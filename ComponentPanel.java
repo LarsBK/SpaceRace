@@ -14,9 +14,16 @@ class ComponentPanel extends JPanel {
 		//add(new JLabel("tools"));
 		//add(new JLabel("tools"));
 		//add(new JPanel());
-		add(new componentList());
+		add(new componentListScroll());
 		//setPreferredSize(new Dimension(300,300));
 		setVisible(true);
+	}
+}
+
+class componentListScroll extends JScrollPane {
+
+	componentListScroll() {
+		super(new componentList());
 	}
 }
 
@@ -40,12 +47,15 @@ class componentList extends JPanel {
 		super();
 		setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 		add(new JLabel("Components:"));
-		ShipComponentType[] c = new ShipComponentType[5];
-		c[0] = new ShipComponentType("engine");
+		ShipComponentType[] c = new ShipComponentType[8];
+		c[0] = new ShipComponentType("engine", 100, 100, 800, 200, 0, Color.red);
 		c[1] = new ShipComponentType("railgun");
 		c[2] = new ShipComponentType("sickbay");
-		c[3] = new ShipComponentType("Combat Information Center");
+		c[3] = new ShipComponentType("CIC");
 		c[4] = new ShipComponentType("Helm");
+		c[5] = new ShipComponentType("Armor", 50, 300, 0, 0, 0, Color.white);
+		c[6] = new ShipComponentType("Hallway", 20, 50, 0, 20, 3, Color.blue);
+		c[7] = new ShipComponentType("Fusion Reactor", 500, 1000, 0, -1000, 0, Color.yellow);
 
 		componentElement l = new componentElement(c[0],this);
 		add(l);
@@ -74,8 +84,11 @@ class componentElement extends JPanel implements ActionListener {
 		setBorder(BorderFactory.createTitledBorder(c.toString()));//Color.black));
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		//add(new JLabel(c.toString())); //, BorderLayout.PAGE_START);
-		add(new JLabel("Cost: " + c.cost)); //, BorderLayout.CENTER);
-		add(new JLabel("Weight: " + c.weight + "kg")); //, BorderLayout.CENTER);
+		add(new JLabel("Cost: " + c.getCost())); //, BorderLayout.CENTER);
+		add(new JLabel("Weight: " + c.getMass() + "kg"));
+		add(new JLabel("Thrust: " + c.getThrust() + "N"));
+		add(new JLabel("Power: " + c.getPower() + "kw"));
+		add(new JLabel("Population: " + c.getPopulation()));
 		add(c);
 		JButton button = new JButton("Select");
 		button.addActionListener(this);

@@ -14,12 +14,19 @@ class editorWindow extends JFrame {
 	editorWindow(String s) {
 		super(s);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setPreferredSize(new Dimension(100,100));
+		setPreferredSize(new Dimension(800,600));
 		add(new View(),BorderLayout.CENTER);
 		add(new ComponentPanel(), BorderLayout.LINE_END);
-		add(new Toolbox(), BorderLayout.PAGE_END);
+		//add(new Toolbox(), BorderLayout.PAGE_END);
 		pack();
 		setVisible(true);
 	}
 }
+
+
+
+
+
+
+
 
