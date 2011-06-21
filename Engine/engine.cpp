@@ -62,10 +62,12 @@ namespace z
 		//sf::Thread[]* t = new sf::Thread[threads];
 		//for(int i = 0; i < t.length; i++) {
 		//	t[i] = new sf::Thread(
-		while(true) {
+		unsigned int i = 0;
+		while(i < 10) {
 			update();
 			physics();
 			draw();
+			i++;
 		}
 	}
 	

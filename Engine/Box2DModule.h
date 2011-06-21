@@ -2,8 +2,11 @@
 #define BOX2DMODULE
 
 #include <Box2D/Box2D.h>
-#include <IOstream>
+#include <iostream>
 #include "Engine.h"
+#include "PhysicsObject.h"
+
+//using namespace z;
 
 namespace z {
 
@@ -13,6 +16,7 @@ namespace z {
 		public:
 		Box2DModule(Engine* e);
 		void onPhysics();
+		void addObject(PhysicsObject* o);
 
 		private:
 		float32 timeStep;
