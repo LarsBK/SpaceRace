@@ -21,9 +21,19 @@
   Allen Jordan allen.jordan@gmail.com
 */
 
+//Edited by Lars Bjørlykke Kristiansen
+
 #pragma once
 
-#include "GlobalInclude.h"
+#include <SFML/Graphics.hpp>
+#include <Box2D/Box2D.h>
+
+//#include "GlobalInclude.h"
+#define PIXELS_PER_METER 64.0f
+#define METERS_PER_PIXEL (1.0f/PIXELS_PER_METER)
+#define PPM PIXELS_PER_METER
+#define MPP METERS_PER_PIXEL
+
 
 //a Box2D debug drawing class for simple rendering of physics objects
 class DebugDraw : public b2DebugDraw

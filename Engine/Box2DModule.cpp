@@ -3,15 +3,22 @@
 namespace z {
 
 	Box2DModule::Box2DModule(Engine* e) : Module(e) {
-		gravity = new b2Vec2(0.0f, -9.81f);
+		gravity = new b2Vec2(0.0f, 9.81f);
 		doSleep = true;
 		world = new b2World(*gravity, doSleep);
 		
-		groundBodyDef.position.Set(0.0f, -10.0f);
+		timeStep = 1.0f/60.0f;
+		velocityIterations = 6;
+		positionIterations = 2;
+		lastTime = 0;
+		
+		groundBodyDef.position.Set(0.0f, 20.0f);
 		groundBody = world->CreateBody(&groundBodyDef);
 
 		groundShape.SetAsBox(50.0f, 10.0f);
 		groundBody->CreateFixture(&groundShape, 0.0f);
+
+		
 	}
 
 	void Box2DModule::addObject(PhysicsObject* o) {
@@ -21,14 +28,18 @@ namespace z {
 		body->CreateFixture(o->getFixtureDef());
 	}
 
-	void Box2DModule::onPhysics() {
-		world->Step(timeStep, velocityIterations, positionIterations);
-		world->ClearForces();
+	b2World* Box2DModule::getWorld() {
+		return world;
+	}
 
-		b2Vec2 position = body->GetPosition();
-		float32 angle = body->GetAngle();
+	void Box2DModule::onPhysics(float now) {
+		//float delta = now - lastTime;
 
-		std::cout << "x: " << position.x << " y: " << position.y
-			<< " angle: " << angle << std::endl;
+		while(lastTime+timeStep <= now) {
+			world->Step(timeStep, velocityIterations, positionIterations);
+			world->ClearForces();
+			lastTime+=timeStep;
+		}
+
 	}
 }

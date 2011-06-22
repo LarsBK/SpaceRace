@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-//#include <SFML/System.hpp>
+#include <SFML/System.hpp>
 //#include <SFML/Window.hpp>
 //#include <SFML/Graphics.hpp>
 
@@ -27,7 +27,7 @@ namespace z {
 		//virtual void update(float deltaTime);
 		virtual void update(); //Called at beginning of every cycle
 		virtual void onDraw(); //Called when time to draw
-		virtual void onPhysics(); //Called at fixed interval
+		virtual void onPhysics(float time); //Called at fixed interval
 
 		protected:
 		Engine* engine;
@@ -40,7 +40,7 @@ namespace z {
 	//Zengine's main class, holds all modules
 	class Engine
 	{
-		//sf::Clock clock;
+		sf::Clock clock;
 		//sf::Clock deltaClock;
 
 		//List over all currently loaded modules

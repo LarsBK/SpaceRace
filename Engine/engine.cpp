@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <SFML/System.hpp>
 
 namespace z
 {
@@ -61,9 +62,10 @@ namespace z
 	void Engine::run() {
 		//sf::Thread[]* t = new sf::Thread[threads];
 		//for(int i = 0; i < t.length; i++) {
-		//	t[i] = new sf::Thread(
+		//	t[i] = new sf::Thread(a
+		clock.Reset();
 		unsigned int i = 0;
-		while(i < 10) {
+		while(true) { //i < 1000) {a
 			update();
 			physics();
 			draw();
@@ -89,9 +91,12 @@ namespace z
 		//delete t;
 	}
 
-	void Engine::physics() {	
+	void Engine::physics() {
+		float pTime = clock.GetElapsedTime();
+		
+
 		for (unsigned int i = 0; i < physicsList.size(); i++) {
-			physicsList[i]->onPhysics();//delta);
+			physicsList[i]->onPhysics(pTime);//delta);
 		}
 	}
 
@@ -132,7 +137,7 @@ namespace z
 		cout << "update() not implemented in " << name << endl;
 	}
 
-	void Module::onPhysics() {
+	void Module::onPhysics(float t) {
 		cout << "onPhysics() not implemented in " << name << endl;
 	}
 
