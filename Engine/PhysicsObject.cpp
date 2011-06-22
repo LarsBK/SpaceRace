@@ -27,6 +27,7 @@ namespace z {
 	TestObject::TestObject(float x, float y) {
 		bodyDef->type = b2_dynamicBody;
 		bodyDef->position.Set(x,y);
+		bodyDef->angle = 3.2/4;
 		shape->SetAsBox(1.0f, 1.0f);
 		fixtureDef->shape = shape;
 		fixtureDef->density = 1.0f;

@@ -12,10 +12,11 @@ namespace z {
 		positionIterations = 2;
 		lastTime = 0;
 		
-		groundBodyDef.position.Set(0.0f, 20.0f);
+		groundBodyDef.position.Set(0.0f, 30.0f);
+		groundBodyDef.angle = 0.2f;
 		groundBody = world->CreateBody(&groundBodyDef);
 
-		groundShape.SetAsBox(50.0f, 10.0f);
+		groundShape.SetAsBox(50.0f, 5.0f);
 		groundBody->CreateFixture(&groundShape, 0.0f);
 
 		

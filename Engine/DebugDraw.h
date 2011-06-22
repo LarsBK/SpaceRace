@@ -29,7 +29,7 @@
 #include <Box2D/Box2D.h>
 
 //#include "GlobalInclude.h"
-#define PIXELS_PER_METER 64.0f
+#define PIXELS_PER_METER 20.0f
 #define METERS_PER_PIXEL (1.0f/PIXELS_PER_METER)
 #define PPM PIXELS_PER_METER
 #define MPP METERS_PER_PIXEL
