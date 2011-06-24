@@ -25,8 +25,8 @@ namespace z {
 
 		//Events
 		//virtual void update(float deltaTime);
-		virtual void update(); //Called at beginning of every cycle
-		virtual void onDraw(); //Called when time to draw
+		virtual void update(float time); //Called at beginning of every cycle
+		virtual void onDraw(float time); //Called when time to draw
 		virtual void onPhysics(float time); //Called at fixed interval
 
 		protected:
@@ -41,7 +41,11 @@ namespace z {
 	class Engine
 	{
 		sf::Clock clock;
+		sf::Clock frameTime;
 		//sf::Clock deltaClock;
+		float fps;
+		unsigned int targetFramerate;
+		bool running;
 
 		//List over all currently loaded modules
 		vector<Module*> updateList;
@@ -69,12 +73,21 @@ namespace z {
 		Engine();
 		~Engine();
 		void run();
+		void cycle();
+		void quit(string reason);
+		bool isRunning();
+
+		float getFps();
+		unsigned int getTargetFramerate();
+
+		void needToDraw();
 		
 		//protected:
 		//Register modules
 		unsigned int addPhysics(Module* Module);
 		unsigned int addDraw(Module* Module);
 		unsigned int addUpdate(Module* Module);
+		unsigned int addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 		//void update();
 

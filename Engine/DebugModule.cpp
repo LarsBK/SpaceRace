@@ -3,18 +3,55 @@
 namespace z {
 
 	DebugDrawModule::DebugDrawModule(Engine* e, Box2DModule* b) : Module(e) {
+		name = "DebugDrawModule";
 		window = new sf::RenderWindow(sf::VideoMode(800,600,32), "DebugDraw");
 		box2d = b;
+		//window->UseVerticalSync(true);
+		window->SetFramerateLimit(engine->getTargetFramerate());
 
 		debug = new DebugDraw(window);
 		debug->SetFlags(b2DebugDraw::e_shapeBit);
 		box2d->getWorld()->SetDebugDraw(debug);
 	}
 
-	void DebugDrawModule::onDraw() {
+	void DebugDrawModule::onDraw(float time) {
 		window->Clear();
 		box2d->getWorld()->DrawDebugData();
+		drawFps();
 		window->Display();
+	}
+
+	void DebugDrawModule::update(float time) {
+		sf::Event event;
+		while(window->GetEvent(event)) {
+			if (event.Type == sf::Event::Closed) 
+				engine->quit("User quit");
+			else if (event.Type == sf::Event::Resized)
+				window->SetSize(event.Size.Width, event.Size.Height);
+			else if (event.Type == sf::Event::MouseMoved) {
+				
+			} else
+				std::cout << "event" << std::endl;
+		}
+	}
+
+
+	void DebugDrawModule::drawFps() {
+		std::stringstream ss;
+		std::string fpsstring;
+		ss << (int) engine->getFps();
+		ss >> fpsstring;
+		
+		sf::String string;
+		string.SetText("fps: " + fpsstring);
+		if (engine->getFps() >= 58)
+			string.SetColor(sf::Color::Green);
+		else if (engine->getFps() >= 30)
+			string.SetColor(sf::Color::Yellow);
+		else
+			string.SetColor(sf::Color::Red);
+
+		window->Draw(string);
 	}
 
 }

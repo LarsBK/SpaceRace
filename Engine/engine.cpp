@@ -6,13 +6,14 @@ namespace z
 
 	//ENGINE
 	Engine::Engine() {
-		//running = true;
+		running = true;
 		//threads = 4;
 		//ptr_console = new console(this);
 		//ptr_console->level = debug;
 		//window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML Window");
 		//view = window->GetView();				
 		//(*ptr_console) << "Zengine started...";
+		targetFramerate = 60;
 	}
 
 	Engine::~Engine()
@@ -35,12 +36,25 @@ namespace z
 
 	}
 
-	unsigned int Engine::addUpdate(Module* module) {
+	unsigned int Engine::addModule(Module* m) {
+		updateList.push_back(m);
+		physicsList.push_back(m);
+		drawList.push_back(m);
+		return updateList.size();
+	}
+
+	unsigned int Engine::getTargetFramerate() {
+		return targetFramerate;
+	}
+
+	/*unsigned int Engine::addUpdate(Module* module) {
 		updateList.push_back(module);
 		//cout << Module->name << " module loaded." << endl;
 		return updateList.size();
 	}
-	
+
+
+
 	unsigned int Engine::addPhysics(Module* module) {
 		physicsList.push_back(module);
 		//cout << Module->name << " module loaded." << endl;
@@ -53,26 +67,53 @@ namespace z
 		return drawList.size();
 	}
 
-	/*int Engine::removeModule(unsigned int nr)
-	{
-		cout << "Unloading module " << moduleList[nr-1]->name << endl;
-		moduleList.erase(moduleList.begin()+nr-1);
+	int Engine::removeModule(unsigned int nr) {
+	  cout << "Unloading module " << moduleList[nr-1]->name << endl;
+	  moduleList.erase(moduleList.begin()+nr-1);
 	}*/
 
 	void Engine::run() {
-		//sf::Thread[]* t = new sf::Thread[threads];
-		//for(int i = 0; i < t.length; i++) {
-		//	t[i] = new sf::Thread(a
+
+		frameTime.Reset();
+		running = true;
 		clock.Reset();
-		unsigned int i = 0;
-		while(true) { //i < 1000) {a
-			update();
-			physics();
-			draw();
-			i++;
+		while(running) { 
+			cycle();
 		}
 	}
+
+
+	void Engine::cycle() {
+
+		update();
+		physics();
+		if(needsDraw)
+			draw();
+
+		if(frameTime.GetElapsedTime() > 0.0f)
+			fps = 1.0f/frameTime.GetElapsedTime();
+		else
+			fps = 1337;
+		frameTime.Reset();
+
+		//if(fps > 240)
+		//	sf::Sleep(0.01);
+		/*if(fps <= 0) {
+			std::cout << "ZOMG" << frameTime.GetElapsedTime()<< std::endl;
+		}*/
+
+	}
+
+	void Engine::quit(string reason) {
+		std::cout << "Quiting: " << reason << std::endl;
+		running = false;
+	}
 	
+	bool Engine::isRunning() {
+		return running;
+	}
+
+
 	void Engine::update() {	
 		//sf::Thread* t = new sf::Thread[moduleList.size()]();
 		//for(int i = 0; i < t.length; i++) {
@@ -80,20 +121,21 @@ namespace z
 
 		//float delta = deltaClock.GetElapsedTime();
 		//deltaClock.Reset();
+		float pTime = clock.GetElapsedTime();
 
 		//cout << "Updating " << moduleList.size() << " modules..." << endl;
 		for (unsigned int i = 0; i < updateList.size(); i++) {
 			//cout << "updating " << moduleList[i] << endl;
 			//t[i] = new Thread(&moduleList[i]->update(delta));
 			//t[i].Launch();
-			updateList[i]->update();//delta);
+			updateList[i]->update(pTime);//delta);
 		}
 		//delete t;
 	}
 
 	void Engine::physics() {
 		float pTime = clock.GetElapsedTime();
-		
+
 
 		for (unsigned int i = 0; i < physicsList.size(); i++) {
 			physicsList[i]->onPhysics(pTime);//delta);
@@ -101,16 +143,25 @@ namespace z
 	}
 
 
-	void Engine::draw() {	
+	void Engine::draw() {
+		needsDraw = false;
+		float pTime = clock.GetElapsedTime();
 		for (unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->onDraw();//delta);
+			drawList[i]->onDraw(pTime);//delta);
 		}
 	}
 
-	/*float Engine::getTime() {
-		return clock.GetElapsedTime();
-	}*/
+	void Engine::needToDraw() {
+		needsDraw = true;
+	}
 
+	float Engine::getTime() {
+	  return clock.GetElapsedTime();
+	}
+
+	float Engine::getFps() {
+		return fps;
+	}
 
 	//MODULE
 	Module::Module(Engine *e)
@@ -124,21 +175,21 @@ namespace z
 	{
 		//engine->removeModule(id);
 	}
-	
-	/*void module::update(float delta) {
-		cout << "update not implemented in " << name << endl;
-	}*/
 
-	void Module::onDraw() {
-		cout << "onDraw() not implemented in " << name << endl;
+	/*void module::update(float delta) {
+	  cout << "update not implemented in " << name << endl;
+	  }*/
+
+	void Module::onDraw(float t) {
+		//cout << "onDraw() not implemented in " << name << endl;
 	}
 
-	void Module::update() {
-		cout << "update() not implemented in " << name << endl;
+	void Module::update(float t) {
+		//cout << "update() not implemented in " << name << endl;
 	}
 
 	void Module::onPhysics(float t) {
-		cout << "onPhysics() not implemented in " << name << endl;
+		//cout << "onPhysics() not implemented in " << name << endl;
 	}
 
 
@@ -159,12 +210,12 @@ namespace z
 	}
 
 	Console::Console(Engine* e) : Module(e)
-	{
-		name = "ZConsole";
-		defaultLevel = debug;
-		maxShow = 0;
-		maxConsole = debug;
-		level = debug;
-	}
+		{
+			name = "ZConsole";
+			defaultLevel = debug;
+			maxShow = 0;
+			maxConsole = debug;
+			level = debug;
+		}
 
-}
+	}

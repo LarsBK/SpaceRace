@@ -4,6 +4,8 @@
 #include "DebugDraw.h"
 #include "Engine.h"
 #include "Box2DModule.h"
+#include <SFML/Graphics.hpp>
+#include <sstream>
 
 namespace z {
 
@@ -11,9 +13,12 @@ namespace z {
 		sf::RenderWindow* window;
 		Box2DModule* box2d;
 		DebugDraw* debug;
+
+		void drawFps();
 		public:
 		DebugDrawModule(Engine* e, Box2DModule* b);
-		void onDraw();
+		void onDraw(float time);
+		void update(float time);
 	};
 }
 

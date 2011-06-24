@@ -31,7 +31,7 @@ namespace z {
 		shape->SetAsBox(1.0f, 1.0f);
 		fixtureDef->shape = shape;
 		fixtureDef->density = 1.0f;
-		fixtureDef->friction = 0.3f;
+		fixtureDef->friction = 0.8f;
 
 	}
 
