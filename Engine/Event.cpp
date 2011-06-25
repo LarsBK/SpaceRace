@@ -35,6 +35,20 @@ namespace z {
 
 	void EventListener::fire() {
 		std::cout << "fire! " << name << std::endl;
-		callBack();
+		
 	}
+
+	Action::Action(string n, ActionHandler* h) {
+		name = n;
+		handler = h;
+	}
+
+	void Action::fire() {
+		handler->handleAction(this);
+	}
+
+	bool Action::equals() {
+		return (s == name);
+	}
+
 }

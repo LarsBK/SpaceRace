@@ -9,7 +9,6 @@ namespace z {
 	class ActionHandler;
 
 	class Event {
-		protected:
 		string s;
 		public:
 		Event(string s);
@@ -19,20 +18,23 @@ namespace z {
 
 	//Only in Engine
 	class EventListener {
-		string eventString;
-		vector<ActionHandler*> HandlerList;
+		vector<Action*> actionList;
 		Event* event; //if recived event returns true for equals(event):
-		Action* action; //this action is sent to every EventHandler in list
 
 		public:
 		EventListener(Event* e);
-		void addActionHandler(ActionHandler* e);
-		bool equals(string s);
+		void addAction(Action* a);
+		bool equals(Event* e);
 		void fire();
 	};
 
 	class Action {
 		string name; //ie "Jump"
+		ActionHandler* handler;
+		public:
+		Action(string n, ActionHandler* h);
+		fire();
+		equals(string s);
 	};
 
 	//ActionHandler interface

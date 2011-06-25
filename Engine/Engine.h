@@ -99,9 +99,9 @@ namespace z {
 		//void update();
 
 		//Event
-		void event(string s);
-		void addEventListener(string s, void (*f)());
-		void bind(string event, string listener);
+		void event(Event* e); //An event has occured
+		void addAction(Action* a); //Add supported action
+		void bind(Event* e, string action); //Binds
 
 	};
 
