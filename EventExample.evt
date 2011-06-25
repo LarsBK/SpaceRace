@@ -1,0 +1,10 @@
+//Event type
+Input {
+	key_released_k = "Player1 jump";
+	key_released_j = "Player1 jump";
+	key_released_k = "Player1 forward";
+
+}
+PhysicsEvent {
+	sensor_goal1 = "Player2 score";
+}

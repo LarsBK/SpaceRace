@@ -14,6 +14,10 @@ namespace z
 		//view = window->GetView();				
 		//(*ptr_console) << "Zengine started...";
 		targetFramerate = 60;
+
+		//Commands
+		addEventListener("quit", &quit);
+		bind("quit", "quit");
 	}
 
 	Engine::~Engine()
@@ -108,6 +112,10 @@ namespace z
 		std::cout << "Quiting: " << reason << std::endl;
 		running = false;
 	}
+
+	void Engine::quit() {
+		quit("no reason given");
+	}
 	
 	bool Engine::isRunning() {
 		return running;
@@ -161,6 +169,50 @@ namespace z
 
 	float Engine::getFps() {
 		return fps;
+	}
+
+	//Event
+
+	void Engine::event(Event* e) {
+		std::cout << "event: " << e.getString() << std::endl;
+		EventListener* l = getListener(e);
+		if(l)
+			l->fire();
+	}
+//fix
+	void Engine::addEventListener(string s, void (*f)()) {
+		eventListeners.push_back(new EventListener(s,f));
+	}
+
+	void Engine::bind(Event* e, Action* a) {
+		Event* e = getEvent(event);
+		EventListener* l = getEventListener(listener);
+
+		if(e == NULL) {
+			e = new Event(event);
+			events.push_back(e);
+		}
+
+		if(l)
+			e->addEventListener(l);
+	}
+
+	Event* Engine::getEvent(string e) {
+		for(unsigned int i = 0; i < events.size(); i++) {
+			if(events[i]->equals(e))
+				return events[i];
+		}
+		std::cout << "No such event: " << e << std::endl;
+		return NULL;
+	}
+
+	EventListener* Engine::getEventListener(string l) {
+		for(unsigned int i = 0; i < eventListeners.size(); i++) {
+			if(eventListeners[i]->equals(l))
+				return eventListeners[i];
+		}
+		std::cout << "No such eventListener: " << l << std::endl;
+		return NULL;
 	}
 
 	//MODULE

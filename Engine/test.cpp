@@ -36,6 +36,8 @@ int main() {
 		}
 	}
 	*/
+	engine->event("teh lulz");
+	engine->event("quit");
 	engine->run();
 	return true;
 }

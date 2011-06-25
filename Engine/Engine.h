@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 //#include <SFML/Window.hpp>
 //#include <SFML/Graphics.hpp>
+#include "Event.h"
 
 
 
@@ -53,6 +54,11 @@ namespace z {
 		vector<Module*> physicsList;
 		//unsigned int threads;
 
+		vector<Event*> events;
+		vector<EventListener*> eventListeners;
+		Event* getEvent(string e);
+		EventListener* getEventListener(string l);
+
 		void update();
 		void physics();
 		void draw();
@@ -75,6 +81,7 @@ namespace z {
 		void run();
 		void cycle();
 		void quit(string reason);
+		void quit();
 		bool isRunning();
 
 		float getFps();
@@ -90,6 +97,11 @@ namespace z {
 		unsigned int addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 		//void update();
+
+		//Event
+		void event(string s);
+		void addEventListener(string s, void (*f)());
+		void bind(string event, string listener);
 
 	};
 
