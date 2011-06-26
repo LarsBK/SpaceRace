@@ -2,8 +2,8 @@
 
 namespace z {
 
-	Event::Event(string s) {
-		eventString = s;
+	Event::Event(string st) {
+		s = st;
 		std::cout << "added event " << s << std::endl;
 	}
 
@@ -43,7 +43,7 @@ namespace z {
 		handler->handleAction(this);
 	}
 
-	bool Action::equals() {
+	bool Action::equals(string s) {
 		return (s == name);
 	}
 

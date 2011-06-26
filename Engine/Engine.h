@@ -47,6 +47,7 @@
 		float fps;
 		unsigned int targetFramerate;
 		bool running;
+		string gameName;
 
 		//List over all currently loaded modules
 		vector<Module*> updateList;
@@ -54,10 +55,15 @@
 		vector<Module*> physicsList;
 		//unsigned int threads;
 
-		vector<Event*> events;
+		//vector<Event*> events;
 		vector<EventListener*> eventListeners;
-		Event* getEvent(string e);
-		EventListener* getEventListener(string l);
+		vector<Action*> actions;
+		//Event* getEvent(string e);
+		EventListener* getEventListener(Event* e);
+		Action* getAction(string s);
+
+		//Actions
+		Action* quitAction;
 
 		void update();
 		void physics();
@@ -76,13 +82,14 @@
 		//bool running;
 		
 		float getTime();
-		Engine();
+		Engine(string name);
 		~Engine();
 		void run();
 		void cycle();
 		void quit(string reason);
 		void quit();
 		bool isRunning();
+		string getName();
 
 		float getFps();
 		unsigned int getTargetFramerate();
@@ -101,7 +108,10 @@
 		//Event
 		void event(Event* e); //An event has occured
 		void addAction(Action* a); //Add supported action
-		void bind(Event* e, string action); //Binds
+		void bind(Event* e, string a); //Binds
+		void bind(Event* e, Action* a); //Binds
+
+		void handleAction(Action* a);
 
 	};
 

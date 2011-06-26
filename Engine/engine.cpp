@@ -5,7 +5,8 @@ namespace z
 {
 
 	//ENGINE
-	Engine::Engine() {
+	Engine::Engine(string name) {
+		gameName = name;
 		running = true;
 		//threads = 4;
 		//ptr_console = new console(this);
@@ -16,11 +17,18 @@ namespace z
 		targetFramerate = 60;
 
 		//Commands
-		addAction(new Action("test action", this));
-		bind(new Event("test event"), "test action");
+		quitAction = new Action("quit", this);
+		addAction(quitAction);
+		bind(new Event("quit"), quitAction);
+	}
+
+	string Engine::getName() {
+		return gameName;
 	}
 
 	void Engine::handleAction(Action* a) {
+		if(a == quitAction)
+			quit("Event");
 		std::cout << a->getName() << std::endl;
 	}
 
@@ -179,12 +187,39 @@ namespace z
 
 	void Engine::event(Event* e) {
 		std::cout << "event: " << e->getString() << std::endl;
-		EventListener* l = getListener(e);
+		EventListener* l = getEventListener(e);
 		if(l)
 			l->fire();
 	}
-//fix
-	void Engine::addEventListener(Event* e, string a) {
+
+	void Engine::addAction(Action* a) {
+		std::cout << "added action " << a->getName() << std::endl;
+		actions.push_back(a);
+	}
+	
+	//buggy
+	Action* Engine::getAction(string s) {
+		for(unsigned int i = 0; i < actions.size(); i++) {
+			if(actions[i]->equals(s))
+				return actions[i];
+		}
+		std::cout << "no such action" << s << std::endl;
+		return NULL;
+	}
+
+	void Engine::bind(Event* e, string a) {
+		Action* c = getAction(a);
+		if(c)
+			bind(e,a);
+	}
+
+	void Engine::bind(Event* e, Action* a) {
+		EventListener* l = new EventListener(e);
+		l->addAction(a);
+		eventListeners.push_back(l);
+	}
+
+	/*void Engine::addEventListener(Event* e, string a) {
 		Action* c = getAction(a);
 		if(c) {
 			EventListener* l = new EventListener(e);
@@ -213,14 +248,14 @@ namespace z
 		}
 		std::cout << "No such event: " << e << std::endl;
 		return NULL;
-	}
+	}*/
 
-	EventListener* Engine::getEventListener(string l) {
+	EventListener* Engine::getEventListener(Event* e) {
 		for(unsigned int i = 0; i < eventListeners.size(); i++) {
-			if(eventListeners[i]->equals(l))
+			if(eventListeners[i]->equals(e))
 				return eventListeners[i];
 		}
-		std::cout << "No such eventListener: " << l << std::endl;
+		std::cout << "No such eventListener: " << e->getString() << std::endl;
 		return NULL;
 	}
 

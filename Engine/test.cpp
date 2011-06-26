@@ -1,11 +1,12 @@
 #include "Engine.h"
 #include "Box2DModule.h"
 #include "DebugModule.h"
+#include "WindowModule.h"
 
 using namespace z;
 
 int main() {
-	Engine* engine = new Engine();
+	Engine* engine = new Engine("Test");
 	Box2DModule* box2d = new Box2DModule(engine);
 	TestObject* o;
 
@@ -14,7 +15,8 @@ int main() {
 		box2d->addObject(o);
 	}
 
-	DebugDrawModule* d = new DebugDrawModule(engine, box2d);
+	//DebugDrawModule* d = new DebugDrawModule(engine, box2d);
+	WindowModule* d = new WindowModule(engine);
 
 	engine->addModule(box2d);
 	engine->addModule(d);
@@ -36,8 +38,8 @@ int main() {
 		}
 	}
 	*/
-	engine->event("teh lulz");
-	engine->event("quit");
+	//engine->event("teh lulz");
+	//engine->event("quit");
 	engine->run();
 	return true;
 }

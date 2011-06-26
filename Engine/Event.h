@@ -1,3 +1,6 @@
+#ifndef EVENT
+#define EVENT
+
 #include <iostream>
 #include <vector>
 
@@ -14,7 +17,7 @@ namespace z {
 		Event(string s);
 		bool equals(Event* e);
 		string getString();
-	}
+	};
 
 	//Only in Engine
 	class EventListener {
@@ -44,3 +47,5 @@ namespace z {
 		virtual void handleAction(Action* a) =0;
 	};
 }
+
+#endif
