@@ -33,13 +33,14 @@ namespace z {
 		ActionHandler* handler;
 		public:
 		Action(string n, ActionHandler* h);
-		fire();
-		equals(string s);
+		void fire();
+		bool equals(string s);
+		string getName();
 	};
 
 	//ActionHandler interface
 	class ActionHandler {
 		public:
-		virtual void handleAction(Action a) =0;
+		virtual void handleAction(Action* a) =0;
 	};
 }

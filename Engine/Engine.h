@@ -4,18 +4,18 @@
 #include <iostream>
 #include <vector>
 #include <SFML/System.hpp>
-//#include <SFML/Window.hpp>
-//#include <SFML/Graphics.hpp>
+	//#include <SFML/Window.hpp>
+	//#include <SFML/Graphics.hpp>
 #include "Event.h"
 
 
 
-using namespace std;
+	using namespace std;
 
-namespace z {
+	namespace z {
 
-	class Engine;
-	class Console;
+		class Engine;
+		class Console;
 
 	//MODULE
 	//Modules are loaded into the engine class
@@ -39,7 +39,7 @@ namespace z {
 
 	//ENGINE
 	//Zengine's main class, holds all modules
-	class Engine
+	class Engine : public ActionHandler
 	{
 		sf::Clock clock;
 		sf::Clock frameTime;

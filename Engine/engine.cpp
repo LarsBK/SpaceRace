@@ -16,8 +16,12 @@ namespace z
 		targetFramerate = 60;
 
 		//Commands
-		addEventListener("quit", &quit);
-		bind("quit", "quit");
+		addAction(new Action("test action", this));
+		bind(new Event("test event"), "test action");
+	}
+
+	void Engine::handleAction(Action* a) {
+		std::cout << a->getName() << std::endl;
 	}
 
 	Engine::~Engine()
@@ -174,14 +178,19 @@ namespace z
 	//Event
 
 	void Engine::event(Event* e) {
-		std::cout << "event: " << e.getString() << std::endl;
+		std::cout << "event: " << e->getString() << std::endl;
 		EventListener* l = getListener(e);
 		if(l)
 			l->fire();
 	}
 //fix
-	void Engine::addEventListener(string s, void (*f)()) {
-		eventListeners.push_back(new EventListener(s,f));
+	void Engine::addEventListener(Event* e, string a) {
+		Action* c = getAction(a);
+		if(c) {
+			EventListener* l = new EventListener(e);
+			l->addAction(c);
+			eventListeners.push_back(l);
+		}
 	}
 
 	void Engine::bind(Event* e, Action* a) {

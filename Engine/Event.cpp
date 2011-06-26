@@ -7,10 +7,6 @@ namespace z {
 		std::cout << "added event " << s << std::endl;
 	}
 
-	void Event::addEventListener(EventListener* e) {
-		listenerList.push_back(e);
-	}
-
 	bool Event::equals(Event* e) {
 		return (e->getString() == s);
 	}
@@ -19,23 +15,23 @@ namespace z {
 		return s;
 	}
 
-	void EventListener::fire() {
-		for(unsigned int i = 0; i < handlerList.size(); i++) {
-			handlerList[i]->handleAction(action);
-		}
-	}
-
 	EventListener::EventListener(Event* e) {
 		event = e;
 	}
 
-	bool EventListener::equals(string l) {
-		return (name == l);
+	bool EventListener::equals(Event* e) {
+		return (event->equals(e));
 	}
 
 	void EventListener::fire() {
-		std::cout << "fire! " << name << std::endl;
-		
+		std::cout << "fire! " << event->getString() << std::endl;
+		for(unsigned int i = 0; i < actionList.size(); i++) {
+			actionList[i]->fire();
+		}
+	}
+
+	void EventListener::addAction(Action* a) {
+		actionList.push_back(a);
 	}
 
 	Action::Action(string n, ActionHandler* h) {
@@ -49,6 +45,10 @@ namespace z {
 
 	bool Action::equals() {
 		return (s == name);
+	}
+
+	string Action::getName() {
+		return name;
 	}
 
 }
