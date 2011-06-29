@@ -12,7 +12,9 @@ namespace z {
 		
 		fullscreenAction = new Action("fullscreen", this);
 		engine->addAction(fullscreenAction);
-		engine->bind(new Event("f"), fullscreenAction);
+		engine->bind(new Event("Input_released_f"), fullscreenAction);
+
+		pressed = new bool[sf::Key::Count];
 	}
 
 	void WindowModule::handleAction(Action* a) {
@@ -24,10 +26,13 @@ namespace z {
 	void WindowModule::toggleFullscreen() {
 		fullscreen = !fullscreen;
 
-		if(fullscreen)
+		if(fullscreen) {
+			std::cout << "Entering fullscreen" << std::endl;
 			window->Create(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
-		else
+		} else {
+			std::cout << "Leaving fullscreen" << std::endl;
 			window->Create(sf::VideoMode(720,480,32), engine->getName());
+		}
 	}
 
 	void WindowModule::update(float time) {
@@ -43,13 +48,44 @@ namespace z {
 				
 			} else if (event.Type == sf::Event::KeyReleased) {
 				s.append("released_");
-				stringstream ss;
 				char c = event.Text.Unicode;
-				ss << c;
-				s.append(ss.str()); // >> s;
+				s.append(charToString(c));
+				pressed[event.Key.Code] = false;
 				engine->event(new Event(s));
+			} else if (event.Type == sf::Event::KeyPressed) {
+				s.append("pressed_");
+				char c = event.Text.Unicode;
+				s.append(charToString(c));
+				if(!pressed[event.Key.Code]) {
+					pressed[event.Key.Code] = true;
+					engine->event(new Event(s));
+				}
 			}
+
 		}
+	}
+
+	void WindowModule::onDraw(float time) {
+		window->Clear();
+		
+		for(unsigned int i = 0; i < drawList.size(); i++) {
+			drawList[i]->draw(window);
+		}
+
+		window->Display();
+	}
+
+	void WindowModule::add(Drawable* d) {
+		drawList.push_back(d);
+	}
+
+	static string charToString(char c) {
+		stringstream ss;
+		ss << c;
+		return ss.str();
+	}
+
+	void Drawable::draw(sf::RenderWindow* w) {
 	}
 
 }
