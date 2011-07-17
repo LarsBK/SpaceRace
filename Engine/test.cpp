@@ -2,21 +2,28 @@
 #include "Box2DModule.h"
 #include "DebugModule.h"
 #include "WindowModule.h"
+#include "PongBall.h"
+#include "GameObject.h"
 
 using namespace z;
 
 int main() {
 	Engine* engine = new Engine("Test");
 	Box2DModule* box2d = new Box2DModule(engine);
-	TestObject* o;
+	GameObject* o;
+	WindowModule* d = new WindowModule(engine);
+	
+	/*for(unsigned int i = 0; i < 20; i++) {
+		o = (GameObject*) new DynamicBox(100.0f+(i%2),-5.0f);
+		box2d->addObject((PhysicsObject*)o);
+		d->add((Drawable*)o);
+	}*/
 
-	for(unsigned int i = 0; i < 20; i++) {
-		o = new TestObject(100.0f+(i%2),-5.0f);
-		box2d->addObject(o);
-	}
+	o = (GameObject*) new PongBall();
+	box2d->addObject((PhysicsObject*)o);
+	d->add((Drawable*)o);
 
 	//DebugDrawModule* d = new DebugDrawModule(engine, box2d);
-	WindowModule* d = new WindowModule(engine);
 
 	engine->addModule(box2d);
 	engine->addModule(d);

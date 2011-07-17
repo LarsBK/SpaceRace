@@ -68,8 +68,14 @@ namespace z {
 	void WindowModule::onDraw(float time) {
 		window->Clear();
 		
+		//sf::Drawable d;
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(window);
+			
+			/*d = drawList[i]->getDrawable();
+			if(d)
+				window->Draw(d);
+			*/
 		}
 
 		window->Display();
@@ -85,7 +91,9 @@ namespace z {
 		return ss.str();
 	}
 
-	void Drawable::draw(sf::RenderWindow* w) {
+/*	sf::Drawable Drawable::getDrawable() {
+		return drawable;
 	}
+*/
 
 }

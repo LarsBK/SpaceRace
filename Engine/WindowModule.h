@@ -32,8 +32,12 @@ namespace z {
 	};
 
 	class Drawable {
+		protected:
+		//sf::Drawable drawable;
 		public:
-		virtual void draw(sf::RenderWindow* w);
+		//virtual sf::Drawable getDrawable();
+		virtual void draw(sf::RenderWindow* w) =0;
+
 	};
 
 	static string charToString(char c);

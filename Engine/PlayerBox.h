@@ -5,10 +5,11 @@
 #include "Event.h"
 #include "PhysicsObject.h"
 #include "WindowModule.h"
+#include "GameObject.h"
 
 using namespace z;
 
-class PlayerBox : public ActionHandler, public Drawable, public PhysicsObject {
+class PlayerBox : public ActionHandler, protected GameObject {
 
 	//Actions
 	Action* moveLeft;
@@ -19,7 +20,7 @@ class PlayerBox : public ActionHandler, public Drawable, public PhysicsObject {
 	public:
 	PlayerBox(float x, float y);
 	void handleAction(Action* a);
-	void draw(sf::RenderWindow* w);
+	//void draw(sf::RenderWindow* w);
 };
 
 #endif

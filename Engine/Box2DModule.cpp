@@ -24,10 +24,12 @@ namespace z {
 	}
 
 	void Box2DModule::addObject(PhysicsObject* o) {
-		body = world->CreateBody(o->getBodyDef());
+		b2BodyDef def = o->getBodyDef();
+		b2FixtureDef fix = o->getFixtureDef();
+		body = world->CreateBody(&def);
 		//b2Body* body = world->CreateBody(o.getBodyDef());
 		o->setBody(body);
-		body->CreateFixture(o->getFixtureDef());
+		//body->CreateFixture(&fix);
 	}
 
 	b2World* Box2DModule::getWorld() {

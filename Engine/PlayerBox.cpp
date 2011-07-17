@@ -1,12 +1,13 @@
 #include "PlayerBox.h"
 
-PlayerBox::PlayerBox(float x, float y) {
-	bodyDef->type = b2_dynamicBody;
-	bodyDef->position.Set(x,y);
-	shape->SetAsBox(2.0f, 2.0f);
-	fixtureDef->shape = shape;
-	fixtureDef->density = 1.0f;
-	fixtureDef->friction = 0.8f;
+PlayerBox::PlayerBox(float x, float y) : GameObject(x,y) {
+	//bodyDef->type = b2_dynamicBody;
+	//bodyDef->position.Set(x,y);
+	//b2PolygonShape shape;
+	//shape.SetAsBox(2.0f, 2.0f);
+	//fixtureDef->shape = &shape;
+	//fixtureDef->density = 1.0f;
+	//fixtureDef->friction = 0.8f;
 
 	//Actions
 	moveLeft = new Action("moveLeft", this);
@@ -30,6 +31,6 @@ void PlayerBox::handleAction(Action* a) {
 	}
 }
 
-void PlayerBox::draw(sf::RenderWindow* w) {
-	
-}
+/*void PlayerBox::draw(sf::RenderWindow* w) {
+	//w->DrawRect(	
+}*/

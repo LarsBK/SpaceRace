@@ -8,16 +8,20 @@ namespace z {
 	class PhysicsObject {
 		protected:
 		b2Body* body;
-		b2BodyDef* bodyDef;
-		b2FixtureDef* fixtureDef;
-		b2PolygonShape* shape;
+		//b2BodyDef* bodyDef;
+		//b2FixtureDef* fixtureDef;
+		//b2Shape* shape;
+		float x;
+		float y;
 		
 		public:
-		PhysicsObject();
+		PhysicsObject(float x, float y);
 		b2Body* getBody();
 		void setBody(b2Body* b);
-		b2BodyDef* getBodyDef();
-		b2FixtureDef* getFixtureDef();
+		virtual b2BodyDef getBodyDef();
+		virtual b2FixtureDef getFixtureDef();
+
+		void setAsDynamicBox(float x, float y, float w, float h);
 	};
 
 	class TestObject : public PhysicsObject {
