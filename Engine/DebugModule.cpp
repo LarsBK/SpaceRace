@@ -25,13 +25,9 @@ namespace z {
 		sf::Event event;
 		while(window->GetEvent(event)) {
 			if (event.Type == sf::Event::Closed) 
-				engine->quit("User quit");
+				engine->quit("User quit (debugdraw)");
 			else if (event.Type == sf::Event::Resized)
 				window->SetSize(event.Size.Width, event.Size.Height);
-			else if (event.Type == sf::Event::MouseMoved) {
-				
-			} else
-				std::cout << "event" << std::endl;
 		}
 	}
 

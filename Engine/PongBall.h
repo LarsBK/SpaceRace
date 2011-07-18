@@ -9,6 +9,9 @@ class PongBall : public GameObject {
 
 	public:
 	PongBall();
+	
+	virtual b2BodyDef getBodyDef();
+	virtual b2FixtureDef getFixtureDef();
 	//sf::Drawable getDrawable();
 };
 

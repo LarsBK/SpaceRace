@@ -25,6 +25,8 @@ namespace z {
 		void update(float time);
 		void onDraw(float time);
 
+		void drawFps(int f);
+
 		void handleAction(Action* a);
 		void toggleFullscreen();
 

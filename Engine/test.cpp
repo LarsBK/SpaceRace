@@ -4,6 +4,7 @@
 #include "WindowModule.h"
 #include "PongBall.h"
 #include "GameObject.h"
+#include "Wall.h"
 
 using namespace z;
 
@@ -12,41 +13,30 @@ int main() {
 	Box2DModule* box2d = new Box2DModule(engine);
 	GameObject* o;
 	WindowModule* d = new WindowModule(engine);
+	DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
 	
-	/*for(unsigned int i = 0; i < 20; i++) {
-		o = (GameObject*) new DynamicBox(100.0f+(i%2),-5.0f);
+	for(unsigned int i = 0; i < 20; i++) {
+		//o = (GameObject*) new DynamicBox(100.0f+(i%2),-5.0f);
+		o = (GameObject*) new PongBall();
 		box2d->addObject((PhysicsObject*)o);
 		d->add((Drawable*)o);
-	}*/
+	}
 
 	o = (GameObject*) new PongBall();
+	GameObject* w1 = (GameObject*) new Wall(0,120,200,10);
+	GameObject* w2 = (GameObject*) new Wall(0,80,200,10);
+	box2d->addObject((PhysicsObject*) w1);
+	box2d->addObject((PhysicsObject*) w2);
 	box2d->addObject((PhysicsObject*)o);
 	d->add((Drawable*)o);
+	d->add((Drawable*)w2);
+	d->add((Drawable*)w1);
 
-	//DebugDrawModule* d = new DebugDrawModule(engine, box2d);
 
 	engine->addModule(box2d);
 	engine->addModule(d);
+	engine->addModule(debug);
 
-	/*
-	float nextTime = engine->getTime();
-	int i = 0;
-	while(true) {
-		engine->cycle();
-
-		if(engine->getFps() > 60 && engine->getTime() >= nextTime) {
-			o = new TestObject(100.0f,-5.0f);
-			box2d->addObject(o);
-			o = new TestObject(100.0f,-5.0f);
-			box2d->addObject(o);
-			nextTime = engine->getTime() + 0.01f;
-			i++;
-			//std::cout << i << std::endl;
-		}
-	}
-	*/
-	//engine->event("teh lulz");
-	//engine->event("quit");
 	engine->run();
 	return true;
 }

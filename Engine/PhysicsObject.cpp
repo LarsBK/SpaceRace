@@ -15,7 +15,7 @@ namespace z {
 		return body;
 	}
 
-	b2BodyDef PhysicsObject::getBodyDef() {
+/*	b2BodyDef PhysicsObject::getBodyDef() {
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.position.Set(x,y);
@@ -34,6 +34,7 @@ namespace z {
 		
 		return fix;
 	}
+*/
 /*
 	void PhysicsObject::setAsDynamicBox(float x, float y, float w, float h) {
 		bodyDef->type = b2_dynamicBody;

@@ -6,11 +6,8 @@
 #include "Engine.h"
 #include "PhysicsObject.h"
 
-//using namespace z;
 
 namespace z {
-
-
 	
 	class Box2DModule : public Module {
 		public:

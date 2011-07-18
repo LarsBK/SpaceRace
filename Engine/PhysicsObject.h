@@ -18,8 +18,8 @@ namespace z {
 		PhysicsObject(float x, float y);
 		b2Body* getBody();
 		void setBody(b2Body* b);
-		virtual b2BodyDef getBodyDef();
-		virtual b2FixtureDef getFixtureDef();
+		virtual b2BodyDef getBodyDef() =0;
+		virtual b2FixtureDef getFixtureDef() =0;
 
 		void setAsDynamicBox(float x, float y, float w, float h);
 	};

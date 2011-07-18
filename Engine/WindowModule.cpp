@@ -67,18 +67,32 @@ namespace z {
 
 	void WindowModule::onDraw(float time) {
 		window->Clear();
+		int fps = 1.0f/window->GetFrameTime();
 		
-		//sf::Drawable d;
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(window);
-			
-			/*d = drawList[i]->getDrawable();
-			if(d)
-				window->Draw(d);
-			*/
 		}
-
+		
+		drawFps(fps);
 		window->Display();
+	}
+
+	void WindowModule::drawFps(int f) {
+		std::stringstream ss;
+		std::string fpsstring;
+		ss << f;
+		ss >> fpsstring;
+		
+		sf::String string;
+		string.SetText("fps: " + fpsstring);
+		if (engine->getFps() >= 58)
+			string.SetColor(sf::Color::Green);
+		else if (engine->getFps() >= 30)
+			string.SetColor(sf::Color::Yellow);
+		else
+			string.SetColor(sf::Color::Red);
+
+		window->Draw(string);
 	}
 
 	void WindowModule::add(Drawable* d) {
@@ -90,10 +104,5 @@ namespace z {
 		ss << c;
 		return ss.str();
 	}
-
-/*	sf::Drawable Drawable::getDrawable() {
-		return drawable;
-	}
-*/
 
 }
