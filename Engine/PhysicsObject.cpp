@@ -24,11 +24,11 @@ namespace z {
 	}
 
 	b2FixtureDef PhysicsObject::getFixtureDef() {
-		//b2PolygonShape shape;
-		//shape.SetAsBox(5.0f,5.0f);
+		b2PolygonShape* shape;
+		shape->SetAsBox(10.0f,10.0f);
 		
 		b2FixtureDef fix;
-		//fix.shape = &shape;
+		fix.shape = shape;
 		fix.density = 1.0f;
 		fix.friction = 0.8f;
 		
@@ -48,6 +48,14 @@ namespace z {
 
 
 	void PhysicsObject::setBody(b2Body* b) {
+		b2PolygonShape shape;
+		shape.SetAsBox(10.0f,10.0f);
+		
+		b2FixtureDef fix;
+		fix.shape = &shape;
+		fix.density = 1.0f;
+		fix.friction = 0.8f;
+		b->CreateFixture(&fix);
 		body = b;
 	}
 

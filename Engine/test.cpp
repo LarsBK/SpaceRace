@@ -4,6 +4,7 @@
 #include "WindowModule.h"
 #include "PongBall.h"
 #include "GameObject.h"
+#include "PlayerBox.h"
 
 using namespace z;
 
@@ -20,6 +21,10 @@ int main() {
 	}*/
 
 	o = (GameObject*) new PongBall();
+	GameObject* g = (GameObject*) new PlayerBox(120,100,engine);
+	engine->bind(new Event("Input_pressed_h"), "moveLeft");
+	box2d->addObject((PhysicsObject*)g);
+	d->add((Drawable*)g);
 	box2d->addObject((PhysicsObject*)o);
 	d->add((Drawable*)o);
 

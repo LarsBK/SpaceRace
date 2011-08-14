@@ -199,7 +199,7 @@ namespace z
 	
 	//buggy
 	Action* Engine::getAction(string s) {
-		for(unsigned int i = 0; i < actions.size(); i++) {
+		for(unsigned int i = 0; i < actions.size(); i++) { 
 			if(actions[i]->equals(s))
 				return actions[i];
 		}
@@ -210,7 +210,7 @@ namespace z
 	void Engine::bind(Event* e, string a) {
 		Action* c = getAction(a);
 		if(c)
-			bind(e,a);
+			bind(e,c);
 	}
 
 	void Engine::bind(Event* e, Action* a) {
