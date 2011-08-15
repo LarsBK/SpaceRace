@@ -4,7 +4,7 @@ namespace z {
 
 	Box2DModule::Box2DModule(Engine* e) : Module(e) {
 		name = "Box2DModule";
-		gravity = new b2Vec2(0.0f, 9.81f);
+		gravity = new b2Vec2(0.0f, 0.0f); //9.81f);
 		doSleep = true;
 		world = new b2World(*gravity, doSleep);
 		
@@ -12,16 +12,12 @@ namespace z {
 		velocityIterations = 6;
 		positionIterations = 2;
 		lastTime = 0;
-		
 	}
 
 	void Box2DModule::addObject(PhysicsObject* o) {
 		b2BodyDef def = o->getBodyDef();
-		body = world->CreateBody(&def);
-		o->setBody(body);
-		
-		b2FixtureDef fix = o->getFixtureDef();
-		body->CreateFixture(&fix);
+		b2Body* b = world->CreateBody(&def);
+		o->setBody(b);
 	}
 
 	b2World* Box2DModule::getWorld() {

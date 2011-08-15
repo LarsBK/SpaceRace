@@ -8,10 +8,12 @@
 namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {
-
+		
+		protected:
+		sf::Drawable* sprite;
 
 		public:
-		GameObject(float x, float y);
+		GameObject();
 		//virtual sf::Drawable getDrawable();
 		virtual void draw(sf::RenderWindow* w);
 

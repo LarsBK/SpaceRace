@@ -2,59 +2,36 @@
 #include <iostream>
 
 namespace z {
-	PhysicsObject::PhysicsObject(float xi, float yi) {
+	PhysicsObject::PhysicsObject() {
 		body = NULL;
-		x = xi;
-		y = yi;
-		//bodyDef = new b2BodyDef();
-		//shape = new b2PolygonShape();
-		//fixtureDef = new b2FixtureDef();
+		shape = NULL;
+		density = 0;
+		friction = 0;
+		x = 0;
+		y = 0;
+
+		b2PolygonShape* s = new b2PolygonShape();
+		s->SetAsBox(10.0f,10.0f);
+		shape = s;
+		density = 0.8;
+		friction = 1;
 	}
 
 	b2Body* PhysicsObject::getBody() {
 		return body;
 	}
 
-/*	b2BodyDef PhysicsObject::getBodyDef() {
-		b2BodyDef bodyDef;
-		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(x,y);
-		
-		return bodyDef;
-	}
-
-	b2FixtureDef PhysicsObject::getFixtureDef() {
-		//b2PolygonShape shape;
-		//shape.SetAsBox(5.0f,5.0f);
-		
-		b2FixtureDef fix;
-		//fix.shape = &shape;
-		fix.density = 1.0f;
-		fix.friction = 0.8f;
-		
-		return fix;
-	}
-*/
-/*
-	void PhysicsObject::setAsDynamicBox(float x, float y, float w, float h) {
-		bodyDef->type = b2_dynamicBody;
-		bodyDef->position.Set(x,y);
-		b2PolygonShape shape;
-		shape.SetAsBox(w, h);
-		fixtureDef->shape = &shape;
-		fixtureDef->density = 1.0f;
-		fixtureDef->friction = 0.8f;
-	}
-*/
-
-
 	void PhysicsObject::setBody(b2Body* b) {
+		b2FixtureDef fix;
+		fix.shape = shape;
+		fix.density = density;
+		fix.friction = friction;
+		b->CreateFixture(&fix);
 		body = b;
 	}
 
-	TestObject::TestObject(float x, float y) : PhysicsObject(x,y) {
-		std::cout << "lol2" << std::endl;
-		//setAsDynamicBox(x,y,1.0f,1.0f);
-	}
+	/*TestObject::TestObject(float x, float y) : PhysicsObject(x,y) {
+		std::cout << "TestObject" << std::endl;
+	}*/
 
 }

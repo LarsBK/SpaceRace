@@ -18,7 +18,7 @@ class PlayerBox : public ActionHandler, protected GameObject {
 	Action* moveDown;
 
 	public:
-	PlayerBox(float x, float y);
+	PlayerBox(float x, float y, Engine* engine);
 	void handleAction(Action* a);
 	//void draw(sf::RenderWindow* w);
 };

@@ -34,10 +34,7 @@ namespace z {
 	};
 
 	class Drawable {
-		protected:
-		//sf::Drawable drawable;
 		public:
-		//virtual sf::Drawable getDrawable();
 		virtual void draw(sf::RenderWindow* w) =0;
 
 	};

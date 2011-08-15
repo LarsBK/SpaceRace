@@ -5,13 +5,15 @@
 
 using namespace z;
 
-class PongBall : public GameObject {
+class PongBall : protected GameObject {
+
+	float radius;
 
 	public:
 	PongBall();
 	
-	virtual b2BodyDef getBodyDef();
-	virtual b2FixtureDef getFixtureDef();
+	//virtual b2BodyDef getBodyDef();
+	//virtual b2FixtureDef getFixtureDef();
 	//sf::Drawable getDrawable();
 };
 

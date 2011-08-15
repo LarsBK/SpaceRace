@@ -5,6 +5,7 @@
 #include "PongBall.h"
 #include "GameObject.h"
 #include "Wall.h"
+#include "PlayerBox.h"
 
 using namespace z;
 
@@ -27,15 +28,21 @@ int main() {
 	GameObject* w2 = (GameObject*) new Wall(0,80,200,10);
 	box2d->addObject((PhysicsObject*) w1);
 	box2d->addObject((PhysicsObject*) w2);
+	GameObject* g = (GameObject*) new PlayerBox(120,100,engine);
+	engine->bind(new Event("Input_pressed_h"), "moveLeft");
+	box2d->addObject((PhysicsObject*)g);
+	d->add((Drawable*)g);
 	box2d->addObject((PhysicsObject*)o);
 	d->add((Drawable*)o);
 	d->add((Drawable*)w2);
 	d->add((Drawable*)w1);
 
 
+	DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
+
 	engine->addModule(box2d);
 	engine->addModule(d);
-	//engine->addModule(debug);
+	engine->addModule(debug);
 
 	engine->run();
 	return true;
