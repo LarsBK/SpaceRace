@@ -14,7 +14,7 @@ namespace z {
 		Box2DModule* box2d;
 		DebugDraw* debug;
 
-		void drawFps();
+		//void drawFps();
 		public:
 		DebugDrawModule(Engine* e, Box2DModule* b);
 		void onDraw(float time);

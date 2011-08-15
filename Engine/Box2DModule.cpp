@@ -29,10 +29,11 @@ namespace z {
 	}
 
 	void Box2DModule::onPhysics(float now) {
-		//float delta = now - lastTime;
-		/*while(lastTime+timeStep > engine->getTime())
+
+		//Saves cpu time, more inputlag
+		while(lastTime+timeStep > engine->getTime())
 			sf::Sleep(timeStep/3);
-		*/
+		
 
 		unsigned int i = 0;
 

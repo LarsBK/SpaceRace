@@ -37,8 +37,8 @@ namespace z {
 
 	void WindowModule::update(float time) {
 		sf::Event event;
-		string s;
 		while(window->GetEvent(event)) {
+			string s;
 			s.append("Input_");
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
@@ -85,9 +85,9 @@ namespace z {
 		
 		sf::String string;
 		string.SetText("fps: " + fpsstring);
-		if (engine->getFps() >= 58)
+		if (f >= 58)
 			string.SetColor(sf::Color::Green);
-		else if (engine->getFps() >= 30)
+		else if (f >= 30)
 			string.SetColor(sf::Color::Yellow);
 		else
 			string.SetColor(sf::Color::Red);

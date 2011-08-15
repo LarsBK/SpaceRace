@@ -8,12 +8,6 @@ namespace z
 	Engine::Engine(string name) {
 		gameName = name;
 		running = true;
-		//threads = 4;
-		//ptr_console = new console(this);
-		//ptr_console->level = debug;
-		//window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML Window");
-		//view = window->GetView();				
-		//(*ptr_console) << "Zengine started...";
 		targetFramerate = 60;
 
 		//Commands
@@ -32,24 +26,10 @@ namespace z
 		std::cout << a->getName() << std::endl;
 	}
 
-	Engine::~Engine()
-	{
+	Engine::~Engine() {
 		drawList.clear();
 		physicsList.clear();
 		updateList.clear();
-		//moduleList.clear();
-		//Using this instead to print the name of all modules as they are unloaded
-		//(*ptr_console) << "Unloading all modules...";
-		//for (unsigned int i = moduleList.size(); i > 0; i--)
-		//{
-		//	removeModule(i);
-		//	//moduleList.erase(moduleList.begin()+i-1);
-		//}
-		//delete moduleList;
-		//delete ptr_console;
-		//delete window;
-		//delete view;
-
 	}
 
 	unsigned int Engine::addModule(Module* m) {
@@ -63,33 +43,7 @@ namespace z
 		return targetFramerate;
 	}
 
-	/*unsigned int Engine::addUpdate(Module* module) {
-		updateList.push_back(module);
-		//cout << Module->name << " module loaded." << endl;
-		return updateList.size();
-	}
-
-
-
-	unsigned int Engine::addPhysics(Module* module) {
-		physicsList.push_back(module);
-		//cout << Module->name << " module loaded." << endl;
-		return physicsList.size();
-	}
-
-	unsigned int Engine::addDraw(Module* module) {
-		drawList.push_back(module);
-		//cout << Module->name << " module loaded." << endl;
-		return drawList.size();
-	}
-
-	int Engine::removeModule(unsigned int nr) {
-	  cout << "Unloading module " << moduleList[nr-1]->name << endl;
-	  moduleList.erase(moduleList.begin()+nr-1);
-	}*/
-
 	void Engine::run() {
-
 		frameTime.Reset();
 		running = true;
 		clock.Reset();
@@ -98,26 +52,11 @@ namespace z
 		}
 	}
 
-
 	void Engine::cycle() {
-
 		update();
 		physics();
 		if(needsDraw)
 			draw();
-
-		if(frameTime.GetElapsedTime() > 0.0f)
-			fps = 1.0f/frameTime.GetElapsedTime();
-		else
-			fps = 1337;
-		frameTime.Reset();
-
-		//if(fps > 240)
-		//	sf::Sleep(0.01);
-		/*if(fps <= 0) {
-			std::cout << "ZOMG" << frameTime.GetElapsedTime()<< std::endl;
-		}*/
-
 	}
 
 	void Engine::quit(string reason) {
@@ -135,27 +74,15 @@ namespace z
 
 
 	void Engine::update() {	
-		//sf::Thread* t = new sf::Thread[moduleList.size()]();
-		//for(int i = 0; i < t.length; i++) {
-		//	t[i] = new sf::Thread(
-
-		//float delta = deltaClock.GetElapsedTime();
-		//deltaClock.Reset();
 		float pTime = clock.GetElapsedTime();
 
-		//cout << "Updating " << moduleList.size() << " modules..." << endl;
 		for (unsigned int i = 0; i < updateList.size(); i++) {
-			//cout << "updating " << moduleList[i] << endl;
-			//t[i] = new Thread(&moduleList[i]->update(delta));
-			//t[i].Launch();
 			updateList[i]->update(pTime);//delta);
 		}
-		//delete t;
 	}
 
 	void Engine::physics() {
 		float pTime = clock.GetElapsedTime();
-
 
 		for (unsigned int i = 0; i < physicsList.size(); i++) {
 			physicsList[i]->onPhysics(pTime);//delta);
@@ -179,14 +106,9 @@ namespace z
 	  return clock.GetElapsedTime();
 	}
 
-	float Engine::getFps() {
-		return fps;
-	}
-
 	//Event
-
 	void Engine::event(Event* e) {
-		std::cout << "event: " << e->getString() << std::endl;
+		std::cout << "event occured: " << e->getString() << std::endl;
 		EventListener* l = getEventListener(e);
 		if(l)
 			l->fire();
@@ -263,18 +185,12 @@ namespace z
 	Module::Module(Engine *e)
 	{
 		engine = e;
-		//id = parentEngine->addModule(this);
-		cout << "Added module!" << endl;
 	}
 
 	Module::~Module()
 	{
-		//engine->removeModule(id);
+		//engine->removeModule(this);
 	}
-
-	/*void module::update(float delta) {
-	  cout << "update not implemented in " << name << endl;
-	  }*/
 
 	void Module::onDraw(float t) {
 		//cout << "onDraw() not implemented in " << name << endl;
@@ -288,7 +204,7 @@ namespace z
 		//cout << "onPhysics() not implemented in " << name << endl;
 	}
 
-
+/*
 	//CONSOLE
 	void Console::operator <<(string msg)
 	{
@@ -313,5 +229,6 @@ namespace z
 			maxConsole = debug;
 			level = debug;
 		}
-
-	}
+*/
+}
+	

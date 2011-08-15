@@ -13,7 +13,7 @@ int main() {
 	Box2DModule* box2d = new Box2DModule(engine);
 	GameObject* o;
 	WindowModule* d = new WindowModule(engine);
-	DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
+	//DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
 	
 	for(unsigned int i = 0; i < 20; i++) {
 		//o = (GameObject*) new DynamicBox(100.0f+(i%2),-5.0f);
@@ -35,7 +35,7 @@ int main() {
 
 	engine->addModule(box2d);
 	engine->addModule(d);
-	engine->addModule(debug);
+	//engine->addModule(debug);
 
 	engine->run();
 	return true;

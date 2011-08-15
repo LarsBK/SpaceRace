@@ -17,7 +17,7 @@ namespace z {
 	void DebugDrawModule::onDraw(float time) {
 		window->Clear();
 		box2d->getWorld()->DrawDebugData();
-		drawFps();
+		//drawFps();
 		window->Display();
 	}
 
@@ -32,7 +32,7 @@ namespace z {
 	}
 
 
-	void DebugDrawModule::drawFps() {
+/*	void DebugDrawModule::drawFps() {
 		std::stringstream ss;
 		std::string fpsstring;
 		ss << (int) engine->getFps();
@@ -49,5 +49,6 @@ namespace z {
 
 		window->Draw(string);
 	}
+*/
 
 }

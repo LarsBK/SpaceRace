@@ -4,36 +4,30 @@
 #include <iostream>
 #include <vector>
 #include <SFML/System.hpp>
-	//#include <SFML/Window.hpp>
-	//#include <SFML/Graphics.hpp>
 #include "Event.h"
 
+namespace z {
 
-
-	using namespace std;
-
-	namespace z {
-
-		class Engine;
-		class Console;
+	class Engine;
+	class Console;
 
 	//MODULE
 	//Modules are loaded into the engine class
 	class Module {
 		public:
-		Module(Engine*);
-		~Module();
+			Module(Engine*);
+			~Module();
 
-		//Events
-		//virtual void update(float deltaTime);
-		virtual void update(float time); //Called at beginning of every cycle
-		virtual void onDraw(float time); //Called when time to draw
-		virtual void onPhysics(float time); //Called at fixed interval
+			//Events
+			//virtual void update(float deltaTime);
+			virtual void update(float time); //Called at beginning of every cycle
+			virtual void onDraw(float time); //Called when time to draw
+			virtual void onPhysics(float time); //Called at fixed interval
 
 		protected:
-		Engine* engine;
-		string name;
-		int id;
+			Engine* engine;
+			string name;
+			int id;
 	};
 
 
@@ -43,8 +37,7 @@
 	{
 		sf::Clock clock;
 		sf::Clock frameTime;
-		//sf::Clock deltaClock;
-		float fps;
+		
 		unsigned int targetFramerate;
 		bool running;
 		string gameName;
@@ -53,12 +46,9 @@
 		vector<Module*> updateList;
 		vector<Module*> drawList;
 		vector<Module*> physicsList;
-		//unsigned int threads;
 
-		//vector<Event*> events;
 		vector<EventListener*> eventListeners;
 		vector<Action*> actions;
-		//Event* getEvent(string e);
 		EventListener* getEventListener(Event* e);
 		Action* getAction(string s);
 
@@ -73,14 +63,6 @@
 		bool needsDraw; //game state changed
 
 		public:
-		//Pointers
-		//console *ptr_console;
-		//sf::RenderWindow* window;
-		//sf::View view;
-		//unsigned int window_width;
-		//unsigned int window_height;
-		//bool running;
-		
 		float getTime();
 		Engine(string name);
 		~Engine();
@@ -90,17 +72,14 @@
 		void quit();
 		bool isRunning();
 		string getName();
-
-		float getFps();
 		unsigned int getTargetFramerate();
 
 		void needToDraw();
-		
-		//protected:
+
 		//Register modules
-		unsigned int addPhysics(Module* Module);
-		unsigned int addDraw(Module* Module);
-		unsigned int addUpdate(Module* Module);
+		//unsigned int addPhysics(Module* Module);
+		//unsigned int addDraw(Module* Module);
+		//unsigned int addUpdate(Module* Module);
 		unsigned int addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 		//void update();
@@ -115,7 +94,7 @@
 
 	};
 
-
+/*
 	//CONSOLE
 	//Zengine will automagically spawn a console for its own use, however multiple consoles may be spawned
 	//Zengine's console can be acsessed with the pointer member ptr_console e.g. : (*engine.prt_console) << "Hello world"
@@ -128,27 +107,27 @@
 	class Console : public Module
 	{
 		public:
-		Console(Engine*);
+			Console(Engine*);
 
-		//Level to return level to after each use of <<
-		unsigned int defaultLevel;
+			//Level to return level to after each use of <<
+			unsigned int defaultLevel;
 
-		//Max level shown to user
-		unsigned int maxShow;
+			//Max level shown to user
+			unsigned int maxShow;
 
-		//Max level shown to developer/debugger
-		unsigned int maxConsole;
+			//Max level shown to developer/debugger
+			unsigned int maxConsole;
 
-		//Level of next message
-		unsigned int level;
+			//Level of next message
+			unsigned int level;
 
-		//Use (*engine.ptr_console) << "Hello world"
-		void operator <<(string msg);
+			//Use (*engine.ptr_console) << "Hello world"
+			void operator <<(string msg);
 
-		//List of all messages, not currently implemented
-		//vector <string> list;
+			//List of all messages, not currently implemented
+			//vector <string> list;
 	};
-
+*/
 }
 
 #endif

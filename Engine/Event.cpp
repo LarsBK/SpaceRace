@@ -4,7 +4,6 @@ namespace z {
 
 	Event::Event(string st) {
 		s = st;
-		std::cout << "added event " << s << std::endl;
 	}
 
 	bool Event::equals(Event* e) {
@@ -24,7 +23,6 @@ namespace z {
 	}
 
 	void EventListener::fire() {
-		std::cout << "fire! " << event->getString() << std::endl;
 		for(unsigned int i = 0; i < actionList.size(); i++) {
 			actionList[i]->fire();
 		}
