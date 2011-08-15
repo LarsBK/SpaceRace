@@ -13,16 +13,17 @@ namespace z {
 */
 
 	void GameObject::draw(sf::RenderWindow* w) {
-		sf::Shape shape = sf::Shape::Rectangle(0.0f,0.0f,10.0f,10.0f, sf::Color::White, 0.0f, sf::Color::Black);
 		b2Vec2 vec = body->GetPosition();
-		shape.SetPosition(vec.x,vec.y);
-		//update drawable
-		w->Draw(shape);
+		std::cout << "x" << vec.x << " " << sprite->GetPosition().x << std::endl;
+		std::cout << "y" << vec.y << " " << sprite->GetPosition().y << std::endl;
+		sprite->SetPosition(vec.x,vec.y);
+		w->Draw(*sprite);
 	}
 
-	GameObject::GameObject(float x, float y) :PhysicsObject(x,y) {
+	GameObject::GameObject() :PhysicsObject() {
 		//drawable = new sf::Shape
-
+		sprite = new sf::Shape(sf::Shape::Rectangle(0.0f,0.0f,10.0f,10.0f, sf::Color::White,0.0f,sf::Color::Black));
+		sprite->SetCenter(5,5);
 	}
 
 }

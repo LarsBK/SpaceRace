@@ -5,7 +5,9 @@
 
 using namespace z;
 
-class PongBall : public GameObject {
+class PongBall : protected GameObject {
+
+	float radius;
 
 	public:
 	PongBall();

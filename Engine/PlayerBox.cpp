@@ -1,6 +1,6 @@
 #include "PlayerBox.h"
 
-PlayerBox::PlayerBox(float x, float y, Engine* engine) : GameObject(x,y) {
+PlayerBox::PlayerBox(float xi, float yi, Engine* engine) : GameObject() {
 	//bodyDef->type = b2_dynamicBody;
 	//bodyDef->position.Set(x,y);
 	//b2PolygonShape shape;
@@ -8,6 +8,10 @@ PlayerBox::PlayerBox(float x, float y, Engine* engine) : GameObject(x,y) {
 	//fixtureDef->shape = &shape;
 	//fixtureDef->density = 1.0f;
 	//fixtureDef->friction = 0.8f;
+	x = xi;
+	y = yi;
+	density = 1;
+	friction = 1;
 
 	//Actions
 	moveLeft = new Action("moveLeft", this);

@@ -28,10 +28,11 @@ int main() {
 	box2d->addObject((PhysicsObject*)o);
 	d->add((Drawable*)o);
 
-	//DebugDrawModule* d = new DebugDrawModule(engine, box2d);
+	DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
 
 	engine->addModule(box2d);
 	engine->addModule(d);
+	engine->addModule(debug);
 
 	/*
 	float nextTime = engine->getTime();

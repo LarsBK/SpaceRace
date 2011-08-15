@@ -4,7 +4,7 @@ namespace z {
 
 	Box2DModule::Box2DModule(Engine* e) : Module(e) {
 		name = "Box2DModule";
-		gravity = new b2Vec2(0.0f, 9.81f);
+		gravity = new b2Vec2(0.0f, 0.0f); //9.81f);
 		doSleep = true;
 		world = new b2World(*gravity, doSleep);
 		
@@ -13,13 +13,13 @@ namespace z {
 		positionIterations = 2;
 		lastTime = 0;
 		
-		groundBodyDef.position.Set(0.0f, 100.0f);
+		/*groundBodyDef.position.Set(0.0f, 100.0f);
 		groundBodyDef.angle = 0.0f;
 		groundBody = world->CreateBody(&groundBodyDef);
 
 		groundShape.SetAsBox(200.0f, 5.0f);
 		groundBody->CreateFixture(&groundShape, 0.0f);
-
+		*/
 		
 	}
 
