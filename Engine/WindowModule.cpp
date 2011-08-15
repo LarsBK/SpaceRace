@@ -43,8 +43,8 @@ namespace z {
 			s.append("Input_");
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
-			else if (event.Type == sf::Event::Resized)
-				window->SetSize(event.Size.Width, event.Size.Height);
+			//else if (event.Type == sf::Event::Resized)
+				//window->SetSize(event.Size.Width, event.Size.Height);
 			else if (event.Type == sf::Event::MouseMoved) {
 				
 			} else if (event.Type == sf::Event::KeyReleased) {
