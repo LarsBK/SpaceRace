@@ -21,6 +21,13 @@ namespace z {
 		return body;
 	}
 
+	b2BodyDef PhysicsObject::getBodyDef() {
+		b2BodyDef bodyDef;
+		bodyDef.type = b2_dynamicBody;
+		bodyDef.position.Set(x,y);
+
+		return bodyDef;
+	}
 	void PhysicsObject::setBody(b2Body* b) {
 		b2FixtureDef fix;
 		fix.shape = shape;
@@ -31,7 +38,7 @@ namespace z {
 	}
 
 	/*TestObject::TestObject(float x, float y) : PhysicsObject(x,y) {
-		std::cout << "TestObject" << std::endl;
-	}*/
+	  std::cout << "TestObject" << std::endl;
+	  }*/
 
 }

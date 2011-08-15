@@ -19,7 +19,7 @@ namespace z {
 		PhysicsObject();
 		b2Body* getBody();
 		void setBody(b2Body* b);
-		virtual b2BodyDef getBodyDef();
+		b2BodyDef getBodyDef();
 
 	};
 /*

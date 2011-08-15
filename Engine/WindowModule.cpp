@@ -4,6 +4,7 @@ namespace z {
 
 	WindowModule::WindowModule(Engine* e) : Module(e) {
 		name = "WindowModule";
+		fullscreen = false;
 
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
