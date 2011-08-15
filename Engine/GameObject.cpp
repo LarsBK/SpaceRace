@@ -22,7 +22,7 @@ namespace z {
 
 	GameObject::GameObject() :PhysicsObject() {
 		//drawable = new sf::Shape
-		sprite = new sf::Shape(sf::Shape::Rectangle(0.0f,0.0f,10.0f,10.0f, sf::Color::White,0.0f,sf::Color::Black));
+		sprite = new sf::Shape(sf::Shape::Rectangle(100,100,10.0f,10.0f, sf::Color::White,0.0f,sf::Color::Black));
 		sprite->SetCenter(5,5);
 	}
 
