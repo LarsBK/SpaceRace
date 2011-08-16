@@ -14,12 +14,16 @@ namespace z {
 		float friction;
 		float x;
 		float y;
+		bool dynamic;
 		
 		public:
 		PhysicsObject();
 		b2Body* getBody();
 		void setBody(b2Body* b);
 		b2BodyDef getBodyDef();
+		virtual void onSpawn();
+		void impulse(float x, float y);
+		void setVelocity(float x, float y);
 
 	};
 /*

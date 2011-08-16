@@ -11,6 +11,7 @@ class PongBall : protected GameObject {
 
 	public:
 	PongBall();
+	virtual void onSpawn();
 	
 	//virtual b2BodyDef getBodyDef();
 	//virtual b2FixtureDef getFixtureDef();

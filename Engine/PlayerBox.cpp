@@ -12,6 +12,11 @@ PlayerBox::PlayerBox(float xi, float yi, Engine* engine) : GameObject() {
 	y = yi;
 	density = 1;
 	friction = 1;
+	dynamic = true;
+
+	b2PolygonShape* s = new b2PolygonShape();
+	s->SetAsBox(5,5);
+	shape = s;
 
 	//Actions
 	moveLeft = new Action("moveLeft", this);

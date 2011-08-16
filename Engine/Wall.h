@@ -7,7 +7,7 @@ using namespace z;
 
 class Wall : protected GameObject {
 	
-	float x,y,width,height;
+	float width,height;
 
 	public:
 	Wall(float x, float y, float w, float h);

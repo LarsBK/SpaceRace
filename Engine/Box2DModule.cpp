@@ -4,7 +4,7 @@ namespace z {
 
 	Box2DModule::Box2DModule(Engine* e) : Module(e) {
 		name = "Box2DModule";
-		gravity = new b2Vec2(0.0f, 0.0f); //9.81f);
+		gravity = new b2Vec2(0.0f, 0.0f);
 		doSleep = true;
 		world = new b2World(*gravity, doSleep);
 		

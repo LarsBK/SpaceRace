@@ -4,8 +4,10 @@
 Wall::Wall(float xi, float yi, float w, float h) {
 	x = xi;
 	y = yi;
+	density = 0;
 	b2PolygonShape* s = new b2PolygonShape();
-	s->SetAsBox(w,h);
+	s->SetAsBox(w/2,h/2);
 	shape = s;
-	sprite = new sf::Shape(sf::Shape::Rectangle(x,y,x+w,y+h,sf::Color::White));
+	sprite = new sf::Shape(sf::Shape::Rectangle(0,0,w,h,sf::Color::White));
+	sprite->SetCenter(w/2,h/2);
 }
