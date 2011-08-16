@@ -18,13 +18,11 @@ namespace z {
 		event = e;
 	}
 
-	bool EventListener::equals(Event* e) {
-		return (event->equals(e));
-	}
-
-	void EventListener::fire() {
-		for(unsigned int i = 0; i < actionList.size(); i++) {
-			actionList[i]->fire();
+	void EventListener::fire(Event* e) {
+		if(e->equals(event)) {
+			for(unsigned int i = 0; i < actionList.size(); i++) {
+				actionList[i]->fire(e);
+			}
 		}
 	}
 
@@ -37,8 +35,13 @@ namespace z {
 		handler = h;
 	}
 
-	void Action::fire() {
+	void Action::fire(Event* e) {
+		event = e;
 		handler->handleAction(this);
+	}
+
+	Event* Action::getEvent() {
+		return event;
 	}
 
 	bool Action::equals(string s) {

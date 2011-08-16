@@ -17,6 +17,7 @@ namespace z {
 		Event(string s);
 		bool equals(Event* e);
 		string getString();
+		enum state {STARTED, STOPPED};
 	};
 
 	//Only in Engine
@@ -28,17 +29,19 @@ namespace z {
 		EventListener(Event* e);
 		void addAction(Action* a);
 		bool equals(Event* e);
-		void fire();
+		void fire(Event* e);
 	};
 
 	class Action {
 		string name; //ie "Jump"
 		ActionHandler* handler;
+		Event* event;
 		public:
 		Action(string n, ActionHandler* h);
-		void fire();
+		void fire(Event* e);
 		bool equals(string s);
 		string getName();
+		Event* getEvent();
 	};
 
 	//ActionHandler interface

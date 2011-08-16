@@ -109,9 +109,10 @@ namespace z
 	//Event
 	void Engine::event(Event* e) {
 		std::cout << "event occured: " << e->getString() << std::endl;
-		EventListener* l = getEventListener(e);
-		if(l)
-			l->fire();
+		//EventListener* l = getEventListener(e);
+		for(unsigned int i = 0; i < eventListeners.size(); i++) {
+			eventListeners[i]->fire(e);
+		}
 	}
 
 	void Engine::addAction(Action* a) {
@@ -172,14 +173,14 @@ namespace z
 		return NULL;
 	}*/
 
-	EventListener* Engine::getEventListener(Event* e) {
+	/*EventListener* Engine::getEventListener(Event* e) {
 		for(unsigned int i = 0; i < eventListeners.size(); i++) {
 			if(eventListeners[i]->equals(e))
 				return eventListeners[i];
 		}
 		std::cout << "No such eventListener: " << e->getString() << std::endl;
 		return NULL;
-	}
+	}*/
 
 	//MODULE
 	Module::Module(Engine *e)
