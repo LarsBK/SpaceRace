@@ -17,7 +17,8 @@ namespace z {
 		Event(string s);
 		bool equals(Event* e);
 		string getString();
-		enum state {STARTED, STOPPED};
+		enum EventState {UNDEFINED, STARTED, STOPPED};
+		EventState state;
 	};
 
 	//Only in Engine

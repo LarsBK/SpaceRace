@@ -15,6 +15,8 @@ namespace z {
 		float x;
 		float y;
 		bool dynamic;
+		bool fixedRotation;
+		float restitution;
 		
 		public:
 		PhysicsObject();

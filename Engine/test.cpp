@@ -11,7 +11,7 @@
 using namespace z;
 
 int main() {
-	Engine* engine = new Engine("Test");
+	Engine* engine = new Engine("LOLp0ng");
 	Box2DModule* box2d = new Box2DModule(engine);
 	//GameObject* o;
 	WindowModule* d = new WindowModule(engine);
@@ -28,12 +28,18 @@ int main() {
 	box2d->addObject((PhysicsObject*) ball);
 	d->add((Drawable*)ball);
 	
-	GameObject* paddle1 = (GameObject*) new Paddle("Right Player", 300, 50, engine);
+	GameObject* paddle1 = (GameObject*) new Paddle("Right Player", 600, 200, engine);
+	GameObject* paddle2 = (GameObject*) new Paddle("Left Player", 120, 200, engine);
 	box2d->addObject((PhysicsObject*) paddle1);
+	box2d->addObject((PhysicsObject*) paddle2);
 	d->add((Drawable*) paddle1);
+	d->add((Drawable*) paddle2);
 
-	engine->bind(new Event("Input_pressed_h"), "Right Player up");
-	engine->bind(new Event("Input_pressed_n"), "Right Player down");
+
+	engine->bind(new Event("Input_a"), "Left Player up");
+	engine->bind(new Event("Input_z"), "Left Player down");
+	engine->bind(new Event("Input_h"), "Right Player up");
+	engine->bind(new Event("Input_n"), "Right Player down");
 	
 	
 	//GameObject* w1 = (GameObject*) new Wall(100,200,200,10);
@@ -50,11 +56,11 @@ int main() {
 	//d->add((Drawable*)w1);
 
 
-	DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
+	//DebugDrawModule* debug = new DebugDrawModule(engine, box2d);
 
 	engine->addModule(box2d);
 	engine->addModule(d);
-	engine->addModule(debug);
+	//engine->addModule(debug);
 
 	engine->run();
 	return true;

@@ -25,6 +25,7 @@ namespace z {
 		if(dynamic)
 			bodyDef.type = b2_dynamicBody;
 		bodyDef.position.Set(x,y);
+		bodyDef.fixedRotation = fixedRotation;
 
 		return bodyDef;
 	}
@@ -33,6 +34,7 @@ namespace z {
 		fix.shape = shape;
 		fix.density = density;
 		fix.friction = friction;
+		fix.restitution = restitution;
 		b->CreateFixture(&fix);
 		body = b;
 		onSpawn();

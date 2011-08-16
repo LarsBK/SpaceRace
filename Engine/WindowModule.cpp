@@ -13,13 +13,13 @@ namespace z {
 		
 		fullscreenAction = new Action("fullscreen", this);
 		engine->addAction(fullscreenAction);
-		engine->bind(new Event("Input_released_f"), fullscreenAction);
+		engine->bind(new Event("Input_f"), fullscreenAction);
 
 		pressed = new bool[sf::Key::Count];
 	}
 
 	void WindowModule::handleAction(Action* a) {
-		if(a == fullscreenAction) {
+		if(a == fullscreenAction && a->getEvent()->state == Event::STARTED) {
 			toggleFullscreen();
 		}
 	}
@@ -38,6 +38,7 @@ namespace z {
 
 	void WindowModule::update(float time) {
 		sf::Event event;
+		Event* e;
 		while(window->GetEvent(event)) {
 			string s;
 			s.append("Input_");
@@ -48,18 +49,20 @@ namespace z {
 			else if (event.Type == sf::Event::MouseMoved) {
 				
 			} else if (event.Type == sf::Event::KeyReleased) {
-				s.append("released_");
 				char c = event.Text.Unicode;
 				s.append(charToString(c));
 				pressed[event.Key.Code] = false;
-				engine->event(new Event(s));
+				e = new Event(s);
+				e->state = Event::STOPPED;
+				engine->event(e);
 			} else if (event.Type == sf::Event::KeyPressed) {
-				s.append("pressed_");
 				char c = event.Text.Unicode;
 				s.append(charToString(c));
 				if(!pressed[event.Key.Code]) {
 					pressed[event.Key.Code] = true;
-					engine->event(new Event(s));
+					e = new Event(s);
+					e->state = Event::STARTED;
+					engine->event(e);
 				}
 			}
 
