@@ -4,7 +4,6 @@
 namespace z
 {
 
-	//ENGINE
 	Engine::Engine(string name) {
 		gameName = name;
 		running = true;
@@ -72,7 +71,6 @@ namespace z
 		return running;
 	}
 
-
 	void Engine::update() {	
 		float pTime = clock.GetElapsedTime();
 
@@ -88,7 +86,6 @@ namespace z
 			physicsList[i]->onPhysics(pTime);//delta);
 		}
 	}
-
 
 	void Engine::draw() {
 		needsDraw = false;
@@ -108,15 +105,12 @@ namespace z
 
 	//Event
 	void Engine::event(Event* e) {
-		std::cout << "event occured: " << e->getString() << std::endl;
-		//EventListener* l = getEventListener(e);
 		for(unsigned int i = 0; i < eventListeners.size(); i++) {
 			eventListeners[i]->fire(e);
 		}
 	}
 
 	void Engine::addAction(Action* a) {
-		std::cout << "added action " << a->getName() << std::endl;
 		actions.push_back(a);
 	}
 	
@@ -142,54 +136,12 @@ namespace z
 		eventListeners.push_back(l);
 	}
 
-	/*void Engine::addEventListener(Event* e, string a) {
-		Action* c = getAction(a);
-		if(c) {
-			EventListener* l = new EventListener(e);
-			l->addAction(c);
-			eventListeners.push_back(l);
-		}
-	}
-
-	void Engine::bind(Event* e, Action* a) {
-		Event* e = getEvent(event);
-		EventListener* l = getEventListener(listener);
-
-		if(e == NULL) {
-			e = new Event(event);
-			events.push_back(e);
-		}
-
-		if(l)
-			e->addEventListener(l);
-	}
-
-	Event* Engine::getEvent(string e) {
-		for(unsigned int i = 0; i < events.size(); i++) {
-			if(events[i]->equals(e))
-				return events[i];
-		}
-		std::cout << "No such event: " << e << std::endl;
-		return NULL;
-	}*/
-
-	/*EventListener* Engine::getEventListener(Event* e) {
-		for(unsigned int i = 0; i < eventListeners.size(); i++) {
-			if(eventListeners[i]->equals(e))
-				return eventListeners[i];
-		}
-		std::cout << "No such eventListener: " << e->getString() << std::endl;
-		return NULL;
-	}*/
-
 	//MODULE
-	Module::Module(Engine *e)
-	{
+	Module::Module(Engine *e) {
 		engine = e;
 	}
 
-	Module::~Module()
-	{
+	Module::~Module() {
 		//engine->removeModule(this);
 	}
 

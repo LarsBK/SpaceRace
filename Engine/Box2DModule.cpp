@@ -8,7 +8,7 @@ namespace z {
 		doSleep = true;
 		world = new b2World(*gravity, doSleep);
 		
-		timeStep = 1.0f/60; //engine->getTargetFramerate();
+		timeStep = 1.0f/120; //engine->getTargetFramerate();
 		velocityIterations = 6;
 		positionIterations = 2;
 		lastTime = 0;

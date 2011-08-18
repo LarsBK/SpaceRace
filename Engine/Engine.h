@@ -77,12 +77,8 @@ namespace z {
 		void needToDraw();
 
 		//Register modules
-		//unsigned int addPhysics(Module* Module);
-		//unsigned int addDraw(Module* Module);
-		//unsigned int addUpdate(Module* Module);
 		unsigned int addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
-		//void update();
 
 		//Event
 		void event(Event* e); //An event has occured
@@ -90,8 +86,8 @@ namespace z {
 		void bind(Event* e, string a); //Binds
 		void bind(Event* e, Action* a); //Binds
 
+		//ActionHandler
 		void handleAction(Action* a);
-
 	};
 
 /*

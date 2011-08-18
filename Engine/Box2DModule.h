@@ -26,12 +26,6 @@ namespace z {
 		b2Vec2* gravity;
 		bool doSleep;
 		b2World* world;
-
-		b2BodyDef groundBodyDef;
-		b2Body* groundBody;
-		b2PolygonShape groundShape;
-
-		b2Body* body;
 		
 	};
 }

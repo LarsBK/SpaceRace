@@ -2,16 +2,6 @@
 
 namespace z {
 
-/*
-	sf::Drawable GameObject::getDrawable() {
-		drawable = sf::Shape::Rectangle(0,0,10,10);
-		b2Vec2 vec = body->GetPosition();
-		drawable.SetPosition(vec.x,vec.y);
-		//update drawable
-		return drawable;
-	}
-*/
-
 	void GameObject::draw(sf::RenderWindow* w) {
 		b2Vec2 vec = body->GetPosition();
 		float rot = body->GetAngle();
