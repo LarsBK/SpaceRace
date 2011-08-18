@@ -5,6 +5,11 @@
 #include "PhysicsObject.h"
 #include "WindowModule.h"
 
+#define SCREEN_WIDTH 1024
+#define PM (SCREEN_WIDTH/8.0f)
+#define MP (1.0f/PM)
+
+
 namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {

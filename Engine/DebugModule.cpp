@@ -4,7 +4,7 @@ namespace z {
 
 	DebugDrawModule::DebugDrawModule(Engine* e, Box2DModule* b) : Module(e) {
 		name = "DebugDrawModule";
-		window = new sf::RenderWindow(sf::VideoMode(800,600,32), "DebugDraw");
+		window = new sf::RenderWindow(sf::VideoMode(480,272,32), "DebugDraw");
 		box2d = b;
 		//window->UseVerticalSync(true);
 		window->SetFramerateLimit(engine->getTargetFramerate());

@@ -1,23 +1,24 @@
 #include "PongBall.h"
 
-PongBall::PongBall() : GameObject() {
-	x = 400;
-	y = 200;
-	radius = 5;
+PongBall::PongBall(float start) : GameObject() {
+	x = 4;
+	y = 2.25;
+	startSpeed = start;
+	radius = 0.05;
 	dynamic = true;
 
-	density = 0.1;
-	restitution = 0;
-	friction = 1;
+	density = 1;
+	restitution = 1.07;
+	friction = 0;
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = radius;
 	
-	sprite = new sf::Shape(sf::Shape::Circle(0,0,radius,sf::Color::White));
-	//sprite->SetCenter(radius,radius);
+	sprite = new sf::Shape(sf::Shape::Circle(0,0,radius*PM,sf::Color::White));
+	//sprite->SetCenter(radius*PM,radius*PM);
 }
 
 void PongBall::onSpawn() {
-	setVelocity(1000000,100000);
+	setVelocity(startSpeed,0.1);
 }
 
 /*sf::Drawable PongBall::getDrawable() {

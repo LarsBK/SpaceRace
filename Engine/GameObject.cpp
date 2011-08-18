@@ -15,8 +15,8 @@ namespace z {
 	void GameObject::draw(sf::RenderWindow* w) {
 		b2Vec2 vec = body->GetPosition();
 		float rot = body->GetAngle();
-		sprite->SetRotation( rot * (180/3.14));
-		sprite->SetPosition(vec.x,vec.y);
+		sprite->SetRotation( -rot * (180/3.14));
+		sprite->SetPosition(PM*vec.x,PM*vec.y);
 		w->Draw(*sprite);
 	}
 

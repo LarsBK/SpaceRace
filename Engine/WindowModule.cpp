@@ -9,7 +9,7 @@ namespace z {
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
 		else
-			window = new sf::RenderWindow(sf::VideoMode(720,480,32), engine->getName());
+			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName());
 		
 		fullscreenAction = new Action("fullscreen", this);
 		engine->addAction(fullscreenAction);

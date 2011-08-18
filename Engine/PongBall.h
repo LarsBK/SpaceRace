@@ -8,9 +8,10 @@ using namespace z;
 class PongBall : protected GameObject {
 
 	float radius;
+	float startSpeed;
 
 	public:
-	PongBall();
+	PongBall(float start);
 	virtual void onSpawn();
 	
 	//virtual b2BodyDef getBodyDef();
