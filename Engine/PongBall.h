@@ -9,6 +9,9 @@ class PongBall : protected GameObject {
 
 	float radius;
 	float startSpeed;
+	
+	protected:
+	virtual sf::Drawable* getDrawable();
 
 	public:
 	PongBall(float start);

@@ -13,6 +13,10 @@ class Paddle : public ActionHandler, protected GameObject {
 	//Actions
 	Action* moveUp;
 	Action* moveDown;
+	float height,width;
+
+	protected:
+	virtual sf::Drawable* getDrawable();
 
 	public:
 	Paddle(string name, float x, float y, Engine* engine);

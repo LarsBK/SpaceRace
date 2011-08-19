@@ -13,19 +13,15 @@ PongBall::PongBall(float start) : GameObject() {
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = radius;
 	
-	sprite = new sf::Shape(sf::Shape::Circle(0,0,radius*PM,sf::Color::White));
+	//sprite = new sf::Shape(sf::Shape::Circle(0,0,radius*PM,sf::Color::White));
 	//sprite->SetCenter(radius*PM,radius*PM);
 }
+
 
 void PongBall::onSpawn() {
 	setVelocity(startSpeed,0.1);
 }
 
-/*sf::Drawable PongBall::getDrawable() {
-  b2Vec2 vec = body->GetPosition();
-  float x = vec.x;
-  float y = vec.y;
-  float radius = 1.0f;
-  sf::Shape s = sf::Shape::Circle(x,y,radius,sf::Color::White);
-  return s;
-  }*/
+sf::Drawable* PongBall::getDrawable() {
+  return new sf::Shape(sf::Shape::Circle(0,0,meterToPixel(radius),sf::Color::White));
+}

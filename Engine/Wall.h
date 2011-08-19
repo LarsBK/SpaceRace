@@ -9,10 +9,11 @@ class Wall : protected GameObject {
 	
 	float width,height;
 
+	protected:
+	sf::Drawable* getDrawable();
+
 	public:
 	Wall(float x, float y, float w, float h);
-	//virtual b2BodyDef getBodyDef();
-	//virtual b2FixtureDef getFixtureDef();
 
 };
 

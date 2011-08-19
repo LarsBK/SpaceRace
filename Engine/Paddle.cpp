@@ -8,21 +8,24 @@ Paddle::Paddle(string name, float xi, float yi, Engine* engine) {
 	restitution = 0.5;
 	//fixedRotation = true;
 	dynamic = true;
-	float height = 0.6;
-	float width = 0.08;
+	height = 0.6;
+	width = 0.08;
 
 	b2PolygonShape* s = new b2PolygonShape();
 	s->SetAsBox(width/2, height/2);
 	shape = s;
-
-	sprite = new sf::Shape(sf::Shape::Rectangle(0,0,width*PM,height*PM,sf::Color::White));
-	sprite->SetCenter(width/2*PM,height/2*PM);
 
 	//Actions
 	moveUp = new Action(name+" up", this);
 	moveDown = new Action(name+" down", this);
 	engine->addAction(moveUp);
 	engine->addAction(moveDown);
+}
+
+sf::Drawable* Paddle::getDrawable() {
+	sf::Drawable* d = new sf::Shape(sf::Shape::Rectangle(0,0,meterToPixel(width),meterToPixel(height),sf::Color::White));
+	d->SetCenter(meterToPixel(width/2),meterToPixel(height/2));
+	return d;
 }
 
 void Paddle::handleAction(Action* a) {

@@ -14,8 +14,12 @@ namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {
 		
-		protected:
+		private:
 		sf::Drawable* sprite;
+		int screenWidth;
+		protected:
+		virtual sf::Drawable* getDrawable();
+		float meterToPixel(float m);
 
 		public:
 		GameObject();
