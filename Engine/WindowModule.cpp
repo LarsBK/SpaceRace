@@ -44,9 +44,11 @@ namespace z {
 			s.append("Input_");
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
-			//else if (event.Type == sf::Event::Resized)
-				//window->SetSize(event.Size.Width, event.Size.Height);
-			else if (event.Type == sf::Event::MouseMoved) {
+			else if (event.Type == sf::Event::Resized) {
+			//fix here	
+				
+				window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
+			} else if (event.Type == sf::Event::MouseMoved) {
 				
 			} else if (event.Type == sf::Event::KeyReleased) {
 				char c = event.Text.Unicode;
