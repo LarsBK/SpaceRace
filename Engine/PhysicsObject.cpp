@@ -57,7 +57,6 @@ namespace z {
 		body->SetLinearVelocity(vec);
 	}
 
-
 	/*TestObject::TestObject(float x, float y) : PhysicsObject(x,y) {
 	  std::cout << "TestObject" << std::endl;
 	  }*/

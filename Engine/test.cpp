@@ -7,6 +7,7 @@
 #include "Wall.h"
 //#include "PlayerBox.h"
 #include "Paddle.h"
+#include "Camera.h"
 
 using namespace z;
 
@@ -41,9 +42,9 @@ int main() {
 	GameObject* ball = (GameObject*) new PongBall(1.2);
 	box2d->addObject((PhysicsObject*) ball);
 	d->add((Drawable*)ball);
-	ball = (GameObject*) new PongBall(-1.2);
-	box2d->addObject((PhysicsObject*) ball);
-	d->add((Drawable*)ball);
+	//ball = (GameObject*) new PongBall(-1.2);
+	//box2d->addObject((PhysicsObject*) ball);
+	//d->add((Drawable*)ball);
 	
 	GameObject* paddle1 = (GameObject*) new Paddle("Right Player", 7, 2.75, engine);
 	GameObject* paddle2 = (GameObject*) new Paddle("Left Player", 1, 2.75, engine);
@@ -57,6 +58,8 @@ int main() {
 	engine->bind(new Event("Input_z"), "Left Player down");
 	engine->bind(new Event("Input_k"), "Right Player up");
 	engine->bind(new Event("Input_m"), "Right Player down");
+
+	d->getCamera()->follow((PhysicsObject*)ball);
 	
 	
 	//GameObject* w1 = (GameObject*) new Wall(100,200,200,10);

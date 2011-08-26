@@ -5,9 +5,9 @@
 #include "PhysicsObject.h"
 #include "WindowModule.h"
 
-#define SCREEN_WIDTH 1024
-#define PM (SCREEN_WIDTH/8.0f)
-#define MP (1.0f/PM)
+//#define SCREEN_WIDTH 1024
+//#define PM (SCREEN_WIDTH/8.0f)
+//#define MP (1.0f/PM)
 
 
 namespace z {
@@ -16,6 +16,7 @@ namespace z {
 		
 		private:
 		sf::Drawable* sprite;
+		sf::RenderWindow* window;
 		int screenWidth;
 		protected:
 		virtual sf::Drawable* getDrawable();

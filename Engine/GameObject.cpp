@@ -20,7 +20,7 @@ namespace z {
 	}
 
 	float GameObject::meterToPixel(float m) {
-		int ppm = screenWidth/8.0f;
+		int ppm = screenWidth/METERINWIDTH;
 		return m*ppm;
 	}
 

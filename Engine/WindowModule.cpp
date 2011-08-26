@@ -11,6 +11,8 @@ namespace z {
 		else
 			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName());
 		
+		camera = new Camera(&window->GetDefaultView());
+		camera->setWindowSize(window->GetWidth(), window->GetHeight());
 		fullscreenAction = new Action("fullscreen", this);
 		engine->addAction(fullscreenAction);
 		engine->bind(new Event("Input_f"), fullscreenAction);
@@ -34,6 +36,8 @@ namespace z {
 			std::cout << "Leaving fullscreen" << std::endl;
 			window->Create(sf::VideoMode(720,480,32), engine->getName());
 		}
+
+		camera->setWindowSize(window->GetWidth(), window->GetHeight());
 	}
 
 	void WindowModule::update(float time) {
@@ -45,9 +49,10 @@ namespace z {
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
 			else if (event.Type == sf::Event::Resized) {
-			//fix here	
+			//fix here
+				camera->setWindowSize(event.Size.Width, event.Size.Width);
 				
-				window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
+				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
 			} else if (event.Type == sf::Event::MouseMoved) {
 				
 			} else if (event.Type == sf::Event::KeyReleased) {
@@ -74,10 +79,14 @@ namespace z {
 	void WindowModule::onDraw(float time) {
 		window->Clear();
 		int fps = 1.0f/window->GetFrameTime();
+
+		window->SetView(*camera->getView());
 		
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(window);
 		}
+
+		window->SetView(window->GetDefaultView());
 		
 		drawFps(fps);
 		window->Display();
@@ -103,6 +112,15 @@ namespace z {
 
 	void WindowModule::add(Drawable* d) {
 		drawList.push_back(d);
+	}
+
+/*	float WindowModule::meterToPixel(float m) {
+		return camera->meterToPixel(m);
+	}
+*/
+
+	Camera* WindowModule::getCamera() {
+		return camera;
 	}
 
 	static string charToString(char c) {

@@ -3,16 +3,21 @@
 
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
+#include "Camera.h"
 #include <iostream>
 #include <sstream>
+
+#define METERINWIDTH 8.0f
 
 namespace z {
 
 	class Drawable;
+	class Camera;
 
 	class WindowModule : public Module, public ActionHandler {
 		sf::RenderWindow* window;
 		bool fullscreen;
+		Camera* camera;
 
 		Action* fullscreenAction;
 
@@ -29,6 +34,7 @@ namespace z {
 
 		void handleAction(Action* a);
 		void toggleFullscreen();
+		Camera* getCamera();
 
 		void add(Drawable* d);
 	};
