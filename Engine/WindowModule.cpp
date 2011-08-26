@@ -50,7 +50,7 @@ namespace z {
 				engine->quit("User quit");
 			else if (event.Type == sf::Event::Resized) {
 			//fix here
-				camera->setWindowSize(event.Size.Width, event.Size.Width);
+				camera->setWindowSize(event.Size.Width, event.Size.Height);
 				
 				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
 			} else if (event.Type == sf::Event::MouseMoved) {
