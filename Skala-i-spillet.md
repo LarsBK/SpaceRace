@@ -15,3 +15,4 @@ Astroide: 10-30m
 Skip: 5-20m  
 Missil: 1m  
 Railgun: 0.1m  
+![Skala](https://github.com/LarsBK/SpaceRace/blob/master/scale.tif?raw=true)
