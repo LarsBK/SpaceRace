@@ -1,3 +1,5 @@
+# Skala i spillet
+
 ## "Real" life:
 Astroide: 100-300m
 Skip:
