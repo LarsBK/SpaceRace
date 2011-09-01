@@ -5,10 +5,10 @@ void Game::push(GameState* gs) {
 }
 
 void Game::pop() {
-	states.pop();
+	states.pop_back();
 }
 
-int run() {
+int Game::run() {
 	int v = 0;
 	while(states.size() > 0) {
 		for(unsigned int i = 0; i < states.size(); i++) {

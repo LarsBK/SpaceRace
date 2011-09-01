@@ -3,6 +3,8 @@
 
 class GameState {
 
+	public:
+
 	/** Perform step.
 	* returnvalue != 0 indicates failure.
 	*/
@@ -10,7 +12,7 @@ class GameState {
 	
 	virtual void getName() =0;
 
-}
+};
 
 
 #endif
