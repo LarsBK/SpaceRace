@@ -12,10 +12,12 @@ InGameState::InGameState(z::Engine* e, z::WindowModule* w) {
 int InGameState::load(Game* game) {
 	box2d = new z::Box2DModule(engine);
 	engine->addModule(box2d);
+	return 0;
 }
 
 int InGameState::run() {
 	engine->run();
+	return 0;
 }
 
 void InGameState::spawn(z::GameObject* g) {
