@@ -1,7 +1,7 @@
 #include "InGameState.h"
 
 string InGameState::getName() {
-	return "Ingame state";
+	return "Ingame State";
 }
 
 InGameState::InGameState(z::Engine* e, z::WindowModule* w) {
