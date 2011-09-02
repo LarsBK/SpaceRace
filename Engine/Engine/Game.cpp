@@ -1,7 +1,8 @@
 #include "Game.h"
 
 void Game::push(GameState* gs) {
-	states.push_back(gs);
+	if(! gs->load(this))
+		states.push_back(gs);
 }
 
 void Game::pop() {
@@ -11,11 +12,10 @@ void Game::pop() {
 int Game::run() {
 	int v = 0;
 	while(states.size() > 0) {
-		for(unsigned int i = 0; i < states.size(); i++) {
-			v = states[i]->step();
-			if(v)
-				return v;
-		}
+		v = states.back()->run();
+		states.pop_back();
+		if(v)
+			return v;
 	}
 	return 0;
 }

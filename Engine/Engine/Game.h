@@ -7,6 +7,8 @@
 
 using namespace std;
 
+class GameState;
+
 class Game {
 
 	vector <GameState*> states;
