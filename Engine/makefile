@@ -1,6 +1,7 @@
 #
 # Makefile for SpaceRace
-# Compiler: g++
+# Compiler: clang
+# Linker: g++
 #
 
 UNAME = $(shell uname)
@@ -17,7 +18,7 @@ $(EXEC) : $(OBJECTS)
 #	clang -c *.cpp
 
 #Kompiler .cpp filer
-%.o : %.cpp
+build/%.o : %.cpp
 	clang -c $< -o $@
 clean:
 	rm -f $(EXEC) $(OBJECTS)
