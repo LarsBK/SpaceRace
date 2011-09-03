@@ -114,7 +114,6 @@ namespace z
 		actions.push_back(a);
 	}
 	
-	//buggy
 	Action* Engine::getAction(string s) {
 		for(unsigned int i = 0; i < actions.size(); i++) { 
 			if(actions[i]->equals(s))
@@ -139,10 +138,6 @@ namespace z
 	//MODULE
 	Module::Module(Engine *e) {
 		engine = e;
-	}
-
-	Module::~Module() {
-		//engine->removeModule(this);
 	}
 
 	void Module::onDraw(float t) {

@@ -11,8 +11,10 @@ namespace z {
 	class Engine;
 	class Console;
 
-	//MODULE
-	//Modules are loaded into the engine class
+	/** Modules are loaded into the engine class
+	* The will be called to do work three times
+	* per step. update(), onDraw() and onPhysics()
+	*/
 	class Module {
 		public:
 			Module(Engine*);
