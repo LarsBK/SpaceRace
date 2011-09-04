@@ -18,7 +18,6 @@ namespace z {
 	class Module {
 		public:
 			Module(Engine*);
-			~Module();
 
 			//Events
 			//virtual void update(float deltaTime);

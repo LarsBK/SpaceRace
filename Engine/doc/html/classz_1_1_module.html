@@ -71,6 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
   <div id="nav-path" class="navpath">
@@ -88,7 +89,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">z::Module Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="z::Module" --><div class="dynheader">
+<!-- doxytag: class="z::Module" -->
+<p>Modules are loaded into the engine class The will be called to do work three times per step.  
+ <a href="classz_1_1_module.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_engine_8h_source.html">Engine.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for z::Module:</div>
 <div class="dyncontent">
  <div class="center">
@@ -96,8 +102,7 @@ Inheritance diagram for z::Module:</div>
   <map id="z::Module_map" name="z::Module_map">
 <area href="classz_1_1_box2_d_module.html" alt="z::Box2DModule" shape="rect" coords="0,56,133,80"/>
 <area href="classz_1_1_debug_draw_module.html" alt="z::DebugDrawModule" shape="rect" coords="143,56,276,80"/>
-<area href="classz_1_1_input_handler.html" alt="z::InputHandler" shape="rect" coords="286,56,419,80"/>
-<area href="classz_1_1_window_module.html" alt="z::WindowModule" shape="rect" coords="429,56,562,80"/>
+<area href="classz_1_1_window_module.html" alt="z::WindowModule" shape="rect" coords="286,56,419,80"/>
 </map>
  </div></div>
 
@@ -122,9 +127,12 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a205f5f584e5b74a1567c8ea78aab68f2"></a><!-- doxytag: member="z::Module::id" ref="a205f5f584e5b74a1567c8ea78aab68f2" args="" -->
 int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_engine_8h_source.html">Engine.h</a></li>
-<li>engine.cpp</li>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>Modules are loaded into the engine class The will be called to do work three times per step. </p>
+<p>update(), onDraw() and onPhysics() </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
+<li>Engine/<a class="el" href="_engine_8h_source.html">Engine.h</a></li>
+<li>Engine/engine.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -132,7 +140,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -144,7 +152,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 31 2011 00:47:30 for SpaceRace by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 4 2011 02:45:43 for SpaceRace by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

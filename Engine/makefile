@@ -7,18 +7,48 @@
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-#SOURCES_ENGINE = $(wildcard *.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
+ifeq ($(UNAME),Darwin)
+	COMPILER := clang
+	LINKER := g++
+	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
+	REMOVE := rm
+endif
+
+ifeq ($(UNAME),Linux)
+	COMPILER := clang
+	LINKER := clang
+	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	REMOVE := rm
+endif
+
+#WINDOWS
+ifeq ($(UNAME),Windows)
+	COMPILER := g++
+	LINKER := g++
+	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	REMOVE := del
+endif
+
+
 $(EXEC) : $(OBJECTS)
-	g++ -o $(EXEC) -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D $(OBJECTS)
-#Engine/*.o : 
-#	clang -c Engine/*.cpp
-#*.o :
-#	clang -c *.cpp
+	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer
 build/%.o : %.cpp
-	clang -c $< -o $@
+	$(COMPILER) -c $< -o $@
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	$(REMOVE) $(EXEC) $(OBJECTS)
+
+#Kjør
+run: $(EXEC)
+	$(EXEC)
+
+#Doxygen
+doxygen : $(SOURCES)
+	doxygen
+
+#ALL
+all : $(doxygen) $(run)
+	
