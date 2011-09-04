@@ -1,5 +1,9 @@
 #include "Game.h"
 
+Game::~Game() {
+	states.clear();
+}
+
 void Game::push(GameState* gs) {
 	if(! gs->load(this))
 		states.push_back(gs);

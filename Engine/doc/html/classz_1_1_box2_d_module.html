@@ -88,7 +88,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">z::Box2DModule Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="z::Box2DModule" --><!-- doxytag: inherits="z::Module" --><div class="dynheader">
+<!-- doxytag: class="z::Box2DModule" --><!-- doxytag: inherits="z::Module" -->
+<p>The physics module.  
+ <a href="classz_1_1_box2_d_module.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_box2_d_module_8h_source.html">Box2DModule.h</a>&gt;</code></p>
+<div class="dynheader">
 Inheritance diagram for z::Box2DModule:</div>
 <div class="dyncontent">
  <div class="center">
@@ -102,8 +107,7 @@ Inheritance diagram for z::Box2DModule:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac70e00dad311b3451f6603bf23ec7e4f"></a><!-- doxytag: member="z::Box2DModule::Box2DModule" ref="ac70e00dad311b3451f6603bf23ec7e4f" args="(Engine *e)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>Box2DModule</b> (<a class="el" href="classz_1_1_engine.html">Engine</a> *e)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classz_1_1_box2_d_module.html#a11a4553eb12235869db03144fea4d09b">Box2DModule</a> (<a class="el" href="classz_1_1_engine.html">Engine</a> *e, int fps, b2Vec2 gravity, bool allowSleep)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79ee0a81465fcd6c1bbf8b5f3a5dd298"></a><!-- doxytag: member="z::Box2DModule::onPhysics" ref="a79ee0a81465fcd6c1bbf8b5f3a5dd298" args="(float now)" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onPhysics</b> (float now)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af23018b93707acdedc8e02f3ae2b6ded"></a><!-- doxytag: member="z::Box2DModule::addObject" ref="af23018b93707acdedc8e02f3ae2b6ded" args="(PhysicsObject *o)" -->
@@ -111,6 +115,57 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>addObject</b> (<a cla
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ec332371e9e4319878d05ca5b70dd9d"></a><!-- doxytag: member="z::Box2DModule::getWorld" ref="a7ec332371e9e4319878d05ca5b70dd9d" args="()" -->
 b2World *&#160;</td><td class="memItemRight" valign="bottom"><b>getWorld</b> ()</td></tr>
 </table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>The physics module. </p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a11a4553eb12235869db03144fea4d09b"></a><!-- doxytag: member="z::Box2DModule::Box2DModule" ref="a11a4553eb12235869db03144fea4d09b" args="(Engine *e, int fps, b2Vec2 gravity, bool allowSleep)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">z::Box2DModule::Box2DModule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classz_1_1_engine.html">Engine</a> *&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">b2Vec2&#160;</td>
+          <td class="paramname"><em>gravity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>allowSleep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>pointer to the engine </td></tr>
+    <tr><td class="paramname">fps</td><td>the number of times physics will be updated per secound. </td></tr>
+    <tr><td class="paramname">gravity</td><td>the gravityvector of the world </td></tr>
+    <tr><td class="paramname">allow</td><td>inactive objects to sleep to save cpu time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/<a class="el" href="_box2_d_module_8h_source.html">Box2DModule.h</a></li>
 <li>Engine/Box2DModule.cpp</li>
@@ -133,7 +188,7 @@ b2World *&#160;</td><td class="memItemRight" valign="bottom"><b>getWorld</b> ()<
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 4 2011 02:45:43 for SpaceRace by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Sep 4 2011 16:32:41 for SpaceRace by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

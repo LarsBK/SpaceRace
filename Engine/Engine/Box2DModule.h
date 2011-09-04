@@ -9,9 +9,18 @@
 
 namespace z {
 	
+	/**The physics module
+	*/
 	class Box2DModule : public Module {
 		public:
-		Box2DModule(Engine* e);
+		/**
+		* @param e pointer to the engine
+		* @param fps the number of times physics will be updated per secound.
+		* @param gravity the gravityvector of the world
+		* @param allowSleep allow inactive objects to sleep to save cpu time
+		*/
+		Box2DModule(Engine* e, int fps, b2Vec2 gravity, bool allowSleep);
+		~Box2DModule();
 		void onPhysics(float now);
 		void addObject(PhysicsObject* o);
 		b2World* getWorld();
@@ -23,8 +32,6 @@ namespace z {
 
 		float lastTime;
 
-		b2Vec2* gravity;
-		bool doSleep;
 		b2World* world;
 		
 	};

@@ -7,5 +7,7 @@ int main(int argc, const char *argv[])
 {
 	Game* game = new SpaceRace();
 	cout << game->getName() << endl;
-	return game->run();
+	int i = game->run();
+	delete game;
+	return i;
 }

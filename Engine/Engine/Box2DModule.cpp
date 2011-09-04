@@ -2,16 +2,18 @@
 
 namespace z {
 
-	Box2DModule::Box2DModule(Engine* e) : Module(e) {
+	Box2DModule::Box2DModule(Engine* e, int fps, b2Vec2 gravity, bool allowSleep) : Module(e) {
 		name = "Box2DModule";
-		gravity = new b2Vec2(0.0f, 0.0f);
-		doSleep = true;
-		world = new b2World(*gravity, doSleep);
 		
-		timeStep = 1.0f/120; //engine->getTargetFramerate();
-		velocityIterations = 6;
-		positionIterations = 2;
+		world = new b2World(gravity, allowSleep);
+		timeStep = 1.0f/fps;
+		velocityIterations = 8;
+		positionIterations = 3;
 		lastTime = 0;
+	}
+
+	Box2DModule::~Box2DModule() {
+		delete world;
 	}
 
 	void Box2DModule::addObject(PhysicsObject* o) {
@@ -38,7 +40,7 @@ namespace z {
 			world->ClearForces();
 			lastTime+=timeStep;
 			i++;
-			if(i > 5) {
+			if(i > 30) {
 				std::cout << "Trying to catch up " << i << std::endl;
 			}
 		}

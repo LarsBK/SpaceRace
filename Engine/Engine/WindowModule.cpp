@@ -20,6 +20,12 @@ namespace z {
 		pressed = new bool[sf::Key::Count];
 	}
 
+WindowModule::~WindowModule() {
+	delete camera;
+	delete[] pressed;
+	delete window;
+}
+
 	void WindowModule::handleAction(Action* a) {
 		if(a == fullscreenAction && a->getEvent()->state == Event::STARTED) {
 			toggleFullscreen();
@@ -70,6 +76,7 @@ namespace z {
 					e = new Event(s);
 					e->state = Event::STARTED;
 					engine->event(e);
+					delete e;
 				}
 			}
 

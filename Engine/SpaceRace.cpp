@@ -17,3 +17,8 @@ SpaceRace::SpaceRace() {
 
 	push(new InGameState(engine, window));
 }
+
+SpaceRace::~SpaceRace() {
+	delete engine;
+	delete window;
+}

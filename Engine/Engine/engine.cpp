@@ -15,6 +15,14 @@ namespace z
 		bind(new Event("quit"), quitAction);
 	}
 
+	Engine::~Engine() {
+		eventListeners.clear();
+		actions.clear();
+		drawList.clear();
+		physicsList.clear();
+		updateList.clear();
+	}
+
 	string Engine::getName() {
 		return gameName;
 	}
@@ -23,12 +31,6 @@ namespace z
 		if(a == quitAction)
 			quit("Event");
 		std::cout << a->getName() << std::endl;
-	}
-
-	Engine::~Engine() {
-		drawList.clear();
-		physicsList.clear();
-		updateList.clear();
 	}
 
 	unsigned int Engine::addModule(Module* m) {

@@ -12,6 +12,8 @@ class GameState;
 class Game {
 
 	vector <GameState*> states;
+
+	~Game();
 	
 	public:
 	virtual string getName() =0;

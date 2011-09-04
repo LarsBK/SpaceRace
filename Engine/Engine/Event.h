@@ -21,7 +21,12 @@ namespace z {
 		EventState state;
 	};
 
-	//Only in Engine
+	class ErrorEvent : public Event {
+		ErrorEvent(string s);
+	};
+
+	/** EventListener (Internal)
+	*/
 	class EventListener {
 		vector<Action*> actionList;
 		Event* event; //if recived event returns true for equals(event):
@@ -33,6 +38,11 @@ namespace z {
 		void fire(Event* e);
 	};
 
+	/** An action that can be performed
+	* Create an action to represent an action
+	* you class can perform and add it to the
+	* engine with Engine::addAction()
+	*/
 	class Action {
 		string name; //ie "Jump"
 		ActionHandler* handler;
@@ -45,11 +55,15 @@ namespace z {
 		Event* getEvent();
 	};
 
-	//ActionHandler interface
+	/**ActionHandler interface
+	* Internal
+	*/
 	class ActionHandler {
 		public:
 		virtual void handleAction(Action* a) =0;
 	};
+
+
 }
 
 #endif

@@ -27,6 +27,7 @@ namespace z {
 
 		public:
 		WindowModule(Engine* e);
+		~WindowModule();
 		void update(float time);
 		void onDraw(float time);
 

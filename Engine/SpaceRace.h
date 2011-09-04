@@ -17,6 +17,7 @@ class SpaceRace : public Game {
 
 	public:
 	SpaceRace();
+	~SpaceRace();
 	virtual string getName();
 
 };

@@ -14,6 +14,10 @@ namespace z {
 		return s;
 	}
 
+	ErrorEvent::ErrorEvent(string s) : Event("ERROR: " + s) {
+		cout << "ERROR: " << s;
+	}
+
 	EventListener::EventListener(Event* e) {
 		event = e;
 	}

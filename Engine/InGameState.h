@@ -23,6 +23,7 @@ class InGameState : public GameState {
 	virtual int load(Game* g);
 	virtual string getName();
 	InGameState(z::Engine* e, z::WindowModule* w);
+	~InGameState();
 };
 
 
