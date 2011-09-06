@@ -1,4 +1,5 @@
 #include "SpaceRace.h"
+#include "BenchmarkState.h"
 
 string SpaceRace::getName() {
 	string s;
@@ -14,8 +15,9 @@ SpaceRace::SpaceRace() {
 	engine = new z::Engine(getName());
 	window = new z::WindowModule(engine);
 	engine->addModule(window);
-
-	push(new InGameState(engine, window));
+	
+	push(new BenchmarkState(engine, window));
+	//push(new InGameState(engine, window));
 }
 
 SpaceRace::~SpaceRace() {

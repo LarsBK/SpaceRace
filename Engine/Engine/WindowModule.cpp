@@ -10,7 +10,8 @@ namespace z {
 			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
 		else
 			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName());
-		
+
+		window->UseVerticalSync(true);
 		camera = new Camera(&window->GetDefaultView());
 		camera->setWindowSize(window->GetWidth(), window->GetHeight());
 		fullscreenAction = new Action("fullscreen", this);
@@ -20,11 +21,15 @@ namespace z {
 		pressed = new bool[sf::Key::Count];
 	}
 
-WindowModule::~WindowModule() {
-	delete camera;
-	delete[] pressed;
-	delete window;
-}
+	void WindowModule::vsync(bool v) {
+		window->UseVerticalSync(v);
+	}
+
+	WindowModule::~WindowModule() {
+		delete camera;
+		delete[] pressed;
+		delete window;
+	}
 
 	void WindowModule::handleAction(Action* a) {
 		if(a == fullscreenAction && a->getEvent()->state == Event::STARTED) {
@@ -55,12 +60,12 @@ WindowModule::~WindowModule() {
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
 			else if (event.Type == sf::Event::Resized) {
-			//fix here
+				//fix here
 				camera->setWindowSize(event.Size.Width, event.Size.Height);
-				
+
 				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
 			} else if (event.Type == sf::Event::MouseMoved) {
-				
+
 			} else if (event.Type == sf::Event::KeyReleased) {
 				char c = event.Text.Unicode;
 				s.append(charToString(c));
@@ -85,16 +90,17 @@ WindowModule::~WindowModule() {
 
 	void WindowModule::onDraw(float time) {
 		window->Clear();
-		int fps = 1.0f/window->GetFrameTime();
 
 		window->SetView(*camera->getView());
-		
+
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(window);
 		}
 
 		window->SetView(window->GetDefaultView());
-		
+
+		int fps = 1.0f/window->GetFrameTime();
+		engine->setFPS(fps);
 		drawFps(fps);
 		window->Display();
 	}
@@ -104,7 +110,7 @@ WindowModule::~WindowModule() {
 		std::string fpsstring;
 		ss << f;
 		ss >> fpsstring;
-		
+
 		sf::String string;
 		string.SetText("fps: " + fpsstring);
 		if (f >= 58)
@@ -121,10 +127,10 @@ WindowModule::~WindowModule() {
 		drawList.push_back(d);
 	}
 
-/*	float WindowModule::meterToPixel(float m) {
+	/*	float WindowModule::meterToPixel(float m) {
 		return camera->meterToPixel(m);
-	}
-*/
+		}
+	 */
 
 	Camera* WindowModule::getCamera() {
 		return camera;

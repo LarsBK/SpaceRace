@@ -42,6 +42,7 @@ namespace z {
 		unsigned int targetFramerate;
 		bool running;
 		string gameName;
+		unsigned int fps;
 
 		//List over all currently loaded modules
 		vector<Module*> updateList;
@@ -74,6 +75,8 @@ namespace z {
 		bool isRunning();
 		string getName();
 		unsigned int getTargetFramerate();
+		unsigned int getFPS();
+		void setFPS(unsigned int f);
 
 		void needToDraw();
 

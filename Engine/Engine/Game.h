@@ -13,9 +13,9 @@ class Game {
 
 	vector <GameState*> states;
 
-	~Game();
 	
 	public:
+	~Game();
 	virtual string getName() =0;
 	void push(GameState* gs);
 	void pop();

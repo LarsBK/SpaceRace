@@ -34,6 +34,8 @@ namespace z {
 		void drawFps(int f);
 
 		void handleAction(Action* a);
+		
+		void vsync(bool v);
 		void toggleFullscreen();
 		Camera* getCamera();
 

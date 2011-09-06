@@ -105,6 +105,14 @@ namespace z
 	  return clock.GetElapsedTime();
 	}
 
+	unsigned int Engine::getFPS() {
+		return fps;
+	}
+
+	void Engine::setFPS(unsigned int f) {
+		fps = f;
+	}
+
 	//Event
 	void Engine::event(Event* e) {
 		for(unsigned int i = 0; i < eventListeners.size(); i++) {
