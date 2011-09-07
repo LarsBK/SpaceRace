@@ -36,8 +36,6 @@
 	<string>4B110</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.games</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.7</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011 __MyCompanyName__. All rights reserved.</string>
 	<key>NSMainNibFile</key>
