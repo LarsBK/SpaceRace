@@ -13,7 +13,7 @@ BenchmarkState::BenchmarkState(z::Engine* e, z::WindowModule* w) {
 }
 
 int BenchmarkState::load(Game* game) {
-	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 0.0f), true);
+	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 10.0f), true);
 	engine->addModule(box2d);
 	window->vsync(false);
 	return 0;
@@ -29,9 +29,9 @@ int BenchmarkState::run() {
 	unsigned int i = 0;
 	engine->cycle();
 	do {
-		if(lastTime + 0.1f < engine->getTime()) {
-			lastTime += 0.1f;
-			spawn(new TestBox());
+		while(lastTime + 0.01f < engine->getTime()) {
+			lastTime += 0.01f;
+			spawn(new TestBox(i*2.0f));
 			i++;
 		}
 		engine->cycle();
@@ -48,8 +48,8 @@ void BenchmarkState::spawn(z::GameObject* g) {
 	//window->add((z::Drawable*) g);
 }
 
-TestBox::TestBox() {
-	x = 0;
+TestBox::TestBox(float xi) {
+	x = xi;
 	y = 0;
 
 	shape = (b2Shape*) new b2CircleShape();
