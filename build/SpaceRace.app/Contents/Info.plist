@@ -30,8 +30,6 @@
 	<string>GM</string>
 	<key>DTSDKBuild</key>
 	<string>11A511a</string>
-	<key>DTSDKName</key>
-	<string>macosx10.7</string>
 	<key>DTXcode</key>
 	<string>0410</string>
 	<key>DTXcodeBuild</key>
