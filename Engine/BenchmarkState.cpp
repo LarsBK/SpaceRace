@@ -13,7 +13,7 @@ BenchmarkState::BenchmarkState(z::Engine* e, z::WindowModule* w) {
 }
 
 int BenchmarkState::load(Game* game) {
-	box2d = new z::Box2DModule(engine, 120, b2Vec2(0.0f, 0.0f), false);
+	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 0.0f), true);
 	engine->addModule(box2d);
 	window->vsync(false);
 	return 0;
@@ -27,7 +27,6 @@ int BenchmarkState::run() {
 
 	float lastTime = 1.0f;
 	unsigned int i = 0;
-	engine->cycle();
 	engine->cycle();
 	do {
 		if(lastTime + 0.1f < engine->getTime()) {

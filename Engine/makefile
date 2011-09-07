@@ -14,6 +14,7 @@ ifeq ($(UNAME),Darwin)
 	LINKER := g++
 	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
 	REMOVE := rm
+	#EXEC = ../build/stage3.app/Content/MacOS/stage3-$(UNAME)
 endif
 
 ifeq ($(UNAME),Linux)

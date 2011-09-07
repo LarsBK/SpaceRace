@@ -9,7 +9,7 @@ namespace z {
 		timeStep = 1.0f/fps;
 		velocityIterations = 8;
 		positionIterations = 3;
-		lastTime = 0;
+		lastTime = e->getTime();
 	}
 
 	Box2DModule::~Box2DModule() {
