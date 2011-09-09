@@ -27,7 +27,12 @@ int BenchmarkState::run() {
 
 	float lastTime = 1.0f;
 	unsigned int i = 0;
-	engine->cycle();
+	
+	//wait while fps gets better
+	while(engine->getTime() < lastTime - 0.5f) {
+		engine->cycle();
+	}
+	
 	do {
 		while(lastTime + 0.1f < engine->getTime()) {
 			lastTime += 0.1f;
