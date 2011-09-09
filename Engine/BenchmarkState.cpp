@@ -13,7 +13,7 @@ BenchmarkState::BenchmarkState(z::Engine* e, z::WindowModule* w) {
 }
 
 int BenchmarkState::load(Game* game) {
-	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 10.0f), true);
+	box2d = new z::Box2DModule(engine, 120, b2Vec2(0.0f, 10.0f), true);
 	engine->addModule(box2d);
 	window->vsync(false);
 	return 0;
@@ -29,14 +29,15 @@ int BenchmarkState::run() {
 	unsigned int i = 0;
 	engine->cycle();
 	do {
-		while(lastTime + 0.01f < engine->getTime()) {
-			lastTime += 0.01f;
-			spawn(new TestBox(i*2.0f));
-			i++;
+		while(lastTime + 0.1f < engine->getTime()) {
+			lastTime += 0.1f;
+			for(int u = 0; u < 10; u++) {
+				spawn(new TestBox(i*2.0f, u*2.0f));
+				i++;
+			}
 		}
 		engine->cycle();
-		//cout << engine->getFPS() << endl;
-	} while (engine->getFPS() > 10);
+	} while (engine->getFPS() > 20 && engine->isRunning());
 
 	cout << "Max bodies: " << i << endl;
 
@@ -48,9 +49,9 @@ void BenchmarkState::spawn(z::GameObject* g) {
 	//window->add((z::Drawable*) g);
 }
 
-TestBox::TestBox(float xi) {
+TestBox::TestBox(float xi, float yi) {
 	x = xi;
-	y = 0;
+	y = yi;
 
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = 1;

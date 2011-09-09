@@ -30,7 +30,7 @@ namespace z {
 
 		//Saves cpu time, more inputlag
 		while(lastTime+timeStep > engine->getTime())
-			sf::Sleep(timeStep/3);
+			sf::Sleep(engine->getTime()-(lastTime+timeStep));
 		
 
 		unsigned int i = 0;
@@ -44,9 +44,14 @@ namespace z {
 				std::cout << "Trying to catch up " << i << std::endl;
 			}
 		}
-		
-		if(i>0)
-			engine->needToDraw();
 
+		//Smoooooooth
+		float smooth = engine->getTime()-lastTime;
+		world->Step(smooth, velocityIterations, positionIterations);
+		lastTime+=smooth;
+		
+		//if(i>0)
+			engine->needToDraw();
+		
 	}
 }

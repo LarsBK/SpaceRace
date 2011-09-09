@@ -29,7 +29,7 @@ class BenchmarkState : public GameState {
 class TestBox : public z::GameObject {
 
 	public:
-	TestBox(float xi);
+	TestBox(float xi,float yi);
 
 };
 
