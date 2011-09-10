@@ -28,7 +28,7 @@ endif
 ifeq ($(UNAME),Windows)
 	COMPILER := g++ -m32
 	LINKER := g++
-	CFLAGS := -m32 -static-libgcc -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	CFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := del
 endif
 
