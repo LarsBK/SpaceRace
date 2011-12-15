@@ -4,17 +4,20 @@
 # Linker: g++
 #
 
+#Run with -j X for X threads
+
+	
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
 ifeq ($(UNAME),Darwin)
-	COMPILER := clang
+	COMPILER := g++
 	LINKER := g++
 	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
 	REMOVE := rm
-	EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
+	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
@@ -32,15 +35,8 @@ ifeq ($(UNAME),Windows)
 	REMOVE := del
 endif
 
-
-$(EXEC) : $(OBJECTS)
-	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
-
-#Kompiler .cpp filer
-build/%.o : %.cpp
-	$(COMPILER) -c $< -o $@
-clean:
-	$(REMOVE) $(EXEC) $(OBJECTS)
+#ALL
+all : $(doxygen) $(run)
 
 #Kjør
 run: $(EXEC)
@@ -50,6 +46,12 @@ run: $(EXEC)
 doxygen : $(SOURCES)
 	doxygen
 
-#ALL
-all : $(doxygen) $(run)
-	
+clean:
+	$(REMOVE) $(EXEC) $(OBJECTS)
+
+$(EXEC) : $(OBJECTS)
+	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
+
+#Kompiler .cpp filer
+%.o : %.cpp
+	$(COMPILER) -c $< -o $@
