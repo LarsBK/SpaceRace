@@ -58,7 +58,7 @@ namespace z {
 		Event* e;
 		while(window->GetEvent(event)) {
 			string s;
-			s.append("Input_");
+			s.append("keyboard_");
 			if (event.Type == sf::Event::Closed) 
 				engine->quit("User quit");
 			else if (event.Type == sf::Event::Resized) {
@@ -143,7 +143,9 @@ namespace z {
 	}
 
 	void FullscreenAction::fire(Event* e) {
-		wm->toggleFullscreen();
+		if(e->state == Event::STARTED) {
+			wm->toggleFullscreen();
+		}
 	}
 
 	string FullscreenAction::getName() {

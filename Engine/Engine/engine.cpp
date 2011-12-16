@@ -110,7 +110,10 @@ namespace z
 	//Event
 	void Engine::event(Event* e) {
 		EventBinding* eb = getBinding(e->toString());
-		eb->fire(e);
+		cout << "Event: " << e->toString() << endl;
+		if(eb) {
+			eb->fire(e);
+		}
 /*
 		for(unsigned int i = 0; i < eventBindings.size(); i++) {
 			eventBindings[i]->fire(e);
@@ -151,6 +154,7 @@ namespace z
 		if(c) {
 			//bind(eb,c);
 			eb->addAction(c);
+			cout << e << " bound to " << c->toString() << endl;
 		}
 	}
 /*

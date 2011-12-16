@@ -14,17 +14,17 @@ namespace z {
 		return event == e;
 	}
 
-	EventBinding::EventBinding(string e) : actionList(1) {
+	EventBinding::EventBinding(string e) { //: actionList(1) {
 		event = e;
 	}
 
 	void EventBinding::fire(Event* e) {
-		std::cerr << actionList.size() << std::endl;
 		//if(e->equals(event)) {
 			for(unsigned int i = 0; i < actionList.size(); i++) {
 				actionList[i]->fire(e);
 			}
 		//}
+		
 	}
 
 	void EventBinding::addAction(Action* a) {
