@@ -28,6 +28,7 @@ class BenchmarkState : public GameState {
 
 class TestBox : public z::GameObject {
 
+	sf::Shape circle;
 	public:
 	TestBox(float xi,float yi);
 

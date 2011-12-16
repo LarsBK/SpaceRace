@@ -96,9 +96,13 @@ namespace z {
 		window->SetView(*camera->getView());
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->draw(window);
+			drawList[i]->draw(this);
 		}
-
+/*
+		for(unsigned int i = 0; i < hudList.size(); i++) {
+			hudList[i]->draw(window);
+		}
+*/
 		window->SetView(window->GetDefaultView());
 
 		int fps = 1.0f/window->GetFrameTime();
@@ -114,8 +118,8 @@ namespace z {
 		ss >> fpsstring;
 
 		sf::String string;
-		string.SetText("fps: " + fpsstring);
-		if (f >= 58)
+		string.SetText(fpsstring + " FPS");
+		if (f >= 50)
 			string.SetColor(sf::Color::Green);
 		else if (f >= 30)
 			string.SetColor(sf::Color::Yellow);
@@ -129,10 +133,10 @@ namespace z {
 		drawList.push_back(d);
 	}
 
-	/*	float WindowModule::meterToPixel(float m) {
+	float WindowModule::meterToPixel(float m) {
 		return camera->meterToPixel(m);
-		}
-	 */
+	}
+	
 
 	Camera* WindowModule::getCamera() {
 		return camera;
