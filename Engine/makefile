@@ -21,8 +21,8 @@ ifeq ($(UNAME),Darwin)
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := clang
-	LINKER := clang
+	COMPILER := g++
+	LINKER := g++
 	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := rm
 endif
