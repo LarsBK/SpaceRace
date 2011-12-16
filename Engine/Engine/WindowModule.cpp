@@ -14,9 +14,10 @@ namespace z {
 		window->UseVerticalSync(true);
 		camera = new Camera(&window->GetDefaultView());
 		camera->setWindowSize(window->GetWidth(), window->GetHeight());
-		fullscreenAction = new Action("fullscreen", this);
-		engine->addAction(fullscreenAction);
-		engine->bind(new Event("Input_f"), fullscreenAction);
+
+		fullscreenAction = new FullscreenAction(this);
+		engine->addAction( fullscreenAction);
+		engine->bind("keyboard_f", fullscreenAction->toString());
 
 		pressed = new bool[sf::Key::Count];
 	}
@@ -29,14 +30,15 @@ namespace z {
 		delete camera;
 		delete[] pressed;
 		delete window;
+		delete fullscreenAction;
 	}
-
+/*
 	void WindowModule::handleAction(Action* a) {
 		if(a == fullscreenAction && a->getEvent()->state == Event::STARTED) {
 			toggleFullscreen();
 		}
 	}
-
+*/
 	void WindowModule::toggleFullscreen() {
 		fullscreen = !fullscreen;
 
@@ -134,6 +136,22 @@ namespace z {
 
 	Camera* WindowModule::getCamera() {
 		return camera;
+	}
+
+	FullscreenAction::FullscreenAction(WindowModule* w) {
+		wm = w;
+	}
+
+	void FullscreenAction::fire(Event* e) {
+		wm->toggleFullscreen();
+	}
+
+	string FullscreenAction::getName() {
+		return "Toggle fullscreen";
+	}
+
+	string FullscreenAction::toString() {
+		return "fullscreen";
 	}
 
 	static string charToString(char c) {

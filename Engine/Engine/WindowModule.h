@@ -13,13 +13,13 @@ namespace z {
 
 	class Drawable;
 	class Camera;
+	class FullscreenAction;
 
-	class WindowModule : public Module, public ActionHandler {
+	class WindowModule : public Module {
 		sf::RenderWindow* window;
 		bool fullscreen;
 		Camera* camera;
-
-		Action* fullscreenAction;
+		FullscreenAction* fullscreenAction;
 
 		bool* pressed;
 
@@ -33,13 +33,20 @@ namespace z {
 
 		void drawFps(int f);
 
-		void handleAction(Action* a);
-		
 		void vsync(bool v);
 		void toggleFullscreen();
 		Camera* getCamera();
 
 		void add(Drawable* d);
+	};
+
+	class FullscreenAction : public Action {
+		WindowModule* wm;
+		public:
+		FullscreenAction(WindowModule* w);
+		void fire(Event* e);
+		string getName();
+		string toString();
 	};
 
 	class Drawable {

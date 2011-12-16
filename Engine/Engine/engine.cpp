@@ -10,13 +10,13 @@ namespace z
 		targetFramerate = 60;
 
 		//Commands
-		quitAction = new Action("quit", this);
-		addAction(quitAction);
-		bind(new Event("quit"), quitAction);
+		//quitAction = new Action("quit", this);
+		//addAction(quitAction);
+		//bind(new Event("quit"), quitAction);
 	}
 
 	Engine::~Engine() {
-		eventListeners.clear();
+		eventBindings.clear();
 		actions.clear();
 		drawList.clear();
 		physicsList.clear();
@@ -25,12 +25,6 @@ namespace z
 
 	string Engine::getName() {
 		return gameName;
-	}
-
-	void Engine::handleAction(Action* a) {
-		if(a == quitAction)
-			quit("Event");
-		std::cout << a->getName() << std::endl;
 	}
 
 	unsigned int Engine::addModule(Module* m) {
@@ -115,9 +109,13 @@ namespace z
 
 	//Event
 	void Engine::event(Event* e) {
-		for(unsigned int i = 0; i < eventListeners.size(); i++) {
-			eventListeners[i]->fire(e);
+		EventBinding* eb = getBinding(e->toString());
+		eb->fire(e);
+/*
+		for(unsigned int i = 0; i < eventBindings.size(); i++) {
+			eventBindings[i]->fire(e);
 		}
+*/
 	}
 
 	void Engine::addAction(Action* a) {
@@ -126,25 +124,42 @@ namespace z
 	
 	Action* Engine::getAction(string s) {
 		for(unsigned int i = 0; i < actions.size(); i++) { 
-			if(actions[i]->equals(s))
+			if(actions[i]->toString() == s)
 				return actions[i];
 		}
-		std::cout << "no such action" << s << std::endl;
+		std::cout << "no such action: " << s << std::endl;
 		return NULL;
 	}
 
-	void Engine::bind(Event* e, string a) {
-		Action* c = getAction(a);
-		if(c)
-			bind(e,c);
+	EventBinding* Engine::getBinding(string e) {
+		for(int i = 0; i < eventBindings.size(); i++) {
+			if(eventBindings[i]->equals(e)) {
+				return eventBindings[i];
+			}
+		}
+		return 0;
 	}
 
+	void Engine::bind(string e, string a) {
+		EventBinding* eb = getBinding(e);
+		if(eb == 0) {
+			eb = new EventBinding(e);
+			eventBindings.push_back(eb);
+		}
+
+		Action* c = getAction(a);
+		if(c) {
+			//bind(eb,c);
+			eb->addAction(c);
+		}
+	}
+/*
 	void Engine::bind(Event* e, Action* a) {
 		EventListener* l = new EventListener(e);
 		l->addAction(a);
 		eventListeners.push_back(l);
 	}
-
+*/
 	//MODULE
 	Module::Module(Engine *e) {
 		engine = e;
