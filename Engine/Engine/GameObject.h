@@ -14,18 +14,20 @@ namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {
 		
-		private:
-		sf::Drawable* sprite;
-		sf::RenderWindow* window;
-		int screenWidth;
 		protected:
+		sf::Drawable* sprite;
+
+		//These are used to scale the sprite
+		unsigned int spriteWidth;
+		unsigned int spriteHeight;
+		float shapeWidth;
+		float shapeHeight;
+
 		virtual sf::Drawable* getDrawable();
-		float meterToPixel(float m);
 
 		public:
 		GameObject();
-		//virtual sf::Drawable getDrawable();
-		virtual void draw(sf::RenderWindow* w);
+		virtual void draw(WindowModule* wm);
 
 	};
 }

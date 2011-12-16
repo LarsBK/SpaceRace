@@ -36,8 +36,12 @@ namespace z {
 		void vsync(bool v);
 		void toggleFullscreen();
 		Camera* getCamera();
+		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		sf::RenderWindow* getWindow() {
+			return window;
+		}
 	};
 
 	class FullscreenAction : public Action {
@@ -51,7 +55,7 @@ namespace z {
 
 	class Drawable {
 		public:
-		virtual void draw(sf::RenderWindow* w) =0;
+		virtual void draw(WindowModule*) =0;
 
 	};
 

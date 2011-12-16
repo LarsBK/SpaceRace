@@ -2,30 +2,37 @@
 
 namespace z {
 
-	void GameObject::draw(sf::RenderWindow* w) {
+	void GameObject::draw(WindowModule* wm) {
+		sf::RenderWindow* w = wm->getWindow();
 		if(body) {
-			int width = w->GetWidth();
+			sf::Drawable* texture = getDrawable();
+			
+			/*int width = w->GetWidth();
 			if (screenWidth != width) {
 				screenWidth = width;
 				sprite = getDrawable();
-			}
-			if(sprite) {
+			}*/
+
+			if(texture) {
 				b2Vec2 vec = body->GetPosition();
 				float rot = body->GetAngle();
-				sprite->SetRotation( -rot * (180/3.14));
-				sprite->SetPosition(meterToPixel(vec.x),meterToPixel(vec.y));
-				w->Draw(*sprite);
+
+				float scaleW = wm->meterToPixel(shapeWidth)
+					/ (float) spriteWidth;
+				float scaleH = wm->meterToPixel(shapeHeight)
+					/ (float) spriteHeight;
+
+				texture->SetScale(scaleW, scaleH);
+				texture->SetRotation( -rot * (180/3.14));
+				texture->SetPosition(wm->meterToPixel(vec.x),
+					wm->meterToPixel(vec.y));
+				w->Draw(*texture);
 			}
 		}
 	}
 
-	float GameObject::meterToPixel(float m) {
-		int ppm = screenWidth/METERINWIDTH;
-		return m*ppm;
-	}
-
 	sf::Drawable* GameObject::getDrawable() {
-		return NULL;
+		return sprite;
 	}
 
 	GameObject::GameObject() :PhysicsObject() {
