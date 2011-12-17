@@ -38,6 +38,8 @@ endif
 #ALL
 all : $(doxygen) $(SOURCES)
 
+engine : $(OBJECTS)
+
 #Doxygen
 doxygen : $(SOURCES)
 	doxygen

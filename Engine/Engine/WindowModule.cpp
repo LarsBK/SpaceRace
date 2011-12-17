@@ -6,13 +6,15 @@ namespace z {
 		name = "WindowModule";
 		fullscreen = false;
 
+		windowSettings.AntialiasingLevel = 8;
+
 		if(fullscreen)
-			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
+			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		else
-			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName());
+			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
 		window->UseVerticalSync(true);
-		camera = new Camera(&window->GetDefaultView());
+		camera = new Camera(&window->GetDefaultView(), e);
 		camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
@@ -44,10 +46,11 @@ namespace z {
 
 		if(fullscreen) {
 			std::cout << "Entering fullscreen" << std::endl;
-			window->Create(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen);
+			window->Create(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		} else {
 			std::cout << "Leaving fullscreen" << std::endl;
-			window->Create(sf::VideoMode(720,480,32), engine->getName());
+			window->Create(sf::VideoMode(720,480,32), engine->getName(),
+				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
 
 		camera->setWindowSize(window->GetWidth(), window->GetHeight());

@@ -10,7 +10,7 @@
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) #$(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o) $(wildcard Engine/*.o)
 
 ifeq ($(UNAME),Darwin)
 	COMPILER := g++
