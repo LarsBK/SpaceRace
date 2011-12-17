@@ -51,6 +51,7 @@ int BenchmarkState::run() {
 
 void BenchmarkState::spawn(z::GameObject* g) {
 	cerr << "Adding: " << (void*) g << endl;
+	cerr << "Window: " << (void*) window << endl;
 	box2d->addObject((z::PhysicsObject*) g);
 	window->add((z::Drawable*) g);
 	cerr << "done" << endl;

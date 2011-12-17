@@ -133,6 +133,10 @@ namespace z {
 	}
 
 	void WindowModule::add(Drawable* d) {
+		cerr << "D: " << (void*) d << endl;
+		cerr << "L: " << (void*) &drawList << endl;
+		cerr << drawList.size() << endl;
+
 		drawList.push_back(d);
 	}
 
