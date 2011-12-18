@@ -2,16 +2,27 @@
 
 namespace z {
 
-	Camera::Camera(sf::View* v, Engine* e) {
-		f = 0;
-		view = v;
-		zo = new CameraZoomOut(this);
-		e->addAction((Action*) zo);
-		e->bind("keyboard_z", zo->toString());
+	void CameraZoom::fire(Event* e) {
+		if(e->state == Event::STARTED)
+			camera->zoom(factor);
 	}
 
-	Camera::~Camera() {
-		delete zo;
+
+
+//Camera
+	Camera::Camera(sf::Window* w, Engine* e) : zo(this,0.9,"out"), zi(this,1.1,"in") {
+		f = 0;
+		sf::Vector2f center(0,0);
+		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());
+		view = new sf::View(center, halfSize);
+
+		xSpeed = 0;
+		ySpeed = 0;
+
+		e->addAction((Action*) &zo);
+		e->addAction((Action*) &zi);
+		e->bind("keyboard_z", zo.toString());
+		e->bind("keyboard_x", zi.toString());
 	}
 
 	void Camera::follow(PhysicsObject* g) {

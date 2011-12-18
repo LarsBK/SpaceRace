@@ -9,8 +9,8 @@
 	
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
-SOURCES = $(wildcard *.cpp) #$(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o) $(wildcard Engine/*.o)
+SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
+OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
 
 ifeq ($(UNAME),Darwin)
 	COMPILER := g++
@@ -36,19 +36,23 @@ ifeq ($(UNAME),Windows)
 endif
 
 #ALL
-all : $(EXEC)
+all : $(EXEC) doxygen
 
-engine :
-	cd Engine; make -j 4
+#engine :
+#	cd Engine; make -j 10
 
 #Kjør
 run: $(EXEC)
 	$(EXEC)
 
+#Doxygen
+doxygen : $(SOURCES)
+	cd Engine; doxygen
+
 clean:
 	$(REMOVE) $(EXEC) $(OBJECTS)
 
-$(EXEC) : engine $(OBJECTS)
+$(EXEC) : $(OBJECTS)
 	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer

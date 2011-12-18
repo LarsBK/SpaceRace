@@ -14,8 +14,8 @@ namespace z {
 			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
 		window->UseVerticalSync(true);
-		camera = new Camera(&window->GetDefaultView(), e);
-		camera->setWindowSize(window->GetWidth(), window->GetHeight());
+		camera = new Camera(window, e);
+		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
 		engine->addAction( fullscreenAction);
@@ -29,7 +29,6 @@ namespace z {
 	}
 
 	WindowModule::~WindowModule() {
-		delete camera;
 		delete[] pressed;
 		delete window;
 		delete fullscreenAction;
@@ -96,7 +95,7 @@ namespace z {
 	void WindowModule::onDraw(float time) {
 		window->Clear();
 
-		window->SetView(*camera->getView());
+		window->SetView(*(camera->getView()));
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(this);
@@ -133,10 +132,6 @@ namespace z {
 	}
 
 	void WindowModule::add(Drawable* d) {
-		cerr << "D: " << (void*) d << endl;
-		cerr << "L: " << (void*) &drawList << endl;
-		cerr << drawList.size() << endl;
-
 		drawList.push_back(d);
 	}
 

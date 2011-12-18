@@ -27,6 +27,10 @@ int BenchmarkState::run() {
 
 	float lastTime = 1.0f;
 	unsigned int i = 0;
+
+	TestBox* tb = new TestBox(0,0);
+	spawn(tb);
+	//window->getCamera()->follow((z::PhysicsObject*) tb);
 	
 	//wait while fps gets better
 	while(engine->getTime() < lastTime - 0.5f) {
@@ -50,11 +54,8 @@ int BenchmarkState::run() {
 }
 
 void BenchmarkState::spawn(z::GameObject* g) {
-	cerr << "Adding: " << (void*) g << endl;
-	cerr << "Window: " << (void*) window << endl;
 	box2d->addObject((z::PhysicsObject*) g);
 	window->add((z::Drawable*) g);
-	cerr << "done" << endl;
 }
 
 TestBox::TestBox(float xi, float yi) {

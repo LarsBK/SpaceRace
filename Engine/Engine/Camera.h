@@ -5,9 +5,30 @@
 
 namespace z {
 
-	class CameraAction;
-	class CameraZoomOut;
-	
+	class Camera;
+
+	class CameraAction : Action {
+		protected:
+		Camera* camera;
+
+		public:
+		CameraAction(Camera* c) {
+			camera = c;
+		}
+	};
+
+	class CameraZoom : protected CameraAction {
+		float factor;
+		string str;
+		public:
+		CameraZoom(Camera* c, float f, string s) : CameraAction(c) {
+			factor = f;
+			str = s;
+		}
+		virtual string toString() {return "camera_zoom_" + str;}
+		virtual void fire(Event* e);
+	};
+
 	class Camera {
 
 		private:
@@ -21,10 +42,12 @@ namespace z {
 
 		void update();
 
-		CameraZoomOut* zo;
+		CameraZoom zo; //zoom out
+		CameraZoom zi; //zoom in
+		//CameraMove ml
 
 		public:
-		Camera(sf::View* v, Engine* e);
+		Camera(sf::Window* w, Engine* e);
 		~Camera();
 		sf::View* getView();
 		void setWindowSize(int w, int h);
@@ -35,29 +58,8 @@ namespace z {
 
 	};
 
-	class CameraAction : Action {
-		protected:
-		Camera* camera;
-
-		public:
-		CameraAction(Camera* c) {
-			camera = c;
-		}
-	};
-
-	class CameraZoomOut : protected CameraAction {
-		public:
-		CameraZoomOut(Camera* c) : CameraAction(c) {}
-
-		virtual string toString() {
-			return "camera_zoom_out";
-		}
-
-		virtual void fire(Event* e) {
-			if(e->state == Event::STARTED)
-				camera->zoom(0.5f);
-		}
-	};
+//	class CameraMove : protected CameraAction {
+//		public
 }
 
 
