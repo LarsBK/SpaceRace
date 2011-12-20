@@ -12,10 +12,6 @@ InGameState::InGameState(z::Engine* e, z::WindowModule* w) {
 int InGameState::load(Game* game) {
 	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 9.81f), true);
 
-	for(unsigned int i = 0; i < 100; i++) {
-		spawn(new TestObject());
-	}
-
 	engine->addModule(box2d);
 	return 0;
 }

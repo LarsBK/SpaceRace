@@ -10,7 +10,7 @@ namespace z {
 
 
 //Camera
-	Camera::Camera(sf::Window* w, Engine* e) : zo(this,0.9,"out"), zi(this,1.1,"in") {
+	Camera::Camera(sf::Window* w, Engine* e) : zo(this,0.7,"out"), zi(this,1.3,"in") {
 		f = 0;
 		sf::Vector2f center(0,0);
 		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());

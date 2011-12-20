@@ -11,6 +11,9 @@ namespace z {
 		x = 0;
 		y = 0;
 
+		fixedRotation = false;
+		restitution = 0;
+
 		//b2PolygonShape* s = new b2PolygonShape();
 		//s->SetAsBox(10.0f,10.0f);
 		//shape = s;

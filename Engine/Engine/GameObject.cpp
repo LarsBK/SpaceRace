@@ -14,6 +14,8 @@ namespace z {
 			}*/
 
 			if(texture) {
+
+
 				b2Vec2 vec = body->GetPosition();
 				float rot = body->GetAngle();
 
@@ -22,6 +24,7 @@ namespace z {
 				float scaleH = wm->meterToPixel(shapeHeight)
 					/ (float) spriteHeight;
 
+				texture->SetCenter(spriteWidth/2.0f, spriteHeight/2.0f);
 				texture->SetScale(scaleW, scaleH);
 				texture->SetRotation( -rot * (180/3.14));
 				texture->SetPosition(wm->meterToPixel(vec.x),
