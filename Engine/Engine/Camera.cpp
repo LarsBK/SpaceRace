@@ -15,6 +15,7 @@ namespace z {
 		sf::Vector2f center(0,0);
 		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());
 		view = new sf::View(center, halfSize);
+		ppm = halfSize.x/METERINWIDTH;
 
 		xSpeed = 0;
 		ySpeed = 0;
