@@ -4,22 +4,25 @@
 # Linker: g++
 #
 
+#Run with -j X for X threads
+
+	
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
 
 ifeq ($(UNAME),Darwin)
-	COMPILER := clang
+	COMPILER := g++
 	LINKER := g++
 	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
 	REMOVE := rm
-	EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
+	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := clang
-	LINKER := clang
+	COMPILER := g++
+	LINKER := g++
 	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := rm
 endif
@@ -32,15 +35,11 @@ ifeq ($(UNAME),Windows)
 	REMOVE := del
 endif
 
+#ALL
+all : $(EXEC) doxygen
 
-$(EXEC) : $(OBJECTS)
-	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
-
-#Kompiler .cpp filer
-build/%.o : %.cpp
-	$(COMPILER) -c $< -o $@
-clean:
-	$(REMOVE) $(EXEC) $(OBJECTS)
+#engine :
+#	cd Engine; make -j 10
 
 #Kjør
 run: $(EXEC)
@@ -48,8 +47,14 @@ run: $(EXEC)
 
 #Doxygen
 doxygen : $(SOURCES)
-	doxygen
+	cd Engine; doxygen
 
-#ALL
-all : $(doxygen) $(run)
-	
+clean:
+	$(REMOVE) $(EXEC) $(OBJECTS)
+
+$(EXEC) : $(OBJECTS)
+	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
+
+#Kompiler .cpp filer
+%.o : %.cpp
+	$(COMPILER) -c $< -o $@

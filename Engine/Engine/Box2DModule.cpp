@@ -40,7 +40,7 @@ namespace z {
 			world->ClearForces();
 			lastTime+=timeStep;
 			i++;
-			if(i > 30) {
+			if(i % 30 == 0) {
 				std::cout << "Trying to catch up " << i << std::endl;
 			}
 		}
