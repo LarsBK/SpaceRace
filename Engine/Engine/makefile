@@ -38,6 +38,12 @@ endif
 #ALL
 all : $(doxygen) $(SOURCES)
 
+debug : all
+	CFLAGS := $(CFLAGS) -g -O0
+
+release : all
+	CFLAGS := $(CFLAGS) -O2
+
 engine : $(OBJECTS)
 
 #Doxygen

@@ -29,8 +29,8 @@ namespace z {
 	void Box2DModule::onPhysics(float now) {
 
 		//Saves cpu time, more inputlag
-		while(lastTime+timeStep > engine->getTime())
-			sf::Sleep(engine->getTime()-(lastTime+timeStep));
+		//while(lastTime+timeStep > engine->getTime())
+		//	sf::Sleep(engine->getTime()-(lastTime+timeStep));
 		
 
 		unsigned int i = 0;
@@ -45,13 +45,17 @@ namespace z {
 			}
 		}
 
-		//Smoooooooth
-		float smooth = engine->getTime()-lastTime;
-		world->Step(smooth, velocityIterations, positionIterations);
-		lastTime+=smooth;
-		
-		//if(i>0)
-			engine->needToDraw();
+		if(i > 0) {
+			/*
+			//Smoooooooth
+			float smooth = engine->getTime()-lastTime;
+			world->Step(smooth, velocityIterations, positionIterations);
+			lastTime+=smooth;
+			*/
+			
+			//if(i>0)
+				engine->needToDraw();
+		}
 		
 	}
 }

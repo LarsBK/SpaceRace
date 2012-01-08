@@ -13,14 +13,19 @@ int TestState::load(Game* game) {
 	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 9.81f), true);
 
 	spawn(new Wall(0,0,200,1));
-	spawn(new Wall(-100,-50,1,100));
-	spawn(new Wall(100,-50,1,100));
+	spawn(new Wall(-100,-100,1,200));
+	spawn(new Wall(100,-100,1,200));
 	z::GameObject* go = new RandomObject(0,-100);
 	//window->getCamera()->follow((z::PhysicsObject*) go);
 	spawn(go);
 
-	for(unsigned int i = 0; i < 200; i++) {
-		spawn(new RandomObject(0,-200));
+	for(unsigned int x = 0; x < 10; x++) {
+		float z = -200.0f*(x+1.0f);
+		cout << z << endl;
+
+		for(unsigned int i = 0; i < 50; i++) {
+			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
+		}
 	}
 
 	engine->addModule(box2d);
