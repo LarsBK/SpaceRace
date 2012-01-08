@@ -19,7 +19,7 @@ int TestState::load(Game* game) {
 	//window->getCamera()->follow((z::PhysicsObject*) go);
 	spawn(go);
 
-	for(unsigned int i = 0; i < 100; i++) {
+	for(unsigned int i = 0; i < 200; i++) {
 		spawn(new RandomObject(0,-200));
 	}
 

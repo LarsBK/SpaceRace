@@ -29,6 +29,20 @@ namespace z {
 		virtual void fire(Event* e);
 	};
 
+	class CameraMove : protected CameraAction {
+		float x;
+		float y;
+		string str;
+		public:
+		CameraMove(Camera* c, float xi, float yi, string s) : CameraAction(c) {
+			x = xi;
+			y = yi;
+			str = s;
+		}
+		virtual string toString() {return "camera_move_" + str;}
+		virtual void fire(Event* e);
+	};
+
 	class Camera {
 
 		private:
@@ -36,15 +50,23 @@ namespace z {
 		PhysicsObject* f;
 		int ppm;
 
+
 		float xSpeed;
 		float ySpeed;
-		sf::Clock lastUpdate;
+		sf::Clock lastMove;
 
-		void update();
+		float zoomFactor;
+		float lastZoomFactor;
+		sf::Clock lastZoom;
+
+	//	void update();
 
 		CameraZoom zo; //zoom out
 		CameraZoom zi; //zoom in
-		//CameraMove ml
+		CameraMove ml;
+		CameraMove mr;
+		CameraMove mu;
+		CameraMove md;
 
 		public:
 		Camera(sf::Window* w, Engine* e);

@@ -5,7 +5,7 @@ Game::~Game() {
 }
 
 void Game::push(GameState* gs) {
-	if(! gs->load(this))
+//	if(! gs->load(this))
 		states.push_back(gs);
 }
 
@@ -16,10 +16,16 @@ void Game::pop() {
 int Game::run() {
 	int v = 0;
 	while(states.size() > 0) {
-		v = states.back()->run();
+		GameState* gs = states.back();
 		states.pop_back();
-		if(v)
-			return v;
+		cout << "Loading " << gs->getName() << "...";
+		if( gs->load(this) == 0) {
+			cout << "done!" << endl;
+			v = gs->run();
+			if(v)
+				return v;
+		} else
+			cout << "Failed!" << endl;
 	}
 	return 0;
 }
