@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>SpaceRace: z::Event Class Reference</title>
+<title>SpaceRace: BenchmarkState Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -74,56 +74,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
-  <div id="nav-path" class="navpath">
-    <ul>
-      <li class="navelem"><b>z</b>      </li>
-      <li class="navelem"><a class="el" href="classz_1_1_event.html">Event</a>      </li>
-    </ul>
-  </div>
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">z::Event Class Reference</div>  </div>
+<div class="title">BenchmarkState Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="z::Event" --><div class="dynheader">
-Inheritance diagram for z::Event:</div>
+<!-- doxytag: class="BenchmarkState" --><!-- doxytag: inherits="GameState" --><div class="dynheader">
+Inheritance diagram for BenchmarkState:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classz_1_1_event.png" usemap="#z::Event_map" alt=""/>
-  <map id="z::Event_map" name="z::Event_map">
-<area href="classz_1_1_error_event.html" alt="z::ErrorEvent" shape="rect" coords="0,56,86,80"/>
+  <img src="class_benchmark_state.png" usemap="#BenchmarkState_map" alt=""/>
+  <map id="BenchmarkState_map" name="BenchmarkState_map">
+<area href="class_game_state.html" title="The gamestate class Loading should be done in load() NOT in the constructor or run()." alt="GameState" shape="rect" coords="0,0,103,24"/>
 </map>
  </div></div>
 
-<p><a href="classz_1_1_event-members.html">List of all members.</a></p>
+<p><a href="class_benchmark_state-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>EventState</b> { <b>UNDEFINED</b>, 
-<b>STARTED</b>, 
-<b>STOPPED</b>
- }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad41cedde02942e00be2226695f6c47f8"></a><!-- doxytag: member="z::Event::Event" ref="ad41cedde02942e00be2226695f6c47f8" args="(string s)" -->
-&#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> (string s)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f1100fed4a79694e3b0426fdc97e710"></a><!-- doxytag: member="z::Event::equals" ref="a5f1100fed4a79694e3b0426fdc97e710" args="(Event *e)" -->
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>equals</b> (<a class="el" href="classz_1_1_event.html">Event</a> *e)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dd211b40ca8b0a80899bd059449919e"></a><!-- doxytag: member="z::Event::getString" ref="a2dd211b40ca8b0a80899bd059449919e" args="()" -->
-string&#160;</td><td class="memItemRight" valign="bottom"><b>getString</b> ()</td></tr>
-<tr><td colspan="2"><h2><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a348958658ecb155953e05ab8300e627a"></a><!-- doxytag: member="z::Event::state" ref="a348958658ecb155953e05ab8300e627a" args="" -->
-EventState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_benchmark_state.html#a447e5a6cfd62529aba63cb3ce2714e00">run</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Run gamestate.  <a href="#a447e5a6cfd62529aba63cb3ce2714e00"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4dac9028cc29dcd5936153d5c7c67700"></a><!-- doxytag: member="BenchmarkState::load" ref="a4dac9028cc29dcd5936153d5c7c67700" args="(Game *g)" -->
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_benchmark_state.html#a4dac9028cc29dcd5936153d5c7c67700">load</a> (<a class="el" href="class_game.html">Game</a> *g)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Preform any time-consuming work here. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad5aab08587ab6330f58c9df60274f37"></a><!-- doxytag: member="BenchmarkState::getName" ref="aad5aab08587ab6330f58c9df60274f37" args="()" -->
+virtual string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcd2d4e7a7aee4f7bb72c0a37eb6b0b6"></a><!-- doxytag: member="BenchmarkState::BenchmarkState" ref="afcd2d4e7a7aee4f7bb72c0a37eb6b0b6" args="(z::Engine *e, z::WindowModule *w)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>BenchmarkState</b> (<a class="el" href="classz_1_1_engine.html">z::Engine</a> *e, <a class="el" href="classz_1_1_window_module.html">z::WindowModule</a> *w)</td></tr>
 </table>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a447e5a6cfd62529aba63cb3ce2714e00"></a><!-- doxytag: member="BenchmarkState::run" ref="a447e5a6cfd62529aba63cb3ce2714e00" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BenchmarkState::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Run gamestate. </p>
+<p>This gamestate will be removed up on return returnvalue != 0 indicates failure. </p>
+
+<p>Reimplemented from <a class="el" href="class_game_state.html#a6eb8b1a0f39abd0c59647befaacdcc2d">GameState</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Engine/<a class="el" href="_event_8h_source.html">Event.h</a></li>
-<li>Engine/Event.cpp</li>
+<li><a class="el" href="_benchmark_state_8h_source.html">BenchmarkState.h</a></li>
+<li>BenchmarkState.cpp</li>
 </ul>
 </div>
 <!-- window showing the filter options -->
