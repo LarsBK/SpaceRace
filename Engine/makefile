@@ -10,20 +10,20 @@
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
 
 ifeq ($(UNAME),Darwin)
 	COMPILER := g++
 	LINKER := g++
-	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
+	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
 	REMOVE := rm
 	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := clang
-	LINKER := clang
-	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	COMPILER := g++
+	LINKER := g++
+	LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := rm
 endif
 
@@ -31,27 +31,37 @@ endif
 ifeq ($(UNAME),Windows)
 	COMPILER := g++ -m32
 	LINKER := g++
-	CFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := del
 endif
 
 #ALL
-all : $(doxygen) $(run)
+all : $(EXEC) doxygen
+
+#engine :
+#	cd Engine; make -j 10
+
+debug : CFLAGS += -O0 -g
+debug : $(EXEC)	
+
+release : CFLAGS += -O2
+release : $(EXEC)
 
 #Kjør
-run: $(EXEC)
+run: debug
 	$(EXEC)
 
 #Doxygen
 doxygen : $(SOURCES)
-	doxygen
+	cd Engine; doxygen
 
 clean:
-	$(REMOVE) $(EXEC) $(OBJECTS)
+	$(REMOVE) *.o Engine\*.o
+	#$(EXEC) $(OBJECTS)
 
 $(EXEC) : $(OBJECTS)
-	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
+	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer
 %.o : %.cpp
-	$(COMPILER) -c $< -o $@
+	$(COMPILER) $(CFLAGS) -c $< -o $@

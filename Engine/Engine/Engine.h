@@ -34,7 +34,7 @@ namespace z {
 
 	//ENGINE
 	//Zengine's main class, holds all modules
-	class Engine : public ActionHandler
+	class Engine 
 	{
 		sf::Clock clock;
 		sf::Clock frameTime;
@@ -49,13 +49,13 @@ namespace z {
 		vector<Module*> drawList;
 		vector<Module*> physicsList;
 
-		vector<EventListener*> eventListeners;
+		vector<EventBinding*> eventBindings;
 		vector<Action*> actions;
-		EventListener* getEventListener(Event* e);
+		EventBinding* getEventBinding(string e);
 		Action* getAction(string s);
 
 		//Actions
-		Action* quitAction;
+		//Action* quitAction;
 
 		void update();
 		void physics();
@@ -87,12 +87,15 @@ namespace z {
 		//Event
 		void event(Event* e); //An event has occured
 		void addAction(Action* a); //Add supported action
-		void bind(Event* e, string a); //Binds
-		void bind(Event* e, Action* a); //Binds
+		void bind(string e, string a); //Binds
+		EventBinding* getBinding(string e);
+		//void bind(Event* e, Action* a); //Binds
 
 		//ActionHandler
-		void handleAction(Action* a);
+		//void handleAction(Action* a);
 	};
+
+
 
 /*
 	//CONSOLE

@@ -27,6 +27,10 @@ int BenchmarkState::run() {
 
 	float lastTime = 1.0f;
 	unsigned int i = 0;
+
+	TestBox* tb = new TestBox(0,0);
+	spawn(tb);
+	//window->getCamera()->follow((z::PhysicsObject*) tb);
 	
 	//wait while fps gets better
 	while(engine->getTime() < lastTime - 0.5f) {
@@ -51,7 +55,7 @@ int BenchmarkState::run() {
 
 void BenchmarkState::spawn(z::GameObject* g) {
 	box2d->addObject((z::PhysicsObject*) g);
-	//window->add((z::Drawable*) g);
+	window->add((z::Drawable*) g);
 }
 
 TestBox::TestBox(float xi, float yi) {
@@ -61,4 +65,10 @@ TestBox::TestBox(float xi, float yi) {
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = 1;
 	dynamic = true;
+	circle = sf::Shape::Circle(0,0,20, sf::Color::White);
+	sprite = &circle;
+	spriteWidth = 64;
+	spriteHeight = 64;
+	shapeHeight = 1;
+	shapeWidth = 1;
 }
