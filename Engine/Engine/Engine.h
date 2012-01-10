@@ -5,6 +5,7 @@
 #include <vector>
 #include <SFML/System.hpp>
 #include "Event.h"
+#include "split.h"
 
 namespace z {
 
@@ -94,8 +95,35 @@ namespace z {
 		//ActionHandler
 		//void handleAction(Action* a);
 	};
+/*
+	class CommandEvent : public Event {
+		public:
+		vector<string> words;
+		Event(string s) {
+			words = split(s, ' ');
+		}
+		string toString() {
+			return vector[0];
+		}
+	};
 
 
+	class BindAction : public Action {
+		Engine* engine;
+		public:
+		BindAction(Engine* e) {
+			engine = e;
+		}
+
+		virtual void fire(Event* e) {
+			string s = e->toString();
+			int pos = e.find(" ");
+			if(pos = npos) return;
+
+
+			engine->bind( e->
+		virtual void
+*/
 
 /*
 	//CONSOLE

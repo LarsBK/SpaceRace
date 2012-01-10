@@ -21,7 +21,6 @@ int TestState::load(Game* game) {
 
 	for(unsigned int x = 0; x < 10; x++) {
 		float z = -200.0f*(x+1.0f);
-		cout << z << endl;
 
 		for(unsigned int i = 0; i < 50; i++) {
 			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
@@ -29,6 +28,7 @@ int TestState::load(Game* game) {
 	}
 
 	engine->addModule(box2d);
+	engine->cycle();
 	return 0;
 }
 
