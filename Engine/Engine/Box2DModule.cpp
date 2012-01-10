@@ -5,7 +5,7 @@ namespace z {
 	Box2DModule::Box2DModule(Engine* e, int fps, b2Vec2 gravity, bool allowSleep) : Module(e) {
 		name = "Box2DModule";
 		
-		world = new b2World(gravity, allowSleep);
+		world = new b2World(gravity); //, allowSleep);
 		timeStep = 1.0f/fps;
 		velocityIterations = 8;
 		positionIterations = 3;
