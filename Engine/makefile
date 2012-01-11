@@ -12,26 +12,24 @@ EXEC = ../build/stage3-$(UNAME)
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
 
+COMPILER := g++
+LINKER := g++
+REMOVE := rm
+LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+
+
 ifeq ($(UNAME),Darwin)
-	COMPILER := g++
-	LINKER := g++
 	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
-	REMOVE := rm
 	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := g++
-	LINKER := g++
-	LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := rm
 endif
 
 #WINDOWS
 ifeq ($(UNAME),Windows)
-	COMPILER := g++ -m32
-	LINKER := g++
-	LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	#COMPILER := g++ #-m32
+	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := del
 endif
 

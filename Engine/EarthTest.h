@@ -9,7 +9,7 @@ class EarthTest : protected TexturedGameObject {
 		shape = (b2Shape*) new b2CircleShape();
 		shape->m_radius = 5;
 		dynamic = true;
-		density = 5.0f;
+		density = 2.0f;
 		fixedRotation = false;
 		friction = 0.9f;
 		restitution = 0.01f;
