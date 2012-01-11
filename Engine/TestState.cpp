@@ -19,12 +19,16 @@ int TestState::load(Game* game) {
 	//window->getCamera()->follow((z::PhysicsObject*) go);
 	spawn(go);
 
+	z::ResourceManager* man = new z::ResourceManager();
+
 	for(unsigned int x = 0; x < 10; x++) {
 		float z = -200.0f*(x+1.0f);
 
 		for(unsigned int i = 0; i < 50; i++) {
 			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
 		}
+
+		spawn((GameObject*) new EarthTest(man,0,z));
 	}
 
 	engine->addModule(box2d);

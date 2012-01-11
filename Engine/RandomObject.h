@@ -8,8 +8,14 @@
 class RandomObject : public z::GameObject {
 
 	sf::Shape spr;
+	float randomSize;
 	public:
 	RandomObject(float xi, float yi);
+
+	virtual unsigned int spriteHeight() {return 100;}
+	virtual unsigned int spriteWidth() {return 100;}
+	virtual float shapeHeight() {return randomSize;}
+	virtual float shapeWidth() {return randomSize;}
 
 };
 

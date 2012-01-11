@@ -5,11 +5,6 @@
 #include "PhysicsObject.h"
 #include "WindowModule.h"
 
-//#define SCREEN_WIDTH 1024
-//#define PM (SCREEN_WIDTH/8.0f)
-//#define MP (1.0f/PM)
-
-
 namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {
@@ -18,12 +13,10 @@ namespace z {
 		sf::Drawable* sprite;
 
 		//These are used to scale the sprite
-		unsigned int spriteWidth;
-		unsigned int spriteHeight;
-		float shapeWidth;
-		float shapeHeight;
-
-		virtual sf::Drawable* getDrawable();
+		virtual unsigned int spriteHeight()=0;
+		virtual unsigned int spriteWidth()=0;
+		virtual float shapeHeight()=0;
+		virtual float shapeWidth()=0;
 
 		public:
 		GameObject();
