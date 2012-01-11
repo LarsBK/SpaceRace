@@ -28,6 +28,7 @@ endif
 
 #WINDOWS
 ifeq ($(UNAME),Windows)
+	LFLAGS += -static-libgcc -static-libstdc++
 	#COMPILER := g++ #-m32
 	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := del
