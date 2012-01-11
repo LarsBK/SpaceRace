@@ -20,18 +20,19 @@ int TestState::load(Game* game) {
 	spawn(go);
 
 	z::ResourceManager* man = new z::ResourceManager();
+	engine->addModule(box2d);
 
-	for(unsigned int x = 0; x < 10; x++) {
+	for(unsigned int x = 0; x < 20; x++) {
 		float z = -200.0f*(x+1.0f);
 
-		for(unsigned int i = 0; i < 50; i++) {
+		for(unsigned int i = 0; i < 20; i++) {
 			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
 		}
 
 		spawn((GameObject*) new EarthTest(man,0,z));
+		engine->cycle();
 	}
 
-	engine->addModule(box2d);
 	engine->cycle();
 	return 0;
 }

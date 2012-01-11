@@ -6,9 +6,11 @@ sf::Image* z::ResourceManager::getImage(string filename) {
 			return list[i]->im;
 		}
 	}
-
+	
+	cout << "Loading " << filename << endl;
 	sf::Image* im = new sf::Image();
 	if(!im->LoadFromFile(filename)) {
+		cout << "Failed!" << endl;
 		delete im;
 		return 0;
 	}

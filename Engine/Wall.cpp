@@ -16,5 +16,7 @@ Wall::Wall(float x1, float y1, float w, float h) {
 	shHeight = h;
 	shWidth = w;
 
+	friction = 0.9f;
+
 }
 

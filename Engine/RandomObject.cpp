@@ -7,7 +7,7 @@ RandomObject::RandomObject(float xi, float yi) {
 	dynamic = true;
 
 	int randomShape = sf::Randomizer::Random(0,1);
-	randomSize = sf::Randomizer::Random(0.1f, 10.0f);
+	randomSize = sf::Randomizer::Random(0.1f, 3.0f);
 
 	int red = sf::Randomizer::Random(0,255);
 	int green = sf::Randomizer::Random(0,255);
