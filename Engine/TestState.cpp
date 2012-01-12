@@ -22,7 +22,7 @@ int TestState::load(Game* game) {
 	z::ResourceManager* man = new z::ResourceManager();
 	engine->addModule(box2d);
 
-	for(unsigned int x = 0; x < 20; x++) {
+	for(unsigned int x = 0; x < 40; x++) {
 		float z = -200.0f*(x+1.0f);
 
 		for(unsigned int i = 0; i < 20; i++) {
