@@ -16,6 +16,21 @@ import org.w3c.dom.*;
 
 //guide at: http://www.javablogging.com/read-and-write-xml/
 
+/**
+ *how to use:
+ *there are two ways to add data to the xml file: 
+ *1) one is by the use of String[][], where eatch room in the first 
+ *line ([x][]) goes for one Element, and from then 
+ *the arguments comes in pair. The first being name of atribut, 
+ *then the value. (se example of array creation below).
+ *send the array to addToFile(String[][])
+ *2) the use of DataNodes and a tree structure but sending
+ *data. This opens for adding more then one level of information.
+ *
+ *when all the data has been added call creatFile(String)
+ *with the name of the file to be created as a parameter.
+ **/
+
 class XmlCreator{
 
     static Document doc;
