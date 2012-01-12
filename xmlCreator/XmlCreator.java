@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 import java.io.*;
 
 import javax.xml.parsers.*;
@@ -19,15 +21,18 @@ class XmlCreator{
     static Document doc;
     static Element root;
 
-    final static boolean testing = true;
+    final private static boolean testing = true;
 
-    
+    /**
+     *used for testing
+     **/
     public static void main(String[] args) throws Exception{
 	String saveFile = "Test.xml"; 
 
 	String[][] input = new String[2][];
 	
-	//armor
+	
+	//used for testing of string arguments
 	input[0] = new String[5];
 	input[0][0] = "armor";
 	input[0][1] = "health";
@@ -44,14 +49,43 @@ class XmlCreator{
 	input[1][5] = "texture";
 	input[1][6] = "lqpic.jpg";
 
+	addToFile(input);
+	
 
-	new XmlCreator().addToFile(input);
+	//testTree
+	DataNode e = new DataNode("engine");
+	DataNode eh = new DataNode("health");
+	DataNode ehv = new DataNode("15");
+	DataNode et = new DataNode("texture");
+	DataNode etv = new DataNode("enginejpg");
+
+	DataNode c = new DataNode("command");
+	DataNode ch = new DataNode("health");
+	DataNode chv = new DataNode("20");
+	DataNode cp = new DataNode("crew");
+	DataNode cpv = new DataNode("5");
+	DataNode ct = new DataNode("texture");
+	DataNode ctv = new DataNode("compic.jpg");
+
+	e.addChild(eh);
+	eh.addChild(ehv);
+	e.addChild(et);
+	et.addChild(etv);
+
+	c.addChild(ch);
+	ch.addChild(chv);
+	c.addChild(cp);
+	cp.addChild(cpv);
+	c.addChild(ct);
+	ct.addChild(ctv);
+
+	addToFile(e);
+	addToFile(c);
 
 	createFile(saveFile);
     }
     
-
-    static void addToFile(String[][] data){
+    private static void checkInit(){
 	if(doc == null){
 	    try{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -61,6 +95,8 @@ class XmlCreator{
 		
 		root = doc.createElement("ship");
 
+		doc.appendChild(root);
+
 	    }catch(Exception e){
 		//burde ikke skje
 		if(testing){
@@ -68,9 +104,16 @@ class XmlCreator{
 		}
 	    }
 	}
+    }
 
+    public static void addToFile(DataNode dn){
+	checkInit();
+	root.appendChild(dn.getElementTree());
 
-	doc.appendChild(root);
+    }
+
+    public static void addToFile(String[][] data){
+	checkInit();
 
 	for(int i = 0; i < data.length; i++){
 	    System.out.println("data: "+i + " "); //-------
@@ -93,7 +136,7 @@ class XmlCreator{
 	}
     }
 
-    static void createFile(String fileName){
+    public static void createFile(String fileName){
 
 	try{
 	
