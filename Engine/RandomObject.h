@@ -12,6 +12,8 @@ class RandomObject : public z::GameObject {
 	public:
 	RandomObject(float xi, float yi);
 
+	virtual void onSpawn();
+
 	virtual unsigned int spriteHeight() {return 100;}
 	virtual unsigned int spriteWidth() {return 100;}
 	virtual float shapeHeight() {return randomSize;}

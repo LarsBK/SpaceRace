@@ -32,3 +32,6 @@ RandomObject::RandomObject(float xi, float yi) {
 
 }
 
+void RandomObject::onSpawn() {
+	impulse(0,10000);
+}
