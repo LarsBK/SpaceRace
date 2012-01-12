@@ -24,10 +24,10 @@ int TestState::load(Game* game) {
 	spawn((GameObject*) new EarthTest(man,80,100));
 	engine->cycle();
 
-	for(unsigned int x = 0; x < 20; x++) {
+	for(unsigned int x = 0; x < 10; x++) {
 		float z = -100.0f*(x+1.0f);
 
-		for(unsigned int i = 0; i < 20; i++) {
+		for(unsigned int i = 0; i < 40; i++) {
 			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
 		}
 
