@@ -1,23 +1,21 @@
+#ifndef EARTHTEST_6WLGZ8TG
+#define EARTHTEST_6WLGZ8TG
+
 #include "Engine/TexturedGameObject.h"
 
 using namespace z;
 
 class EarthTest : protected TexturedGameObject {
+	
+	float fakeMass;
+
 	public:
 
-	EarthTest(ResourceManager* man, float xi, float yi) : TexturedGameObject("Earth.png", man) {
-		shape = (b2Shape*) new b2CircleShape();
-		shape->m_radius = 5;
-		dynamic = true;
-		density = 2.0f;
-		fixedRotation = false;
-		friction = 0.9f;
-		restitution = 0.01f;
+	EarthTest(ResourceManager* man, float xi, float yi);
+	virtual void onPhysicsStep();
 
-		x = xi;
-		y = yi;
-	}
-
-	virtual float shapeWidth() { return 10;}
-	virtual float shapeHeight() {return 10;}
+	virtual float shapeWidth() { return shape->m_radius*2;}
+	virtual float shapeHeight() {return shape->m_radius*2; }
 };
+
+#endif /* end of include guard: EARTHTEST_6WLGZ8TG */

@@ -33,6 +33,8 @@ namespace z {
 		float lastTime;
 
 		b2World* world;
+
+		vector<PhysicsObject*> list;
 		
 	};
 }

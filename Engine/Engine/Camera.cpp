@@ -16,7 +16,15 @@ namespace z {
 			camera->setSpeed(-x,-y);
 		}
 	}
-
+/*
+	void CameraRotate::fire(Event* e) {
+		if(e->state == Event::STARTED) {
+			camera->setRotation(r);
+		} else {
+			camera->setRotation(-r);
+		}
+	}
+*/
 
 //Camera
 	Camera::Camera(sf::Window* w, Engine* e) :

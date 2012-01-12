@@ -22,6 +22,12 @@ namespace z {
 		GameObject();
 		virtual void draw(WindowModule* wm);
 
+/*
+		virtual void onPhysicsStep() {
+			cout << "A";
+		}
+*/
+
 	};
 }
 

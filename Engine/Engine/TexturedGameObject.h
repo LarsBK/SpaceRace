@@ -32,6 +32,7 @@ namespace z {
 		virtual unsigned int spriteWidth() {
 			return ((sf::Sprite*) sprite)->GetImage()->GetWidth();
 		}
+
 		
 	};
 }

@@ -55,7 +55,7 @@ doxygen : $(SOURCES)
 	cd Engine; doxygen
 
 clean:
-	$(REMOVE) *.o Engine\*.o
+	$(REMOVE) *.o Engine/*.o
 	#$(EXEC) $(OBJECTS)
 
 $(EXEC) : $(OBJECTS)

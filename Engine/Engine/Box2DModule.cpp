@@ -6,6 +6,8 @@ namespace z {
 		name = "Box2DModule";
 		
 		world = new b2World(gravity); //, allowSleep);
+		world->SetAutoClearForces(true);
+		world->SetAllowSleeping(allowSleep);
 		timeStep = 1.0f/fps;
 		velocityIterations = 8;
 		positionIterations = 3;
@@ -13,6 +15,10 @@ namespace z {
 	}
 
 	Box2DModule::~Box2DModule() {
+		while(! list.empty()) {
+			list.back()->setBody(0);
+			list.pop_back();
+		}
 		delete world;
 	}
 
@@ -20,6 +26,7 @@ namespace z {
 		b2BodyDef def = o->getBodyDef();
 		b2Body* b = world->CreateBody(&def);
 		o->setBody(b);
+		list.push_back(o);
 	}
 
 	b2World* Box2DModule::getWorld() {
@@ -36,12 +43,23 @@ namespace z {
 		unsigned int i = 0;
 
 		while(lastTime+timeStep <= engine->getTime()) {
+
+			for(unsigned x = 0; x < list.size(); x++) {
+				list[x]->onPhysicsStep();
+			}
+
 			world->Step(timeStep, velocityIterations, positionIterations);
-			world->ClearForces();
 			lastTime+=timeStep;
 			i++;
-			if(i % 30 == 0) {
-				std::cout << "Trying to catch up " << i << std::endl;
+			if(i % 120 == 0) {
+				std::cout << "WARNING: physics fell 120 steps behind, fast-forwarding. Please report this as a bug." << std::endl;
+				float ff;
+				do {
+					ff = engine->getTime() - lastTime;
+					world->Step(ff,	velocityIterations, positionIterations);
+					lastTime+=ff;
+				} while(lastTime+timeStep < engine->getTime());
+
 			}
 		}
 
