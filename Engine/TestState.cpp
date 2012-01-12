@@ -21,13 +21,14 @@ int TestState::load(Game* game) {
 
 	z::ResourceManager* man = new z::ResourceManager();
 	engine->addModule(box2d);
-	spawn((GameObject*) new EarthTest(man,80,100));
+	spawn((GameObject*) new EarthTest(man,120,100));
+	//spawn((GameObject*) new EarthTest(man,300,500));
 	engine->cycle();
 
-	for(unsigned int x = 0; x < 10; x++) {
+	for(unsigned int x = 0; x < 60; x++) {
 		float z = -100.0f*(x+1.0f);
 
-		for(unsigned int i = 0; i < 40; i++) {
+		for(unsigned int i = 0; i < 10; i++) {
 			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
 		}
 
