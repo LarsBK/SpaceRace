@@ -10,6 +10,9 @@ bool Map::load() {
 		return false;
 	}
 	doc.Print();
-	//TiXmlElement* current = doc.RootElement();
+	TiXmlElement* current = doc.RootElement();
+	string name;
+	current->QueryStringAttribute("name", &name);
+	cout << "name: " << current->GetText() << endl;
 }
 

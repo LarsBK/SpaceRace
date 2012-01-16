@@ -19,6 +19,10 @@ int TestState::load(Game* game) {
 	//window->getCamera()->follow((z::PhysicsObject*) go);
 	spawn(go);
 
+	Map* map = new Map("TestMap.xml");
+	map->load();
+	//delete map;
+
 	z::ResourceManager* man = new z::ResourceManager();
 	engine->addModule(box2d);
 	spawn((GameObject*) new EarthTest(man,120,100));
