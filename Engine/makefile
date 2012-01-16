@@ -9,8 +9,12 @@
 	
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
+
+TINYXMLSRC = tinyxml/tinystr.cpp tinyxml/tinyxml.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp
+TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
+
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
+OBJECTS = $(SOURCES:.cpp=.o) $(TINYXMLOBJ) #$(wildcard Engine/*.o)
 
 COMPILER := g++
 LINKER := g++
@@ -50,6 +54,9 @@ release : $(EXEC)
 run: debug
 	$(EXEC)
 
+#TinyXML
+tinyxml : $(TINYXMLOBJ)
+
 #Doxygen
 doxygen : $(SOURCES)
 	cd Engine; doxygen
@@ -58,7 +65,7 @@ clean:
 	$(REMOVE) *.o Engine/*.o
 	#$(EXEC) $(OBJECTS)
 
-$(EXEC) : $(OBJECTS)
+$(EXEC) : $(OBJECTS) tinyxml
 	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer

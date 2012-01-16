@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<map>
+	<name>Test map</name>
+
+	<planet>
+		<name>Earth</name>
+		<x>0.0f</x>
+		<y>0.0f</y>
+	</planet>
+</map>
