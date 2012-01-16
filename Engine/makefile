@@ -20,6 +20,7 @@ COMPILER := g++
 LINKER := g++
 REMOVE := rm
 LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+CFLAGS = -DTIXML_USE_STL
 
 
 ifeq ($(UNAME),Darwin)
@@ -61,9 +62,9 @@ tinyxml : $(TINYXMLOBJ)
 doxygen : $(SOURCES)
 	cd Engine; doxygen
 
-clean:
-	$(REMOVE) *.o Engine/*.o
-	#$(EXEC) $(OBJECTS)
+clean :
+	$(REMOVE) $(EXEC) $(OBJECTS)
+	#$(REMOVE) *.o Engine/*.o
 
 $(EXEC) : $(OBJECTS) tinyxml
 	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
