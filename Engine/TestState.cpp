@@ -40,7 +40,7 @@ int TestState::load(Game* game) {
 	//spawn((GameObject*) new EarthTest(man,120,100));
 	//spawn((GameObject*) new EarthTest(man,300,500));
 	//engine->cycle();
-/*
+
 	for(unsigned int x = 0; x < 60; x++) {
 		float z = -100.0f*(x+1.0f);
 
@@ -50,7 +50,7 @@ int TestState::load(Game* game) {
 
 		//engine->cycle();
 	}
-*/
+
 	engine->cycle();
 	return 0;
 }

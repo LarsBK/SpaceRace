@@ -5,6 +5,7 @@
 
 	<planet>
 		<name>Earth</name>
+		<dynamic>true</dynamic>
 		<x>1000.0f</x>
 		<y>1500.0f</y>
 		<radius>1000</radius>
@@ -13,8 +14,8 @@
 	</planet>
 	<planet>
 		<name>Luna</name>
-		<x>100</x>
 		<dynamic>true</dynamic>
+		<x>100</x>
 		<y>100.0f</y>
 		<radius>50</radius>
 		<mass>10000</mass>
@@ -22,10 +23,11 @@
 	</planet>
 	<planet>
 		<name>LunaDynamic</name>
-		<x>1</x>
-		<y>1.0f</y>
-		<radius>10</radius>
-		<mass>10</mass>
+		<dynamic>true</dynamic>
+		<x>0</x>
+		<y>200.0f</y>
+		<radius>50</radius>
+		<mass>10000</mass>
 		<texture>Earth.png</texture>
 	</planet>
 
