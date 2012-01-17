@@ -5,8 +5,8 @@
 
 	<planet>
 		<name>Earth</name>
-		<x>700.0f</x>
-		<y>1000.0f</y>
+		<x>1000.0f</x>
+		<y>1500.0f</y>
 		<radius>1000</radius>
 		<mass>1200000</mass>
 		<texture>Earth.png</texture>
@@ -19,4 +19,13 @@
 		<mass>10000</mass>
 		<texture>Earth.png</texture>
 	</planet>
+	<asteroid>
+		<name>LunaDynamic</name>
+		<x>100</x>
+		<y>100.0f</y>
+		<radius>50</radius>
+		<mass>10000</mass>
+		<texture>Earth.png</texture>
+	</asteroid>
+
 </map>
