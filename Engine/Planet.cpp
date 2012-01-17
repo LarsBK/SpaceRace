@@ -1,20 +1,20 @@
-#include "EarthTest.h"
+#include "Planet.h"
 
-EarthTest::EarthTest(ResourceManager* man, float xi, float yi) : TexturedGameObject("Earth.png", man) {
+Planet::Planet(float xi, float yi, float radius, float mass,
+		string textureName, ResourceManager* man) : TexturedGameObject(textureName, man) {
 	shape = (b2Shape*) new b2CircleShape();
-	shape->m_radius = 100;
+	shape->m_radius = radius;
 	dynamic = false;
-	//density = 100000000000000000000000000000000.0f;
-	fakeMass = 100000;//5.9736e1024;
+	fakeMass = mass;
 	fixedRotation = false;
-	friction = 0.9f;
-	restitution = 0.01f;
+	//friction = 0.9f;
+	//restitution = 0.01f;
 
 	x = xi;
 	y = yi;
 }
 
-void EarthTest::onPhysicsStep() {
+void Planet::onPhysicsStep() {
 	b2World* w = body->GetWorld();
 
 	b2Body* next = w->GetBodyList();

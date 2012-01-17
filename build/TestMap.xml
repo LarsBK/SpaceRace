@@ -5,7 +5,18 @@
 
 	<planet>
 		<name>Earth</name>
-		<x>0.0f</x>
+		<x>700.0f</x>
+		<y>1000.0f</y>
+		<radius>1000</radius>
+		<mass>1200000</mass>
+		<texture>Earth.png</texture>
+	</planet>
+	<planet>
+		<name>Luna</name>
+		<x>0</x>
 		<y>0.0f</y>
+		<radius>50</radius>
+		<mass>10000</mass>
+		<texture>Earth.png</texture>
 	</planet>
 </map>
