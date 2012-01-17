@@ -12,7 +12,7 @@ class Planet : protected TexturedGameObject {
 
 	public:
 
-	Planet(float xi, float yi, float r, float mass, string textureName, ResourceManager* man);
+	Planet(float xi, float yi, float r, float mass, bool d, string textureName, ResourceManager* man);
 	virtual void onPhysicsStep();
 
 	virtual float shapeWidth() { return shape->m_radius*2;}

@@ -13,19 +13,20 @@
 	</planet>
 	<planet>
 		<name>Luna</name>
-		<x>0</x>
-		<y>0.0f</y>
-		<radius>50</radius>
-		<mass>10000</mass>
-		<texture>Earth.png</texture>
-	</planet>
-	<asteroid>
-		<name>LunaDynamic</name>
 		<x>100</x>
+		<dynamic>true</dynamic>
 		<y>100.0f</y>
 		<radius>50</radius>
 		<mass>10000</mass>
 		<texture>Earth.png</texture>
-	</asteroid>
+	</planet>
+	<planet>
+		<name>LunaDynamic</name>
+		<x>1</x>
+		<y>1.0f</y>
+		<radius>10</radius>
+		<mass>10</mass>
+		<texture>Earth.png</texture>
+	</planet>
 
 </map>

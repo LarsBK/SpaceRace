@@ -6,11 +6,12 @@ Game::~Game() {
 
 void Game::push(GameState* gs) {
 	cout << "Loading " << gs->getName() << endl;
-	if(! gs->load(this)) {
+	if(gs->load(this) == 0) {
 		states.push_back(gs);
 		cout << "done!" << endl;
+	} else {
+		cout << "FAILED!" << endl;
 	}
-	cout << "FAILED!" << endl;
 }
 
 void Game::pop() {
