@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 
-#define METERINWIDTH 8.0f
+#define METERINWIDTH 10.0f
 
 namespace z {
 
