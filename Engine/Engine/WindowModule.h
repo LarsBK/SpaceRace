@@ -22,6 +22,7 @@ namespace z {
 		Camera* camera;
 		FullscreenAction* fullscreenAction;
 
+
 		bool* pressed;
 
 		vector<Drawable*> drawList;
