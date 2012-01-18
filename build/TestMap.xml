@@ -5,30 +5,23 @@
 
 	<planet>
 		<name>Earth</name>
-		<x>1150.0f</x>
+		<x>100.0f</x>
 		<y>0.0f</y>
-		<radius>1000</radius>
-		<density>2000000</density>
+		<radius>64</radius>
+		<density>5.515</density>
 		<texture>Earth.png</texture>
-	</planet>
-	<planet>
-		<name>Luna</name>
-		<x>-350</x>
-		<y>-1400.0f</y>
-		<radius>250</radius>
-		<density>25000</density>
-		<texture>moon_2.png</texture>
 	</planet>
 	<planet>
 		<name>LunaDynamic</name>
 		<dynamic>true</dynamic>
 		<xSpeed>0</xSpeed>
-		<ySpeed>100</ySpeed>
-		<x>0</x>
-		<y>200.0f</y>
-		<radius>50</radius>
-		<density>10000</density>
-		<texture>Earth.png</texture>
+		<ySpeed>25</ySpeed>
+		<x>-374</x>
+		<y>-100.0f</y>
+		<radius>17</radius>
+		<!-- tetthet er oppgitt i ekte tetthet / 1000 -->
+		<density>3.3</density>
+		<texture>Moon_2.png</texture>
 	</planet>
-
 </map>
+
