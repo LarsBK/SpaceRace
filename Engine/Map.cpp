@@ -32,7 +32,7 @@ bool Map::load() {
 
 		float x = atof(planet->FirstChildElement("x")->GetText());
 		float y = atof(planet->FirstChildElement("y")->GetText());
-		float mass = atof(planet->FirstChildElement("mass")->GetText());
+		float density = atof(planet->FirstChildElement("density")->GetText());
 		float radius = atof(planet->FirstChildElement("radius")->GetText());
 
 		float xSpeed = 0;
@@ -48,7 +48,7 @@ bool Map::load() {
 		string texture = planet->FirstChildElement("texture")->GetText();
 
 		objects.push_back((GameObject*) new Planet(x,y,radius,
-			mass, dynamic,xSpeed, ySpeed, texture, &imageManager));
+			density, dynamic,xSpeed, ySpeed, texture, &imageManager));
 
 		planet = planet->NextSiblingElement("planet");
 	}

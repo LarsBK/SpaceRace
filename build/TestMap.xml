@@ -8,7 +8,7 @@
 		<x>1500.0f</x>
 		<y>1500.0f</y>
 		<radius>1000</radius>
-		<mass>1200000</mass>
+		<density>1200000</density>
 		<texture>Earth.png</texture>
 	</planet>
 	<planet>
@@ -19,7 +19,7 @@
 		<x>0</x>
 		<y>200.0f</y>
 		<radius>50</radius>
-		<mass>10000</mass>
+		<density>10000</density>
 		<texture>Earth.png</texture>
 	</planet>
 

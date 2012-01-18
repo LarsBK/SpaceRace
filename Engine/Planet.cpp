@@ -1,13 +1,13 @@
 #include "Planet.h"
 
-Planet::Planet(float xi, float yi, float radius, float mass, bool d,
+Planet::Planet(float xi, float yi, float radius, float den, bool d,
 		float xS, float yS,	string textureName, ResourceManager* man) :
 			TexturedGameObject(textureName, man) {
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = radius;
 	dynamic = d;
-	density = mass;
-	fakeMass = mass;
+	density = den;
+	fakeMass = den*M_PI*radius*radius;
 	fixedRotation = false;
 	friction = 0.9f;
 	restitution = 0.01f;

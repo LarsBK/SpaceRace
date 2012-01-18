@@ -1,7 +1,9 @@
 #ifndef PLANET_XGKTBIM
 
-#define PLANET_XGKTBIM
+#define PLANET_XGKTBI
 
+#define _USE_MATH_DEFINESM
+#include <Math.h>
 #include "Engine/TexturedGameObject.h"
 
 using namespace z;
