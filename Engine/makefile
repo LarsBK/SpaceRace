@@ -22,6 +22,7 @@ REMOVE := rm
 LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 CFLAGS = -DTIXML_USE_STL
 
+TOREMOVE = $(OBJECTS)
 
 ifeq ($(UNAME),Darwin)
 	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
@@ -36,7 +37,8 @@ ifeq ($(UNAME),Windows)
 	LFLAGS += -static-libgcc -static-libstdc++
 	#COMPILER := g++ #-m32
 	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := del
+	REMOVE := cmd /C del
+	TOREMOVE = $(subst /,\,${OBJECTS})
 endif
 
 #ALL
@@ -63,7 +65,7 @@ doxygen : $(SOURCES)
 	cd Engine; doxygen
 
 clean :
-	$(REMOVE) $(EXEC) $(OBJECTS)
+	$(REMOVE) $(TOREMOVE)
 	#$(REMOVE) *.o Engine/*.o
 
 $(EXEC) : $(OBJECTS) tinyxml

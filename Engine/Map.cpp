@@ -7,7 +7,7 @@ Map::Map(string fn) : filename(fn) {
 bool Map::load() {
 	TiXmlDocument doc(filename.c_str());
 	if(!doc.LoadFile()) {
-		cerr << "Error opening file: " << filename
+		cerr << "Error opening file: " << filename << " "
 			<< doc.ErrorDesc() << endl;
 		return false;
 	}
@@ -24,13 +24,19 @@ bool Map::load() {
 	TiXmlElement* planet = map->FirstChildElement("planet");
 
 	while(planet) {
+		TiXmlElement* dynamicNode = planet->FirstChildElement("dynamic");
+		bool dynamic = false;
+		if(dynamicNode) {
+			dynamic = (string(dynamicNode->GetText()) == "true");
+		}
+
 		float x = atof(planet->FirstChildElement("x")->GetText());
 		float y = atof(planet->FirstChildElement("y")->GetText());
 		float mass = atof(planet->FirstChildElement("mass")->GetText());
 		float radius = atof(planet->FirstChildElement("radius")->GetText());
 		string texture = planet->FirstChildElement("texture")->GetText();
 		objects.push_back((GameObject*) new Planet(x,y,radius,
-			mass,texture, &imageManager));
+			mass, dynamic, texture, &imageManager));
 		cout << "added " << planet->FirstChildElement("name")->GetText() << endl;
 		planet = planet->NextSiblingElement("planet");
 	}

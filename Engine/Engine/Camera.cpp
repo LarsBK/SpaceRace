@@ -30,15 +30,15 @@ namespace z {
 	Camera::Camera(sf::Window* w, Engine* e) :
 			zo(this,0.9,"out"),
 			zi(this,-0.9,"in"),
-			ml(this,-5000,0,"left"),
-			mr(this,5000,0,"right"),
-			mu(this,0,-5000,"up"),
-			md(this,0,5000,"down") {
+			ml(this,-0.5,0,"left"),
+			mr(this,0.5,0,"right"),
+			mu(this,0,-0.5,"up"),
+			md(this,0,0.5,"down") {
 		f = 0;
 		sf::Vector2f center(0,0);
-		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());
+		sf::Vector2f halfSize(w->GetWidth()/2, w->GetHeight()/2);
 		view = new sf::View(center, halfSize);
-		ppm = halfSize.x/METERINWIDTH;
+		ppm = w->GetWidth()/METERINWIDTH;
 		//view->Zoom(0.2);
 
 		xSpeed = 0;
@@ -72,7 +72,8 @@ namespace z {
 			view->SetCenter(x, y);
 			
 		} else {
-			view->Move(xSpeed*lastMove.GetElapsedTime(), ySpeed*lastMove.GetElapsedTime());
+			float scale = (view->GetHalfSize().x * 2);
+			view->Move(scale*xSpeed*lastMove.GetElapsedTime(), scale*ySpeed*lastMove.GetElapsedTime());
 			lastMove.Reset();
 			
 			if(zoomFactor != 0) {
