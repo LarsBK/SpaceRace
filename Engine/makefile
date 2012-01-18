@@ -9,30 +9,36 @@
 	
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
+
+TINYXMLSRC = tinyxml/tinystr.cpp tinyxml/tinyxml.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp
+TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
+
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o) #$(wildcard Engine/*.o)
+OBJECTS = $(SOURCES:.cpp=.o) $(TINYXMLOBJ) #$(wildcard Engine/*.o)
+
+COMPILER := g++
+LINKER := g++
+REMOVE := rm
+LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+CFLAGS = -DTIXML_USE_STL
+
+TOREMOVE = $(OBJECTS)
 
 ifeq ($(UNAME),Darwin)
-	COMPILER := g++
-	LINKER := g++
 	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
-	REMOVE := rm
 	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := g++
-	LINKER := g++
-	LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := rm
 endif
 
 #WINDOWS
 ifeq ($(UNAME),Windows)
-	COMPILER := g++ -m32
-	LINKER := g++
-	LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := del
+	LFLAGS += -static-libgcc -static-libstdc++
+	#COMPILER := g++ #-m32
+	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	REMOVE := cmd /C del
+	TOREMOVE = $(subst /,\,${OBJECTS})
 endif
 
 #ALL
@@ -51,15 +57,18 @@ release : $(EXEC)
 run: debug
 	$(EXEC)
 
+#TinyXML
+tinyxml : $(TINYXMLOBJ)
+
 #Doxygen
 doxygen : $(SOURCES)
 	cd Engine; doxygen
 
-clean:
-	$(REMOVE) *.o Engine\*.o
-	#$(EXEC) $(OBJECTS)
+clean :
+	$(REMOVE) $(TOREMOVE)
+	#$(REMOVE) *.o Engine/*.o
 
-$(EXEC) : $(OBJECTS)
+$(EXEC) : $(OBJECTS) tinyxml
 	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer

@@ -67,8 +67,4 @@ TestBox::TestBox(float xi, float yi) {
 	dynamic = true;
 	circle = sf::Shape::Circle(0,0,20, sf::Color::White);
 	sprite = &circle;
-	spriteWidth = 64;
-	spriteHeight = 64;
-	shapeHeight = 1;
-	shapeWidth = 1;
 }

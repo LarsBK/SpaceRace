@@ -5,7 +5,6 @@ namespace z {
 	void GameObject::draw(WindowModule* wm) {
 		sf::RenderWindow* w = wm->getWindow();
 		if(body) {
-			sf::Drawable* texture = getDrawable();
 			
 			/*int width = w->GetWidth();
 			if (screenWidth != width) {
@@ -13,33 +12,30 @@ namespace z {
 				sprite = getDrawable();
 			}*/
 
-			if(texture) {
+			if(sprite) {
 
 
 				b2Vec2 vec = body->GetPosition();
 				float rot = body->GetAngle();
 
-				float scaleW = wm->meterToPixel(shapeWidth)
-					/ (float) spriteWidth;
-				float scaleH = wm->meterToPixel(shapeHeight)
-					/ (float) spriteHeight;
+				float scaleW = wm->meterToPixel(shapeWidth())
+					/ (float) spriteWidth();
+				float scaleH = wm->meterToPixel(shapeHeight())
+					/ (float) spriteHeight();
 
-				texture->SetCenter(spriteWidth/2.0f, spriteHeight/2.0f);
-				texture->SetScale(scaleW, scaleH);
-				texture->SetRotation( -rot * (180/3.14));
-				texture->SetPosition(wm->meterToPixel(vec.x),
+				sprite->SetCenter(spriteWidth()/2.0f, spriteHeight()/2.0f);
+				sprite->SetScale(scaleW, scaleH);
+				sprite->SetRotation( -rot * (180/3.14));
+				sprite->SetPosition(wm->meterToPixel(vec.x),
 					wm->meterToPixel(vec.y));
-				w->Draw(*texture);
+				w->Draw(*sprite);
 			}
 		}
 	}
 
-	sf::Drawable* GameObject::getDrawable() {
-		return sprite;
-	}
-
 	GameObject::GameObject() :PhysicsObject() {
 		//sprite = new sf::Shape(sf::Shape::Rectangle(0,0,10.0f,10.0f, sf::Color::White,0.0f,sf::Color::Black));
+		sprite = 0;
 	}
 
 }

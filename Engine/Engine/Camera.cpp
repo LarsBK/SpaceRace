@@ -16,22 +16,30 @@ namespace z {
 			camera->setSpeed(-x,-y);
 		}
 	}
-
+/*
+	void CameraRotate::fire(Event* e) {
+		if(e->state == Event::STARTED) {
+			camera->setRotation(r);
+		} else {
+			camera->setRotation(-r);
+		}
+	}
+*/
 
 //Camera
 	Camera::Camera(sf::Window* w, Engine* e) :
 			zo(this,0.9,"out"),
 			zi(this,-0.9,"in"),
-			ml(this,-8,0,"left"),
-			mr(this,8,0,"right"),
-			mu(this,0,-8,"up"),
-			md(this,0,8,"down") {
+			ml(this,-0.5,0,"left"),
+			mr(this,0.5,0,"right"),
+			mu(this,0,-0.5,"up"),
+			md(this,0,0.5,"down") {
 		f = 0;
 		sf::Vector2f center(0,0);
-		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());
+		sf::Vector2f halfSize(w->GetWidth()/2, w->GetHeight()/2);
 		view = new sf::View(center, halfSize);
-		ppm = halfSize.x/METERINWIDTH;
-		view->Zoom(0.2);
+		ppm = w->GetWidth()/METERINWIDTH;
+		//view->Zoom(0.2);
 
 		xSpeed = 0;
 		ySpeed = 0;
@@ -64,7 +72,8 @@ namespace z {
 			view->SetCenter(x, y);
 			
 		} else {
-			view->Move(xSpeed*lastMove.GetElapsedTime(), ySpeed*lastMove.GetElapsedTime());
+			float scale = (view->GetHalfSize().x * 2);
+			view->Move(scale*xSpeed*lastMove.GetElapsedTime(), scale*ySpeed*lastMove.GetElapsedTime());
 			lastMove.Reset();
 			
 			if(zoomFactor != 0) {
@@ -91,8 +100,8 @@ namespace z {
 	}
 
 	void Camera::setSpeed(float x, float y) {
-		xSpeed += meterToPixel(x);
-		ySpeed += meterToPixel(y);
+		xSpeed += x; //meterToPixel(x);
+		ySpeed += y; //meterToPixel(y);
 		lastMove.Reset();
 	}
 

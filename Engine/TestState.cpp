@@ -10,25 +10,48 @@ TestState::TestState(z::Engine* e, z::WindowModule* w) {
 }
 
 int TestState::load(Game* game) {
-	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 9.81f), true);
+	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 0.0f), true);
 
-	spawn(new Wall(0,0,200,1));
-	spawn(new Wall(-100,-100,1,200));
-	spawn(new Wall(100,-100,1,200));
-	z::GameObject* go = new RandomObject(0,-100);
+	//spawn(new Wall(0,0,200,1));
+	//spawn(new Wall(-100,-100,1,200));
+	//spawn(new Wall(100,-100,1,200));
+	//z::GameObject* go = new RandomObject(0,-100);
 	//window->getCamera()->follow((z::PhysicsObject*) go);
-	spawn(go);
+	//spawn(go);
 
-	for(unsigned int x = 0; x < 10; x++) {
-		float z = -200.0f*(x+1.0f);
-		cout << z << endl;
+	//z::ResourceManager* man = new z::ResourceManager();
+	engine->addModule(box2d);
 
-		for(unsigned int i = 0; i < 50; i++) {
-			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
+	//Map
+	Map* map = new Map("TestMap.xml");
+	if(map->load()) {
+		map->spawn(box2d,window);
+	} else {
+		cout << "unable to load map" << endl;
+		return -1;
+	}
+/*		vector<GameObject*>* mapList = map->getObjects();
+		
+		for(unsigned i = 0; i < mapList->size(); i++) {
+			spawn((*mapList)[i]);
 		}
 	}
+*/
+	//spawn((GameObject*) new EarthTest(man,120,100));
+	//spawn((GameObject*) new EarthTest(man,300,500));
+	//engine->cycle();
 
-	engine->addModule(box2d);
+	for(unsigned int x = 0; x < 60; x++) {
+		float z = -100.0f*(x+1.0f);
+
+		for(unsigned int i = 0; i < 10; i++) {
+			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
+		}
+
+		//engine->cycle();
+	}
+
+	engine->cycle();
 	return 0;
 }
 
