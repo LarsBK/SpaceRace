@@ -34,10 +34,22 @@ bool Map::load() {
 		float y = atof(planet->FirstChildElement("y")->GetText());
 		float mass = atof(planet->FirstChildElement("mass")->GetText());
 		float radius = atof(planet->FirstChildElement("radius")->GetText());
+
+		float xSpeed = 0;
+		float ySpeed = 0;
+		TiXmlElement* temp = 0;
+		temp = planet->FirstChildElement("xSpeed");
+		if(temp)
+			xSpeed = atof(temp->GetText());
+		temp = planet->FirstChildElement("ySpeed");
+		if(temp)
+			ySpeed = atof(temp->GetText());
+
 		string texture = planet->FirstChildElement("texture")->GetText();
+
 		objects.push_back((GameObject*) new Planet(x,y,radius,
-			mass, dynamic, texture, &imageManager));
-		cout << "added " << planet->FirstChildElement("name")->GetText() << endl;
+			mass, dynamic,xSpeed, ySpeed, texture, &imageManager));
+
 		planet = planet->NextSiblingElement("planet");
 	}
 	return true;

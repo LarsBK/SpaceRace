@@ -1,7 +1,8 @@
 #include "Planet.h"
 
 Planet::Planet(float xi, float yi, float radius, float mass, bool d,
-		string textureName, ResourceManager* man) : TexturedGameObject(textureName, man) {
+		float xS, float yS,	string textureName, ResourceManager* man) :
+			TexturedGameObject(textureName, man) {
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = radius;
 	dynamic = d;
@@ -10,9 +11,15 @@ Planet::Planet(float xi, float yi, float radius, float mass, bool d,
 	fixedRotation = false;
 	friction = 0.9f;
 	restitution = 0.01f;
+	xSpeed = xS;
+	ySpeed = yS;
 
 	x = xi;
 	y = yi;
+}
+
+void Planet::onSpawn() {
+	setVelocity(xSpeed,ySpeed);
 }
 
 void Planet::onPhysicsStep() {
