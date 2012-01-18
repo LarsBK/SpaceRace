@@ -105,7 +105,7 @@ namespace z {
 		window->SetView(window->GetDefaultView());
 
 		int fps = 1.0f/window->GetFrameTime();
-		engine->setFPS(fps);
+		//engine->setFPS(fps);
 		drawFps(fps);
 		window->Display();
 	}
