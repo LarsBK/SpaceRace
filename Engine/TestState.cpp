@@ -28,6 +28,7 @@ int TestState::load(Game* game) {
 		map->spawn(box2d,window);
 	} else {
 		cout << "unable to load map" << endl;
+		return -1;
 	}
 /*		vector<GameObject*>* mapList = map->getObjects();
 		

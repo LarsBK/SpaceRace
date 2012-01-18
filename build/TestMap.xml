@@ -8,7 +8,7 @@
 		<x>1150.0f</x>
 		<y>0.0f</y>
 		<radius>1000</radius>
-		<mass>2000000</mass>
+		<density>2000000</density>
 		<texture>Earth.png</texture>
 	</planet>
 	<planet>
@@ -16,7 +16,19 @@
 		<x>-350</x>
 		<y>-1400.0f</y>
 		<radius>250</radius>
-		<mass>25000</mass>
+		<density>25000</density>
 		<texture>moon_2.png</texture>
 	</planet>
+	<planet>
+		<name>LunaDynamic</name>
+		<dynamic>true</dynamic>
+		<xSpeed>0</xSpeed>
+		<ySpeed>100</ySpeed>
+		<x>0</x>
+		<y>200.0f</y>
+		<radius>50</radius>
+		<density>10000</density>
+		<texture>Earth.png</texture>
+	</planet>
+
 </map>

@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 
-#define METERINWIDTH 10.0f
+#define METERINWIDTH 20.0f
 
 namespace z {
 
@@ -21,6 +21,7 @@ namespace z {
 		bool fullscreen;
 		Camera* camera;
 		FullscreenAction* fullscreenAction;
+
 
 		bool* pressed;
 
@@ -57,7 +58,6 @@ namespace z {
 	class Drawable {
 		public:
 		virtual void draw(WindowModule*) =0;
-
 	};
 
 	static string charToString(char c);

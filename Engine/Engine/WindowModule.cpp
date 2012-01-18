@@ -5,22 +5,22 @@ namespace z {
 	WindowModule::WindowModule(Engine* e) : Module(e) {
 		name = "WindowModule";
 		fullscreen = false;
-
 		windowSettings.AntialiasingLevel = 8;
 
 		if(fullscreen)
-			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
+			window = new sf::RenderWindow(sf::VideoMode::GetMode(0),
+				engine->getName(), sf::Style::Fullscreen, windowSettings);
 		else
-			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
+			window = new sf::RenderWindow(sf::VideoMode(1024,576,32),
+				engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
-		window->UseVerticalSync(true);
 		camera = new Camera(window, e);
+		window->UseVerticalSync(true);
 		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
 		engine->addAction( fullscreenAction);
 		engine->bind("keyboard_f", fullscreenAction->toString());
-
 		pressed = new bool[sf::Key::Count];
 	}
 
@@ -29,7 +29,7 @@ namespace z {
 	}
 
 	WindowModule::~WindowModule() {
-		delete[] pressed;
+//		delete[] pressed;
 		delete window;
 		delete fullscreenAction;
 	}
@@ -48,10 +48,9 @@ namespace z {
 			window->Create(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		} else {
 			std::cout << "Leaving fullscreen" << std::endl;
-			window->Create(sf::VideoMode(720,480,32), engine->getName(),
+			window->Create(sf::VideoMode(1024,576,32), engine->getName(),
 				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
-
 		camera->setWindowSize(window->GetWidth(), window->GetHeight());
 	}
 
@@ -66,17 +65,15 @@ namespace z {
 			else if (event.Type == sf::Event::Resized) {
 				//fix here
 				camera->setWindowSize(event.Size.Width, event.Size.Height);
-
-				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
 			} else if (event.Type == sf::Event::MouseMoved) {
 
 			} else if (event.Type == sf::Event::KeyReleased) {
 				char c = event.Text.Unicode;
 				s.append(charToString(c));
-				pressed[event.Key.Code] = false;
 				e = new Event(s);
 				e->state = Event::STOPPED;
 				engine->event(e);
+				pressed[event.Key.Code] = false;
 			} else if (event.Type == sf::Event::KeyPressed) {
 				char c = event.Text.Unicode;
 				s.append(charToString(c));
@@ -108,7 +105,7 @@ namespace z {
 		window->SetView(window->GetDefaultView());
 
 		int fps = 1.0f/window->GetFrameTime();
-		engine->setFPS(fps);
+		//engine->setFPS(fps);
 		drawFps(fps);
 		window->Display();
 	}
@@ -138,7 +135,6 @@ namespace z {
 	float WindowModule::meterToPixel(float m) {
 		return camera->meterToPixel(m);
 	}
-	
 
 	Camera* WindowModule::getCamera() {
 		return camera;
