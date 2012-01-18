@@ -4,7 +4,6 @@ Planet::Planet(float xi, float yi, float radius, float mass, bool d,
 		string textureName, ResourceManager* man) : TexturedGameObject(textureName, man) {
 	shape = (b2Shape*) new b2CircleShape();
 	shape->m_radius = radius;
-	cout << d << endl;
 	dynamic = d;
 	density = mass;
 	fakeMass = mass;
