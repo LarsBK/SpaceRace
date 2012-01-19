@@ -15,7 +15,7 @@ namespace z {
 				engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
 		camera = new Camera(window, e);
-		window->UseVerticalSync(true);
+		window->UseVerticalSync(false);
 		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
@@ -95,7 +95,7 @@ namespace z {
 		window->SetView(*(camera->getView()));
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->draw(this);
+			drawList[i]->draw(this,time);
 		}
 /*
 		for(unsigned int i = 0; i < hudList.size(); i++) {

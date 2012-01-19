@@ -2,7 +2,7 @@
 
 namespace z {
 
-	void GameObject::draw(WindowModule* wm) {
+	void GameObject::draw(WindowModule* wm, float now) {
 		sf::RenderWindow* w = wm->getWindow();
 		if(body) {
 			
@@ -14,8 +14,14 @@ namespace z {
 
 			if(sprite) {
 
+				float deltaTime = (now - lastTime) / timeStep;
 
-				b2Vec2 vec = body->GetPosition();
+				b2Vec2 nextPos = body->GetPosition();
+				b2Vec2 deltaPos = nextPos - lastPos;
+				deltaPos *= deltaTime;
+				b2Vec2 renderPos = lastPos + deltaPos;
+
+
 				float rot = body->GetAngle();
 
 				float scaleW = wm->meterToPixel(shapeWidth())
@@ -26,8 +32,8 @@ namespace z {
 				sprite->SetCenter(spriteWidth()/2.0f, spriteHeight()/2.0f);
 				sprite->SetScale(scaleW, scaleH);
 				sprite->SetRotation( -rot * (180/3.14));
-				sprite->SetPosition(wm->meterToPixel(vec.x),
-					wm->meterToPixel(vec.y));
+				sprite->SetPosition(wm->meterToPixel(renderPos.x),
+					wm->meterToPixel(renderPos.y));
 				w->Draw(*sprite);
 			}
 		}
@@ -38,4 +44,13 @@ namespace z {
 		sprite = 0;
 	}
 
+	void GameObject::prePhysicsStep(float last, float t) {
+		storeOldPos(last,t);
+	}
+
+	void GameObject::storeOldPos(float last, float t) {
+		timeStep = t;
+		lastPos = body->GetPosition();
+		lastTime = last;
+	}
 }

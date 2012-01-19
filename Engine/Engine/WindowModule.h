@@ -57,7 +57,7 @@ namespace z {
 
 	class Drawable {
 		public:
-		virtual void draw(WindowModule*) =0;
+		virtual void draw(WindowModule*, float now) =0;
 	};
 
 	static string charToString(char c);

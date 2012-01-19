@@ -18,7 +18,7 @@ class Planet : protected TexturedGameObject {
 
 	Planet(float xi, float yi, float r, float mass, bool d,
 		float xS, float yS, string textureName, ResourceManager* man);
-	virtual void onPhysicsStep();
+	virtual void prePhysicsStep(float now, float t);
 
 	virtual float shapeWidth() { return shape->m_radius*2;}
 	virtual float shapeHeight() {return shape->m_radius*2; }

@@ -23,7 +23,7 @@ namespace z {
 		
 		public:
 
-		virtual void onPhysicsStep();
+		virtual void prePhysicsStep(float now, float timeStep);
 
 		PhysicsObject();
 		b2Body* getBody();

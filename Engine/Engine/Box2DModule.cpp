@@ -44,8 +44,10 @@ namespace z {
 
 		while(lastTime+timeStep <= engine->getTime()) {
 
+			float acc = (engine->getTime() - (lastTime+timeStep))/timeStep;
+
 			for(unsigned x = 0; x < list.size(); x++) {
-				list[x]->onPhysicsStep();
+				list[x]->prePhysicsStep(lastTime, timeStep);
 			}
 
 			world->Step(timeStep, velocityIterations, positionIterations);

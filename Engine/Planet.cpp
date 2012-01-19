@@ -22,7 +22,8 @@ void Planet::onSpawn() {
 	setVelocity(xSpeed,ySpeed);
 }
 
-void Planet::onPhysicsStep() {
+void Planet::prePhysicsStep(float now, float t) {
+	storeOldPos(now,t);
 	b2World* w = body->GetWorld();
 
 	b2Body* next = w->GetBodyList();

@@ -61,9 +61,9 @@ namespace z {
 	  std::cout << "TestObject" << std::endl;
 	  }*/
 
-	void PhysicsObject::onPhysicsStep() {
-		if(force.x != 0 || force.y != 0)
-			body->ApplyForceToCenter(force);
+	void PhysicsObject::prePhysicsStep(float now, float timeStep) {
+		//if(force.x != 0 || force.y != 0)
+		//	body->ApplyForceToCenter(force);
 	}
 
 }
