@@ -5,7 +5,7 @@ namespace z {
 	WindowModule::WindowModule(Engine* e) : Module(e) {
 		name = "WindowModule";
 		fullscreen = false;
-		windowSettings.AntialiasingLevel = 8;
+		windowSettings.AntialiasingLevel = 16;
 
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::GetMode(0),
