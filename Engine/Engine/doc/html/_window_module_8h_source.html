@@ -46,6 +46,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -85,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00007"></a>00007 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;sstream&gt;</span>
 <a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#define METERINWIDTH 8.0f</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#define METERINWIDTH 20.0f</span>
 <a name="l00011"></a>00011 <span class="preprocessor"></span>
 <a name="l00012"></a>00012 <span class="keyword">namespace </span>z {
 <a name="l00013"></a>00013 
@@ -100,42 +101,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00022"></a>00022                 <a class="code" href="classz_1_1_camera.html">Camera</a>* camera;
 <a name="l00023"></a>00023                 <a class="code" href="classz_1_1_fullscreen_action.html">FullscreenAction</a>* fullscreenAction;
 <a name="l00024"></a>00024 
-<a name="l00025"></a>00025                 <span class="keywordtype">bool</span>* pressed;
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027                 vector&lt;Drawable*&gt; drawList;
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029                 <span class="keyword">public</span>:
-<a name="l00030"></a>00030                 <a class="code" href="classz_1_1_window_module.html">WindowModule</a>(<a class="code" href="classz_1_1_engine.html">Engine</a>* e);
-<a name="l00031"></a>00031                 ~<a class="code" href="classz_1_1_window_module.html">WindowModule</a>();
-<a name="l00032"></a>00032                 <span class="keywordtype">void</span> update(<span class="keywordtype">float</span> time);
-<a name="l00033"></a>00033                 <span class="keywordtype">void</span> onDraw(<span class="keywordtype">float</span> time);
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035                 <span class="keywordtype">void</span> drawFps(<span class="keywordtype">int</span> f);
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037                 <span class="keywordtype">void</span> vsync(<span class="keywordtype">bool</span> v);
-<a name="l00038"></a>00038                 <span class="keywordtype">void</span> toggleFullscreen();
-<a name="l00039"></a>00039                 <a class="code" href="classz_1_1_camera.html">Camera</a>* getCamera();
-<a name="l00040"></a>00040                 <span class="keywordtype">float</span> meterToPixel(<span class="keywordtype">float</span> m);
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042                 <span class="keywordtype">void</span> add(<a class="code" href="classz_1_1_drawable.html">Drawable</a>* d);
-<a name="l00043"></a>00043                 sf::RenderWindow* getWindow() {
-<a name="l00044"></a>00044                         <span class="keywordflow">return</span> window;
-<a name="l00045"></a>00045                 }
-<a name="l00046"></a>00046         };
-<a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="classz_1_1_fullscreen_action.html">00048</a>         <span class="keyword">class </span><a class="code" href="classz_1_1_fullscreen_action.html">FullscreenAction</a> : <span class="keyword">public</span> <a class="code" href="classz_1_1_action.html" title="An action that can be performed Create an action to represent an action you class can perform and add...">Action</a> {
-<a name="l00049"></a>00049                 <a class="code" href="classz_1_1_window_module.html">WindowModule</a>* wm;
-<a name="l00050"></a>00050                 <span class="keyword">public</span>:
-<a name="l00051"></a>00051                 <a class="code" href="classz_1_1_fullscreen_action.html">FullscreenAction</a>(<a class="code" href="classz_1_1_window_module.html">WindowModule</a>* w);
-<a name="l00052"></a>00052                 <span class="keywordtype">void</span> fire(<a class="code" href="classz_1_1_event.html">Event</a>* e);
-<a name="l00053"></a>00053                 <span class="keywordtype">string</span> getName();
-<a name="l00054"></a>00054                 <span class="keywordtype">string</span> toString();
-<a name="l00055"></a>00055         };
-<a name="l00056"></a>00056 
-<a name="l00057"></a><a class="code" href="classz_1_1_drawable.html">00057</a>         <span class="keyword">class </span><a class="code" href="classz_1_1_drawable.html">Drawable</a> {
-<a name="l00058"></a>00058                 <span class="keyword">public</span>:
-<a name="l00059"></a>00059                 <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw(<a class="code" href="classz_1_1_window_module.html">WindowModule</a>*) =0;
-<a name="l00060"></a>00060 
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026                 <span class="keywordtype">bool</span>* pressed;
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028                 vector&lt;Drawable*&gt; drawList;
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030                 <span class="keyword">public</span>:
+<a name="l00031"></a>00031                 <a class="code" href="classz_1_1_window_module.html">WindowModule</a>(<a class="code" href="classz_1_1_engine.html">Engine</a>* e);
+<a name="l00032"></a>00032                 ~<a class="code" href="classz_1_1_window_module.html">WindowModule</a>();
+<a name="l00033"></a>00033                 <span class="keywordtype">void</span> update(<span class="keywordtype">float</span> time);
+<a name="l00034"></a>00034                 <span class="keywordtype">void</span> onDraw(<span class="keywordtype">float</span> time);
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036                 <span class="keywordtype">void</span> drawFps(<span class="keywordtype">int</span> f);
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038                 <span class="keywordtype">void</span> vsync(<span class="keywordtype">bool</span> v);
+<a name="l00039"></a>00039                 <span class="keywordtype">void</span> toggleFullscreen();
+<a name="l00040"></a>00040                 <a class="code" href="classz_1_1_camera.html">Camera</a>* getCamera();
+<a name="l00041"></a>00041                 <span class="keywordtype">float</span> meterToPixel(<span class="keywordtype">float</span> m);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043                 <span class="keywordtype">void</span> add(<a class="code" href="classz_1_1_drawable.html">Drawable</a>* d);
+<a name="l00044"></a>00044                 sf::RenderWindow* getWindow() {
+<a name="l00045"></a>00045                         <span class="keywordflow">return</span> window;
+<a name="l00046"></a>00046                 }
+<a name="l00047"></a>00047         };
+<a name="l00048"></a>00048 
+<a name="l00049"></a><a class="code" href="classz_1_1_fullscreen_action.html">00049</a>         <span class="keyword">class </span><a class="code" href="classz_1_1_fullscreen_action.html">FullscreenAction</a> : <span class="keyword">public</span> <a class="code" href="classz_1_1_action.html" title="An action that can be performed Create an action to represent an action you class can perform and add...">Action</a> {
+<a name="l00050"></a>00050                 <a class="code" href="classz_1_1_window_module.html">WindowModule</a>* wm;
+<a name="l00051"></a>00051                 <span class="keyword">public</span>:
+<a name="l00052"></a>00052                 <a class="code" href="classz_1_1_fullscreen_action.html">FullscreenAction</a>(<a class="code" href="classz_1_1_window_module.html">WindowModule</a>* w);
+<a name="l00053"></a>00053                 <span class="keywordtype">void</span> fire(<a class="code" href="classz_1_1_event.html">Event</a>* e);
+<a name="l00054"></a>00054                 <span class="keywordtype">string</span> getName();
+<a name="l00055"></a>00055                 <span class="keywordtype">string</span> toString();
+<a name="l00056"></a>00056         };
+<a name="l00057"></a>00057 
+<a name="l00058"></a><a class="code" href="classz_1_1_drawable.html">00058</a>         <span class="keyword">class </span><a class="code" href="classz_1_1_drawable.html">Drawable</a> {
+<a name="l00059"></a>00059                 <span class="keyword">public</span>:
+<a name="l00060"></a>00060                 <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw(<a class="code" href="classz_1_1_window_module.html">WindowModule</a>*, <span class="keywordtype">float</span> now) =0;
 <a name="l00061"></a>00061         };
 <a name="l00062"></a>00062 
 <a name="l00063"></a>00063         <span class="keyword">static</span> <span class="keywordtype">string</span> charToString(<span class="keywordtype">char</span> c);
@@ -151,7 +152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -163,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 8 2012 13:52:21 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 17:49:02 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

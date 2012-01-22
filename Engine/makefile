@@ -4,17 +4,10 @@
 # Linker: g++
 #
 
-#Run with -j X for X threads
-
-	
-UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 
-TINYXMLSRC = Engine/tinyxml/tinystr.cpp Engine/tinyxml/tinyxml.cpp Engine/tinyxml/tinyxmlerror.cpp Engine/tinyxml/tinyxmlparser.cpp
-TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
-
-SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o) $(TINYXMLOBJ) #$(wildcard Engine/*.o)
+SOURCES = $(wildcard *.cpp) #$(wildcard Engine/*.cpp)
+OBJECTS = $(SOURCES:.cpp=.o) #$(TINYXMLOBJ) #$(wildcard Engine/*.o)
 
 COMPILER := g++
 LINKER := g++
@@ -42,13 +35,13 @@ ifeq ($(UNAME),Windows)
 endif
 
 #ALL
-all : $(EXEC) doxygen
+all : $(EXEC)
 
 #engine :
 #	cd Engine; make -j 10
 
 debug : CFLAGS += -O0 -g
-debug : $(EXEC)	
+debug : $(EXEC)
 
 release : CFLAGS += -O2
 release : $(EXEC)
@@ -58,18 +51,23 @@ run: debug
 	$(EXEC)
 
 #TinyXML
-tinyxml : $(TINYXMLOBJ)
+#tinyxml : $(TINYXMLOBJ)
 
 #Doxygen
-doxygen : $(SOURCES)
-	cd Engine; doxygen
+#doxygen : $(SOURCES)
+#	cd Engine; doxygen
+
+engine : FORCE
+	make -C Engine
+
+FORCE :
 
 clean :
 	$(REMOVE) $(TOREMOVE)
 	#$(REMOVE) *.o Engine/*.o
 
-$(EXEC) : $(OBJECTS) tinyxml
-	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
+$(EXEC) : $(OBJECTS) engine
+	$(LINKER) $(OBJECTS) $(LFLAGS) Engine\libengine.a -o $(EXEC)
 
 #Kompiler .cpp filer
 %.o : %.cpp

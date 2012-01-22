@@ -46,6 +46,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -95,7 +96,8 @@ Inheritance diagram for z::PhysicsObject:</div>
  <div class="center">
   <img src="classz_1_1_physics_object.png" usemap="#z::PhysicsObject_map" alt=""/>
   <map id="z::PhysicsObject_map" name="z::PhysicsObject_map">
-<area href="classz_1_1_game_object.html" alt="z::GameObject" shape="rect" coords="0,56,105,80"/>
+<area href="classz_1_1_game_object.html" alt="z::GameObject" shape="rect" coords="0,56,142,80"/>
+<area href="classz_1_1_textured_game_object.html" alt="z::TexturedGameObject" shape="rect" coords="0,112,142,136"/>
 </map>
  </div></div>
 
@@ -103,6 +105,8 @@ Inheritance diagram for z::PhysicsObject:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a011f81fa88439f35a90050d64936e8d8"></a><!-- doxytag: member="z::PhysicsObject::prePhysicsStep" ref="a011f81fa88439f35a90050d64936e8d8" args="(float now, float timeStep)" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>prePhysicsStep</b> (float now, float timeStep)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0816e12feb18ed1584337136089bbe0"></a><!-- doxytag: member="z::PhysicsObject::getBody" ref="ae0816e12feb18ed1584337136089bbe0" args="()" -->
 b2Body *&#160;</td><td class="memItemRight" valign="bottom"><b>getBody</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ae29e6a338c5bfa666f0b856fb83e8b"></a><!-- doxytag: member="z::PhysicsObject::setBody" ref="a6ae29e6a338c5bfa666f0b856fb83e8b" args="(b2Body *b)" -->
@@ -121,6 +125,8 @@ Protected Attributes</h2></td></tr>
 b2Body *&#160;</td><td class="memItemRight" valign="bottom"><b>body</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac814ce5c44cb6ec6fa693c09ebf744bf"></a><!-- doxytag: member="z::PhysicsObject::shape" ref="ac814ce5c44cb6ec6fa693c09ebf744bf" args="" -->
 b2Shape *&#160;</td><td class="memItemRight" valign="bottom"><b>shape</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac288bc6e8c10d2ff99969e473a178321"></a><!-- doxytag: member="z::PhysicsObject::force" ref="ac288bc6e8c10d2ff99969e473a178321" args="" -->
+b2Vec2&#160;</td><td class="memItemRight" valign="bottom"><b>force</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a749c7be8c7b65dfe26769635b73b4ee4"></a><!-- doxytag: member="z::PhysicsObject::density" ref="a749c7be8c7b65dfe26769635b73b4ee4" args="" -->
 float&#160;</td><td class="memItemRight" valign="bottom"><b>density</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5d4bbee3835203f259ed3a79ac0485e"></a><!-- doxytag: member="z::PhysicsObject::friction" ref="ae5d4bbee3835203f259ed3a79ac0485e" args="" -->
@@ -146,7 +152,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>restitution</b></td>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -158,7 +164,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>restitution</b></td>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 8 2012 13:52:22 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 17:49:02 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

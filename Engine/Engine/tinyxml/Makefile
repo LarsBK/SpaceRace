@@ -1,3 +1,5 @@
+#modified
+
 #****************************************************************************
 #
 # Makefile for TinyXml test.
@@ -15,11 +17,11 @@ PROFILE        := NO
 
 # TINYXML_USE_STL can be used to turn on STL support. NO, then STL
 # will not be used. YES will include the STL files.
-TINYXML_USE_STL := NO
+TINYXML_USE_STL := YES
 
 #****************************************************************************
 
-CC     := gcc
+CC     := g++
 CXX    := g++
 LD     := g++
 AR     := ar rc
@@ -81,28 +83,30 @@ CXXFLAGS := ${CXXFLAGS} ${DEFS}
 # Targets of the build
 #****************************************************************************
 
-OUTPUT := xmltest
+#OUTPUT := xmltest
 
-all: ${OUTPUT}
 
 
 #****************************************************************************
 # Source files
 #****************************************************************************
 
-SRCS := tinyxml.cpp tinyxmlparser.cpp xmltest.cpp tinyxmlerror.cpp tinystr.cpp
+SRCS := tinyxml.cpp tinyxmlparser.cpp tinyxmlerror.cpp tinystr.cpp
 
 # Add on the sources for libraries
 SRCS := ${SRCS}
 
 OBJS := $(addsuffix .o,$(basename ${SRCS}))
 
+all: ${OBJS}
+	ar -r ${OBJS} tinyxml.a
+
 #****************************************************************************
 # Output
 #****************************************************************************
 
-${OUTPUT}: ${OBJS}
-	${LD} -o $@ ${LDFLAGS} ${OBJS} ${LIBS} ${EXTRA_LIBS}
+#${OUTPUT}: ${OBJS}
+#	${LD} -o $@ ${LDFLAGS} ${OBJS} ${LIBS} ${EXTRA_LIBS}
 
 #****************************************************************************
 # common rules
@@ -126,5 +130,5 @@ depend:
 
 tinyxml.o: tinyxml.h tinystr.h
 tinyxmlparser.o: tinyxml.h tinystr.h
-xmltest.o: tinyxml.h tinystr.h
+#xmltest.o: tinyxml.h tinystr.h
 tinyxmlerror.o: tinyxml.h tinystr.h
