@@ -10,7 +10,7 @@
 UNAME = $(shell uname)
 EXEC = ../build/stage3-$(UNAME)
 
-TINYXMLSRC = tinyxml/tinystr.cpp tinyxml/tinyxml.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp
+TINYXMLSRC = Engine/tinyxml/tinystr.cpp Engine/tinyxml/tinyxml.cpp Engine/tinyxml/tinyxmlerror.cpp Engine/tinyxml/tinyxmlparser.cpp
 TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
 
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)

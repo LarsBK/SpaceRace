@@ -3,7 +3,7 @@
 #define MAP_HVG06X4Q
 
 #include "Engine/ResourceManager.h"
-#include "tinyxml/tinyxml.h"
+#include "Engine/tinyxml/tinyxml.h"
 #include "Planet.h"
 #include "Engine/Box2DModule.h"
 #include "Engine/WindowModule.h"
