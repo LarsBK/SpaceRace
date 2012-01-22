@@ -4,37 +4,50 @@
 # Linker: g++
 #
 
-SOURCES = $(wildcard *.cpp) 
+#Run with -j X for X threads
+
+	
+UNAME = $(shell uname)
+#EXEC = ../build/stage3-$(UNAME)
+SOURCES = $(wildcard *.cpp) #$(wildcard Engine/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
-COMPILER := g++
-LINKER := g++
-REMOVE := rm
-CFLAGS = 
 
-ifdef SystemRoot
-	#Windows
+ifeq ($(UNAME),Darwin)
+	COMPILER := g++
+	LINKER := g++
+	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
+	REMOVE := rm
+	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
+endif
+
+ifeq ($(UNAME),Linux)
+	COMPILER := g++
+	LINKER := g++
+	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	REMOVE := rm
+endif
+
+#WINDOWS
+ifeq ($(UNAME),Windows)
+	COMPILER := g++ -m32
+	LINKER := g++
+	CFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 	REMOVE := del
-else
-	ifeq ($(UNAME),Darwin)
-		#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
-	endif
-
-	ifeq ($(UNAME),Linux)
-	endif
 endif
 
 #ALL
-all : doxygen release
+all : $(doxygen) $(SOURCES)
 
-debug :	CFLAGS := $(CFLAGS) -g -O0
-debug : libengine.a
+debug : all
+	CFLAGS := $(CFLAGS) -g -O0
 
-release : CFLAGS := $(CFLAGS) -O2
-release : libengine.a
+release : all
+	CFLAGS := $(CFLAGS) -O2
 
+engine : $(OBJECTS)
 
 #Doxygen
-doxygen : FORCE
+doxygen : $(SOURCES)
 	doxygen
 
 clean:
@@ -42,13 +55,4 @@ clean:
 
 #Kompiler .cpp filer
 %.o : %.cpp
-	$(COMPILER) $(CFLAGS) -c $< -o $@
-
-
-tinyxml : FORCE
-	make -C tinyxml
-
-libengine.a : $(OBJECTS) tinyxml
-	ar crvs libengine.a $(OBJECTS) tinyxml/tinystr.o tinyxml/tinyxml.o tinyxml/tinyxmlerror.o tinyxml/tinyxmlparser.o
-
-FORCE :
+	$(COMPILER) -c $< -o $@

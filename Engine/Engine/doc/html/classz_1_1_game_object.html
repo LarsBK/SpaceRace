@@ -46,7 +46,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -97,9 +96,8 @@ Inheritance diagram for z::GameObject:</div>
  <div class="center">
   <img src="classz_1_1_game_object.png" usemap="#z::GameObject_map" alt=""/>
   <map id="z::GameObject_map" name="z::GameObject_map">
-<area href="classz_1_1_physics_object.html" alt="z::PhysicsObject" shape="rect" coords="0,0,142,24"/>
-<area href="classz_1_1_drawable.html" alt="z::Drawable" shape="rect" coords="152,0,294,24"/>
-<area href="classz_1_1_textured_game_object.html" alt="z::TexturedGameObject" shape="rect" coords="76,112,218,136"/>
+<area href="classz_1_1_physics_object.html" alt="z::PhysicsObject" shape="rect" coords="0,0,105,24"/>
+<area href="classz_1_1_drawable.html" alt="z::Drawable" shape="rect" coords="115,0,220,24"/>
 </map>
  </div></div>
 
@@ -107,32 +105,24 @@ Inheritance diagram for z::GameObject:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99ebd349693b25b5ea6f2da057a1bef5"></a><!-- doxytag: member="z::GameObject::draw" ref="a99ebd349693b25b5ea6f2da057a1bef5" args="(WindowModule *wm, float now)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (<a class="el" href="classz_1_1_window_module.html">WindowModule</a> *wm, float now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad98919230902d7c0ff7a56a4853602f0"></a><!-- doxytag: member="z::GameObject::prePhysicsStep" ref="ad98919230902d7c0ff7a56a4853602f0" args="(float last, float t)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>prePhysicsStep</b> (float last, float t)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05004e4ccfa78517bd20adacb05a0da7"></a><!-- doxytag: member="z::GameObject::storeOldPos" ref="a05004e4ccfa78517bd20adacb05a0da7" args="(float acc, float t)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeOldPos</b> (float acc, float t)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abbc22d25ce80510636f032c114b122bb"></a><!-- doxytag: member="z::GameObject::draw" ref="abbc22d25ce80510636f032c114b122bb" args="(WindowModule *wm)" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (<a class="el" href="classz_1_1_window_module.html">WindowModule</a> *wm)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7fffba12b1144f2a02cf45ddf12e6f1e"></a><!-- doxytag: member="z::GameObject::spriteHeight" ref="a7fffba12b1144f2a02cf45ddf12e6f1e" args="()=0" -->
-virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>spriteHeight</b> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8bc665686942d43898ad449f1ccf56ca"></a><!-- doxytag: member="z::GameObject::spriteWidth" ref="a8bc665686942d43898ad449f1ccf56ca" args="()=0" -->
-virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>spriteWidth</b> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a102abba8761cd2016ddf55579af00f89"></a><!-- doxytag: member="z::GameObject::shapeHeight" ref="a102abba8761cd2016ddf55579af00f89" args="()=0" -->
-virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>shapeHeight</b> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a992a5542ec04a58516c2a0a3d9de6c22"></a><!-- doxytag: member="z::GameObject::shapeWidth" ref="a992a5542ec04a58516c2a0a3d9de6c22" args="()=0" -->
-virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>shapeWidth</b> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad615d330d34aac3f0a84123029bbbb2"></a><!-- doxytag: member="z::GameObject::getDrawable" ref="aad615d330d34aac3f0a84123029bbbb2" args="()" -->
+virtual sf::Drawable *&#160;</td><td class="memItemRight" valign="bottom"><b>getDrawable</b> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0e23a08ccb313ee918e9048bb951802"></a><!-- doxytag: member="z::GameObject::sprite" ref="ae0e23a08ccb313ee918e9048bb951802" args="" -->
 sf::Drawable *&#160;</td><td class="memItemRight" valign="bottom"><b>sprite</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad94c84f1aa6205337577bdbcfa6b14fc"></a><!-- doxytag: member="z::GameObject::lastPos" ref="ad94c84f1aa6205337577bdbcfa6b14fc" args="" -->
-b2Vec2&#160;</td><td class="memItemRight" valign="bottom"><b>lastPos</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b584b70591e590ba1842d2e601b3831"></a><!-- doxytag: member="z::GameObject::lastTime" ref="a9b584b70591e590ba1842d2e601b3831" args="" -->
-float&#160;</td><td class="memItemRight" valign="bottom"><b>lastTime</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9ea0d5dffdcdc39afc3ea3ff57e9e42"></a><!-- doxytag: member="z::GameObject::timeStep" ref="aa9ea0d5dffdcdc39afc3ea3ff57e9e42" args="" -->
-float&#160;</td><td class="memItemRight" valign="bottom"><b>timeStep</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a72b5582f59a5a9d4b0a276e91a9224"></a><!-- doxytag: member="z::GameObject::spriteWidth" ref="a3a72b5582f59a5a9d4b0a276e91a9224" args="" -->
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>spriteWidth</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fb3a128ad875aa3f521f460d305e5bc"></a><!-- doxytag: member="z::GameObject::spriteHeight" ref="a9fb3a128ad875aa3f521f460d305e5bc" args="" -->
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>spriteHeight</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59fa8c6e8bd23e837b458afed9f0da3c"></a><!-- doxytag: member="z::GameObject::shapeWidth" ref="a59fa8c6e8bd23e837b458afed9f0da3c" args="" -->
+float&#160;</td><td class="memItemRight" valign="bottom"><b>shapeWidth</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9557a9594453179b5bcc4e5af480fc54"></a><!-- doxytag: member="z::GameObject::shapeHeight" ref="a9557a9594453179b5bcc4e5af480fc54" args="" -->
+float&#160;</td><td class="memItemRight" valign="bottom"><b>shapeHeight</b></td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_game_object_8h_source.html">GameObject.h</a></li>
@@ -144,7 +134,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>timeStep</b></td></t
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -156,7 +146,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>timeStep</b></td></t
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 22 2012 17:49:02 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 8 2012 13:52:22 for SpaceRaceEngine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
