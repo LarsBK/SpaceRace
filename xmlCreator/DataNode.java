@@ -5,7 +5,7 @@ import org.w3c.dom.*;
 
 class DataNode{
 
-    ArrayList<DataNode> children;
+    ArrayList <DataNode> children;
 
     String value;
 
@@ -20,6 +20,10 @@ class DataNode{
 
     public void addChild(DataNode dn){
 	children.add(dn);
+    }
+
+    public DataNode getChild(int i){
+	return children.get(i);
     }
 
     /**

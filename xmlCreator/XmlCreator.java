@@ -22,6 +22,7 @@ class XmlCreator{
     static Element root;
 
     final private static boolean testing = true;
+    final private static String rootName = "Ship";
 
     /**
      *used for testing
@@ -29,6 +30,10 @@ class XmlCreator{
     public static void main(String[] args) throws Exception{
 	String saveFile = "Test.xml"; 
 
+	mergeFile("Test2.xml");
+
+
+	/*
 	String[][] input = new String[2][];
 	
 	
@@ -81,6 +86,7 @@ class XmlCreator{
 
 	addToFile(e);
 	addToFile(c);
+	*/
 
 	createFile(saveFile);
     }
@@ -93,7 +99,7 @@ class XmlCreator{
 		
 		doc = builder.newDocument();
 		
-		root = doc.createElement("ship");
+		root = doc.createElement(rootName);
 
 		doc.appendChild(root);
 
@@ -157,4 +163,120 @@ class XmlCreator{
 	    }
 	}
     }
+
+    /**
+     *will merge data in in  xml-file
+     *with teh data allready existing in the data structure.
+     *the file most have a "root" named ship
+     *any simulare names found in the existing tree and the file will 
+     *be considered the same, and not be duplicated.
+     *If there in storage or in the infile exists siblings with the same tagName 
+     *then this method will merge into all of the siblings, there should therefor
+     *not be sibling with equal names when this method is called.
+     *returns false if merge failed.
+     **/
+    public static boolean mergeFile(String infilePos){
+	checkInit();
+
+	try{
+	    File inFile = new File(infilePos);
+	    DocumentBuilderFactory indbf = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder indb = indbf.newDocumentBuilder();
+	    Document inDoc = indb.parse(inFile);
+	    Element inAt = inDoc.getDocumentElement();
+	    inAt.normalize();
+
+	    //is the file compatable
+	    if(inAt.getTagName().compareTo(rootName) != 0){
+		if(testing){
+		    System.out.println("rootName in " + infilePos + "is not " + rootName);
+		}
+		return false;
+	    }
+
+	    recursiveMerge(root, inAt);
+
+	    return true;
+
+	}catch(Exception e){
+	    System.out.println("Failed to read file: " + infilePos);
+
+	    if(testing){
+		System.out.println("Error: " + e.getMessage());
+	    }
+	    return false;
+	}
+
+    }
+
+    /**
+     *recursivly merges every element in "inAt" into "storageAt"
+     *used by mergeFile()
+     **/
+    private static void recursiveMerge(Element storageAt, Element inAt){
+	System.out.println("--new revursivemerge call!");//----------
+	if(testing){
+	    if(storageAt.getTagName().compareTo(inAt.getTagName()) != 0){
+		System.out.println("Doing recurcive merge and found a fault in the call of this method where storageAt.getTagName() is: " + storageAt.getTagName() + " and " + inAt.getTagName() + "is called with recurciveMerge(), they should be the same");
+	    }
+	}
+
+	NodeList inNl = inAt.getElementsByTagName("*");
+
+	for(int i = 0; i < inNl.getLength(); i++){
+	    System.out.println("in "+ inAt.getNodeName() + ":");//---------
+
+	    Element inAtChild = (Element)inNl.item(i);
+	    System.out.println(" found "+ inAtChild.getNodeName() + ":");//---------
+	 
+	    //if its a attribute (leafnode)
+	    if(inAtChild.getElementsByTagName("*").getLength() == 0 /*.hasChildNodes()*/){
+		System.out.println(" found a attribute: '" + inAtChild.getNodeName()+"'");//----------
+		System.out.println("    found attribute: '" + inAtChild.getTextContent()+"'");//----------
+
+
+
+
+		storageAt.appendChild(doc.createElement(inAtChild.getNodeName()));
+
+	    }else{
+
+		NodeList storageNl = storageAt.getElementsByTagName(inAtChild.getTagName());
+
+		//if its a non-attribute (node) that dont exist in the storage
+		if(storageNl.getLength() == 0){
+
+		    Element newStorageElement = doc.createElement(inAtChild.getNodeName());
+		    storageAt.appendChild(newStorageElement);
+
+		    recursiveMerge(newStorageElement, inAtChild);
+
+		}else{//if its a non-attribute (node) that exists in the storage
+		    
+		    for(int j = 0; j < storageNl.getLength();j++){
+
+			recursiveMerge((Element)storageNl.item(j), inAtChild);
+		    }
+		}
+	    }
+	}
+    }
+
+
+    /**
+     *returns the Element that is a child of par with getTagName() equal to name
+     *returns null if no fitting child was found
+     **/
+    private static Element getElement(Element par, String name){
+	Element toReturn = null;
+
+	NodeList nl = par.getElementsByTagName(name);
+
+	if(nl.getLength() > 0){
+	    toReturn = (Element)nl.item(0);
+	}
+	
+	return toReturn;    
+    }
+
 }

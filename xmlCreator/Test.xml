@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ship>
-  <armor>
-     <health>15</health>
-     <texture>testjpg</texture>
-  </armor>
-  <living>
-     <health>15</health>
-     <population>10</population>
-     <texture>lqpic.jpg</texture>
-  </living>
-</ship>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Ship><staff><firstname/><lastname/><nickname/><salary/><firstname/><lastname/><nickname/><salary/></staff><firstname/><lastname/><nickname/><salary/><firstname/><lastname/><nickname/><salary/></Ship>
