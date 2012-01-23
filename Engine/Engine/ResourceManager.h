@@ -8,23 +8,26 @@
 using namespace std;
 
 namespace z {
-
+	
+	template <class T>
 	class LoadedResource {
 		public:
-		sf::Image* im;
+		T t;
 		string filename;
 
 		unsigned int count;
 
-		LoadedResource(string f, sf::Image* i) {
-			im = i;
+		LoadedResource(string f, T i) {
+			t = i;
 			filename = f;
+			count = 0;
 		}
 	};
 
 	class ResourceManager {
 
-		vector<LoadedResource*> list;
+		vector<LoadedResource<sf::Image*>*> imageList;
+		vector<LoadedResource<TiXmlDocument*>*>	xmlList
 
 		public:
 		sf::Image* getImage(string filename);

@@ -7,16 +7,15 @@ namespace z
 	Engine::Engine(string name) {
 		gameName = name;
 		running = true;
-		targetFramerate = 60;
-
-		//Commands
-		//quitAction = new Action("quit", this);
-		//addAction(quitAction);
-		//bind(new Event("quit"), quitAction);
 	}
 
 	Engine::~Engine() {
-		eventBindings.clear();
+		while(eventBindings.size()) {
+			EventBinding* eb = eventBindings.back();
+			eventBindings.pop_back();
+			delete eb;
+		}
+
 		actions.clear();
 		drawList.clear();
 		physicsList.clear();
@@ -27,15 +26,8 @@ namespace z
 		return gameName;
 	}
 
-	unsigned int Engine::addModule(Module* m) {
+	void Engine::addModule(Module* m) {
 		updateList.push_back(m);
-		physicsList.push_back(m);
-		drawList.push_back(m);
-		return updateList.size();
-	}
-
-	unsigned int Engine::getTargetFramerate() {
-		return targetFramerate;
 	}
 
 	void Engine::run() {
@@ -50,8 +42,7 @@ namespace z
 	void Engine::cycle() {
 		update();
 		physics();
-		if(needsDraw)
-			draw();
+		draw();
 	}
 
 	void Engine::quit(string reason) {
@@ -78,21 +69,16 @@ namespace z
 	void Engine::physics() {
 		float pTime = clock.GetElapsedTime();
 
-		for (unsigned int i = 0; i < physicsList.size(); i++) {
-			physicsList[i]->onPhysics(pTime);//delta);
+		for (unsigned int i = 0; i < updateList.size(); i++) {
+			updateList[i]->onPhysics(pTime);//delta);
 		}
 	}
 
 	void Engine::draw() {
-		needsDraw = false;
 		float pTime = clock.GetElapsedTime();
-		for (unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->onDraw(pTime);//delta);
+		for (unsigned int i = 0; i < updateList.size(); i++) {
+			updateList[i]->onDraw(pTime);//delta);
 		}
-	}
-
-	void Engine::needToDraw() {
-		needsDraw = true;
 	}
 
 	float Engine::getTime() {
@@ -103,22 +89,13 @@ namespace z
 		return fps;
 	}
 
-	void Engine::setFPS(unsigned int f) {
-		fps = f;
-	}
-
 	//Event
 	void Engine::event(Event* e) {
 		EventBinding* eb = getBinding(e->toString());
-		cout << "Event: " << e->toString() << endl;
+		//cout << "Event: " << e->toString() << endl;
 		if(eb) {
 			eb->fire(e);
 		}
-/*
-		for(unsigned int i = 0; i < eventBindings.size(); i++) {
-			eventBindings[i]->fire(e);
-		}
-*/
 	}
 
 	void Engine::addAction(Action* a) {
@@ -142,6 +119,10 @@ namespace z
 		}
 		return 0;
 	}
+/*
+	void Engine::unbind(string e, string a) {
+		EventBinding* eb = getBinding(e);
+*/		
 
 	void Engine::bind(string e, string a) {
 		EventBinding* eb = getBinding(e);
@@ -157,55 +138,19 @@ namespace z
 			cout << e << " bound to " << c->toString() << endl;
 		}
 	}
-/*
-	void Engine::bind(Event* e, Action* a) {
-		EventListener* l = new EventListener(e);
-		l->addAction(a);
-		eventListeners.push_back(l);
-	}
-*/
+	
 	//MODULE
 	Module::Module(Engine *e) {
 		engine = e;
 	}
 
 	void Module::onDraw(float t) {
-		//cout << "onDraw() not implemented in " << name << endl;
 	}
 
 	void Module::update(float t) {
-		//cout << "update() not implemented in " << name << endl;
 	}
 
 	void Module::onPhysics(float t) {
-		//cout << "onPhysics() not implemented in " << name << endl;
 	}
-
-/*
-	//CONSOLE
-	void Console::operator <<(string msg)
-	{
-		if (level <= maxShow)
-		{
-			//messagebox
-			cout << "Message: " << msg << endl;
-		}
-		if (level <= maxConsole)
-		{
-			//console
-			cout << "Console: " << msg << endl;
-		}
-		level = defaultLevel;
-	}
-
-	Console::Console(Engine* e) : Module(e)
-		{
-			name = "ZConsole";
-			defaultLevel = debug;
-			maxShow = 0;
-			maxConsole = debug;
-			level = debug;
-		}
-*/
 }
 	

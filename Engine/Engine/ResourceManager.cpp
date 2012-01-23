@@ -1,9 +1,9 @@
 #include "ResourceManager.h"
 
 sf::Image* z::ResourceManager::getImage(string filename) {
-	for(unsigned int i = 0; i < list.size(); i++) {
-		if(filename == list[i]->filename) {
-			return list[i]->im;
+	for(unsigned int i = 0; i < imageList.size(); i++) {
+		if(filename == imageList[i]->filename) {
+			return imageList[i]->t;
 		}
 	}
 	
@@ -15,19 +15,19 @@ sf::Image* z::ResourceManager::getImage(string filename) {
 		return 0;
 	}
 	
-	list.push_back(new LoadedResource(filename, im));
+	imageList.push_back(new LoadedResource<sf::Image*>(filename, im));
 	return im;
 }
 
 void z::ResourceManager::unloadImage(sf::Image* im) {
-	for(unsigned int i = 0; i < list.size(); i++) {
-		if(list[i] && im == list[i]->im) {
-			list[i]->count--;
-			if(list[i]->count == 0) {
-				cout << "Unloading " << list[i]->filename << endl;
-				delete list[i]->im;
-				delete list[i];
-				list.erase(list.begin()+i);
+	for(unsigned int i = 0; i < imageList.size(); i++) {
+		if(imageList[i] && im == imageList[i]->t) {
+			imageList[i]->count--;
+			if(imageList[i]->count == 0) {
+				cout << "Unloading " << imageList[i]->filename << endl;
+				delete imageList[i]->t;
+				delete imageList[i];
+				imageList.erase(imageList.begin()+i);
 			}
 			return;
 		}

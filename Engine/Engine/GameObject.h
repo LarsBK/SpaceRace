@@ -11,6 +11,9 @@ namespace z {
 		
 		protected:
 		sf::Drawable* sprite;
+		b2Vec2 lastPos;
+		float lastTime;
+		float timeStep;
 
 		//These are used to scale the sprite
 		virtual unsigned int spriteHeight()=0;
@@ -20,14 +23,11 @@ namespace z {
 
 		public:
 		GameObject();
-		virtual void draw(WindowModule* wm);
+		virtual void draw(WindowModule* wm, float now);
 
-/*
-		virtual void onPhysicsStep() {
-			cout << "A";
-		}
-*/
 
+		virtual void prePhysicsStep(float last, float t);
+		void storeOldPos(float acc, float t);
 	};
 }
 

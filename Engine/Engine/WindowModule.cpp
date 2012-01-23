@@ -5,7 +5,7 @@ namespace z {
 	WindowModule::WindowModule(Engine* e) : Module(e) {
 		name = "WindowModule";
 		fullscreen = false;
-		windowSettings.AntialiasingLevel = 8;
+		windowSettings.AntialiasingLevel = 16;
 
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::GetMode(0),
@@ -15,7 +15,7 @@ namespace z {
 				engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
 		camera = new Camera(window, e);
-		window->UseVerticalSync(true);
+		window->UseVerticalSync(false);
 		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
@@ -95,7 +95,7 @@ namespace z {
 		window->SetView(*(camera->getView()));
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->draw(this);
+			drawList[i]->draw(this,time);
 		}
 /*
 		for(unsigned int i = 0; i < hudList.size(); i++) {
@@ -105,7 +105,7 @@ namespace z {
 		window->SetView(window->GetDefaultView());
 
 		int fps = 1.0f/window->GetFrameTime();
-		engine->setFPS(fps);
+		//engine->setFPS(fps);
 		drawFps(fps);
 		window->Display();
 	}

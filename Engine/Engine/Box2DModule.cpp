@@ -44,8 +44,10 @@ namespace z {
 
 		while(lastTime+timeStep <= engine->getTime()) {
 
+			float acc = (engine->getTime() - (lastTime+timeStep))/timeStep;
+
 			for(unsigned x = 0; x < list.size(); x++) {
-				list[x]->onPhysicsStep();
+				list[x]->prePhysicsStep(lastTime, timeStep);
 			}
 
 			world->Step(timeStep, velocityIterations, positionIterations);
@@ -54,10 +56,12 @@ namespace z {
 			if(i % 120 == 0) {
 				std::cout << "WARNING: physics fell 120 steps behind, fast-forwarding. Please report this as a bug." << std::endl;
 				float ff;
+				unsigned x = 1;
 				do {
 					ff = engine->getTime() - lastTime;
-					world->Step(ff,	velocityIterations, positionIterations);
+					world->Step(ff*x,	velocityIterations, positionIterations);
 					lastTime+=ff;
+					x++;
 				} while(lastTime+timeStep < engine->getTime());
 
 			}
@@ -72,7 +76,7 @@ namespace z {
 			*/
 			
 			//if(i>0)
-				engine->needToDraw();
+				//engine->needToDraw();
 		}
 		
 	}

@@ -63,7 +63,7 @@ namespace z {
 		void draw();
 
 		//State
-		bool needsDraw; //game state changed
+		//bool needsDraw; //game state changed
 
 		public:
 		float getTime();
@@ -79,10 +79,10 @@ namespace z {
 		unsigned int getFPS();
 		void setFPS(unsigned int f);
 
-		void needToDraw();
+		//void needToDraw();
 
 		//Register modules
-		unsigned int addModule(Module* m);
+		void addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 
 		//Event
