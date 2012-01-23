@@ -8,7 +8,9 @@
 
 	
 UNAME = $(shell uname)
-EXEC = ../build/stage3-$(UNAME)
+BUILDDIR = ../build/
+EXECNAME = stage3-$(UNAME)
+EXEC = $(BUILDDIR)$(EXECNAME)
 
 TINYXMLSRC = Engine/tinyxml/tinystr.cpp Engine/tinyxml/tinyxml.cpp Engine/tinyxml/tinyxmlerror.cpp Engine/tinyxml/tinyxmlparser.cpp
 TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
@@ -55,7 +57,7 @@ release : $(EXEC)
 
 #Kjør
 run: debug
-	$(EXEC)
+	cd $(BUILDDIR); ./$(EXECNAME)
 
 #TinyXML
 tinyxml : $(TINYXMLOBJ)
