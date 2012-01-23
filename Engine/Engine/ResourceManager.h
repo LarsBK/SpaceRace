@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include "tinyxml/tinyxml.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ namespace z {
 	class ResourceManager {
 
 		vector<LoadedResource<sf::Image*>*> imageList;
-		vector<LoadedResource<TiXmlDocument*>*>	xmlList
+		vector<LoadedResource<TiXmlDocument*>*>	xmlList;
 
 		public:
 		sf::Image* getImage(string filename);
