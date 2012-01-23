@@ -1,0 +1,57 @@
+<!-- dette er ment som et eksempel på hva
+	man kan forvente å få ut som resultat
+	av del1 -->
+
+<?xml version="1.0"?>
+
+<ship>
+	<population>100</population>
+
+	<partType>
+		<name>engine</name>
+		<thrust>100</thrust>
+		<texture>engine.png</texture>
+	</partType>
+
+	<partType>
+		<name>commandCentral</name>
+	</partType>
+
+	<partType>
+		<name>triangleArmor</name>
+		<texture>triangleArmor</texture>
+		<shape>
+			<point>
+				<x>0.0</x>
+				<y>0.0</y>
+			</point>
+			<point>
+				<x>1.0</x>
+				<y>1.0</y>
+			</point>
+			<point>
+				<x>0.0</x>
+				<y>1.0</y>
+			</point>
+		</shape>
+	</partType>
+
+	<part>
+		<id>1</id>
+		<type>engine</type>
+		<north>2</north>
+	</part>
+	<part>
+		<id>2</id>
+		<type>commandCentral</type>
+		<south>1</south>
+		<north>3</north>
+	</part>
+	<part>
+		<id>3</id>
+		<type>triangleArmor</type>
+		<!-- rotasjon i x*pi radianer -->
+		<rotation>0.5</rotation>
+		<south>2</south>
+	</part>
+</ship>

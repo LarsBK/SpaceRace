@@ -10,7 +10,8 @@ InGameState::InGameState(z::Engine* e, z::WindowModule* w) {
 }
 
 int InGameState::load(Game* game) {
-	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 0.0f), true);
+	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 9.81f), true);
+
 	engine->addModule(box2d);
 	return 0;
 }

@@ -5,28 +5,29 @@
 #include "PhysicsObject.h"
 #include "WindowModule.h"
 
-//#define SCREEN_WIDTH 1024
-//#define PM (SCREEN_WIDTH/8.0f)
-//#define MP (1.0f/PM)
-
-
 namespace z {
 
 	class GameObject : protected PhysicsObject, protected Drawable {
 		
-		private:
-		sf::Drawable* sprite;
-		sf::RenderWindow* window;
-		int screenWidth;
 		protected:
-		virtual sf::Drawable* getDrawable();
-		float meterToPixel(float m);
+		sf::Drawable* sprite;
+		b2Vec2 lastPos;
+		float lastTime;
+		float timeStep;
+
+		//These are used to scale the sprite
+		virtual unsigned int spriteHeight()=0;
+		virtual unsigned int spriteWidth()=0;
+		virtual float shapeHeight()=0;
+		virtual float shapeWidth()=0;
 
 		public:
 		GameObject();
-		//virtual sf::Drawable getDrawable();
-		virtual void draw(sf::RenderWindow* w);
+		virtual void draw(WindowModule* wm, float now);
 
+
+		virtual void prePhysicsStep(float last, float t);
+		void storeOldPos(float acc, float t);
 	};
 }
 

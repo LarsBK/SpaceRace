@@ -29,10 +29,12 @@ namespace z {
 		float32 timeStep;
 		int32 velocityIterations;
 		int32 positionIterations;
-
+		
 		float lastTime;
 
 		b2World* world;
+
+		vector<PhysicsObject*> list;
 		
 	};
 }

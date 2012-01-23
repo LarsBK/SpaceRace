@@ -27,9 +27,14 @@ class BenchmarkState : public GameState {
 };
 
 class TestBox : public z::GameObject {
-
+	sf::Shape circle;
 	public:
 	TestBox(float xi,float yi);
+	virtual unsigned int spriteHeight() {return 64;}
+	virtual unsigned int spriteWidth() {return 64;}
+	virtual float shapeHeight() {return 1;}
+	virtual float shapeWidth() {return 1;}
+
 
 };
 

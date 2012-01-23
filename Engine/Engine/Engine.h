@@ -5,6 +5,7 @@
 #include <vector>
 #include <SFML/System.hpp>
 #include "Event.h"
+#include "split.h"
 
 namespace z {
 
@@ -34,7 +35,7 @@ namespace z {
 
 	//ENGINE
 	//Zengine's main class, holds all modules
-	class Engine : public ActionHandler
+	class Engine 
 	{
 		sf::Clock clock;
 		sf::Clock frameTime;
@@ -49,20 +50,20 @@ namespace z {
 		vector<Module*> drawList;
 		vector<Module*> physicsList;
 
-		vector<EventListener*> eventListeners;
+		vector<EventBinding*> eventBindings;
 		vector<Action*> actions;
-		EventListener* getEventListener(Event* e);
+		EventBinding* getEventBinding(string e);
 		Action* getAction(string s);
 
 		//Actions
-		Action* quitAction;
+		//Action* quitAction;
 
 		void update();
 		void physics();
 		void draw();
 
 		//State
-		bool needsDraw; //game state changed
+		//bool needsDraw; //game state changed
 
 		public:
 		float getTime();
@@ -78,21 +79,51 @@ namespace z {
 		unsigned int getFPS();
 		void setFPS(unsigned int f);
 
-		void needToDraw();
+		//void needToDraw();
 
 		//Register modules
-		unsigned int addModule(Module* m);
+		void addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 
 		//Event
 		void event(Event* e); //An event has occured
 		void addAction(Action* a); //Add supported action
-		void bind(Event* e, string a); //Binds
-		void bind(Event* e, Action* a); //Binds
+		void bind(string e, string a); //Binds
+		EventBinding* getBinding(string e);
+		//void bind(Event* e, Action* a); //Binds
 
 		//ActionHandler
-		void handleAction(Action* a);
+		//void handleAction(Action* a);
 	};
+/*
+	class CommandEvent : public Event {
+		public:
+		vector<string> words;
+		Event(string s) {
+			words = split(s, ' ');
+		}
+		string toString() {
+			return vector[0];
+		}
+	};
+
+
+	class BindAction : public Action {
+		Engine* engine;
+		public:
+		BindAction(Engine* e) {
+			engine = e;
+		}
+
+		virtual void fire(Event* e) {
+			string s = e->toString();
+			int pos = e.find(" ");
+			if(pos = npos) return;
+
+
+			engine->bind( e->
+		virtual void
+*/
 
 /*
 	//CONSOLE

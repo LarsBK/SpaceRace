@@ -8,50 +8,71 @@
 
 	
 UNAME = $(shell uname)
-EXEC = ../build/stage3-$(UNAME)
+BUILDDIR = ../build/
+EXECNAME = stage3-$(UNAME)
+EXEC = $(BUILDDIR)$(EXECNAME)
+
+TINYXMLSRC = Engine/tinyxml/tinystr.cpp Engine/tinyxml/tinyxml.cpp Engine/tinyxml/tinyxmlerror.cpp Engine/tinyxml/tinyxmlparser.cpp
+TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
+
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.o) $(TINYXMLOBJ) #$(wildcard Engine/*.o)
+
+COMPILER := g++
+LINKER := g++
+REMOVE := rm
+LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+CFLAGS = -DTIXML_USE_STL
+
+TOREMOVE = $(OBJECTS)
 
 ifeq ($(UNAME),Darwin)
-	COMPILER := g++
-	LINKER := g++
-	CFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
-	REMOVE := rm
+	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
 	#EXEC = ../build/SpaceRace.app/Contents/MacOS/SpaceRace
 endif
 
 ifeq ($(UNAME),Linux)
-	COMPILER := clang
-	LINKER := clang
-	CFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := rm
 endif
 
 #WINDOWS
 ifeq ($(UNAME),Windows)
-	COMPILER := g++ -m32
-	LINKER := g++
-	CFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := del
+	LFLAGS += -static-libgcc -static-libstdc++
+	#COMPILER := g++ #-m32
+	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
+	REMOVE := cmd /C del
+	TOREMOVE = $(subst /,\,${OBJECTS})
 endif
 
 #ALL
-all : $(doxygen) $(run)
+all : $(EXEC) doxygen
+
+#engine :
+#	cd Engine; make -j 10
+
+debug : CFLAGS += -O0 -g
+debug : $(EXEC)	
+
+release : CFLAGS += -O2
+release : $(EXEC)
 
 #Kjør
-run: $(EXEC)
-	$(EXEC)
+run: debug
+	cd $(BUILDDIR); ./$(EXECNAME)
+
+#TinyXML
+tinyxml : $(TINYXMLOBJ)
 
 #Doxygen
 doxygen : $(SOURCES)
-	doxygen
+	cd Engine; doxygen
 
-clean:
-	$(REMOVE) $(EXEC) $(OBJECTS)
+clean :
+	$(REMOVE) $(TOREMOVE)
+	#$(REMOVE) *.o Engine/*.o
 
-$(EXEC) : $(OBJECTS)
-	$(LINKER) $(OBJECTS) $(CFLAGS) -o $(EXEC)
+$(EXEC) : $(OBJECTS) tinyxml
+	$(LINKER) $(OBJECTS) $(LFLAGS) -o $(EXEC)
 
 #Kompiler .cpp filer
 %.o : %.cpp
-	$(COMPILER) -c $< -o $@
+	$(COMPILER) $(CFLAGS) -c $< -o $@

@@ -7,19 +7,21 @@
 #include <iostream>
 #include <sstream>
 
-#define METERINWIDTH 8.0f
+#define METERINWIDTH 20.0f
 
 namespace z {
 
 	class Drawable;
 	class Camera;
+	class FullscreenAction;
 
-	class WindowModule : public Module, public ActionHandler {
+	class WindowModule : public Module {
 		sf::RenderWindow* window;
+		sf::WindowSettings windowSettings;
 		bool fullscreen;
 		Camera* camera;
+		FullscreenAction* fullscreenAction;
 
-		Action* fullscreenAction;
 
 		bool* pressed;
 
@@ -33,19 +35,29 @@ namespace z {
 
 		void drawFps(int f);
 
-		void handleAction(Action* a);
-		
 		void vsync(bool v);
 		void toggleFullscreen();
 		Camera* getCamera();
+		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		sf::RenderWindow* getWindow() {
+			return window;
+		}
+	};
+
+	class FullscreenAction : public Action {
+		WindowModule* wm;
+		public:
+		FullscreenAction(WindowModule* w);
+		void fire(Event* e);
+		string getName();
+		string toString();
 	};
 
 	class Drawable {
 		public:
-		virtual void draw(sf::RenderWindow* w) =0;
-
+		virtual void draw(WindowModule*, float now) =0;
 	};
 
 	static string charToString(char c);

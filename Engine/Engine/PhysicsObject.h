@@ -10,6 +10,9 @@ namespace z {
 		b2Body* body;
 		
 		b2Shape* shape;
+
+		b2Vec2 force;
+
 		float density;
 		float friction;
 		float x;
@@ -19,6 +22,9 @@ namespace z {
 		float restitution;
 		
 		public:
+
+		virtual void prePhysicsStep(float now, float timeStep);
+
 		PhysicsObject();
 		b2Body* getBody();
 		void setBody(b2Body* b);

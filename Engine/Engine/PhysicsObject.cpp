@@ -2,18 +2,17 @@
 #include <iostream>
 
 namespace z {
-	PhysicsObject::PhysicsObject() {
+	PhysicsObject::PhysicsObject() :force(0,0) {
 		body = NULL;
 		shape = NULL;
-		dynamic = false;
-		density = 0;
-		friction = 0;
+		dynamic = true;
+		density = 1;
+		friction = 0.5;
 		x = 0;
 		y = 0;
 
-		//b2PolygonShape* s = new b2PolygonShape();
-		//s->SetAsBox(10.0f,10.0f);
-		//shape = s;
+		fixedRotation = false;
+		restitution = 0;
 	}
 
 	b2Body* PhysicsObject::getBody() {
@@ -29,6 +28,7 @@ namespace z {
 
 		return bodyDef;
 	}
+
 	void PhysicsObject::setBody(b2Body* b) {
 		b2FixtureDef fix;
 		fix.shape = shape;
@@ -46,7 +46,7 @@ namespace z {
 	void PhysicsObject::impulse(float xi, float yi) {
 		b2Vec2 pos = body->GetWorldCenter();
 		b2Vec2 force;
-		force.Set(x,y);
+		force.Set(xi,yi);
 		body->ApplyLinearImpulse(force,pos);
 	}
 
@@ -60,5 +60,10 @@ namespace z {
 	/*TestObject::TestObject(float x, float y) : PhysicsObject(x,y) {
 	  std::cout << "TestObject" << std::endl;
 	  }*/
+
+	void PhysicsObject::prePhysicsStep(float now, float timeStep) {
+		//if(force.x != 0 || force.y != 0)
+		//	body->ApplyForceToCenter(force);
+	}
 
 }
