@@ -11,7 +11,7 @@
 #include "Wall.h"
 #include "EarthTest.h"
 #include "Engine/ResourceManager.h"
-#include "Map.h"
+#include "SpaceRaceMap.h"
 #include <string>
 
 using namespace std;

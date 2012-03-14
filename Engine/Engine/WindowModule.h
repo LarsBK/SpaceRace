@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
+#include "Map.h"
 #include <iostream>
 #include <sstream>
 
@@ -41,6 +42,7 @@ namespace z {
 		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		void add(Map* m);
 		sf::RenderWindow* getWindow() {
 			return window;
 		}

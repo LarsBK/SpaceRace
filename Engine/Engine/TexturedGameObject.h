@@ -14,6 +14,8 @@ namespace z {
 		public:
 		TexturedGameObject(string textureFile, ResourceManager* man) {
 			sf::Image* im = man->getImage(textureFile);
+			cout << "im: " << im << endl;
+			sf::Sleep(2);
 			resMan = man;
 			sprite = new sf::Sprite();
 			((sf::Sprite*) sprite)->SetImage(*im); //??

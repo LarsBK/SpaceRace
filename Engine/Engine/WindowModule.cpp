@@ -132,6 +132,13 @@ namespace z {
 		drawList.push_back(d);
 	}
 
+	void WindowModule::add(Map* m) {
+		vector<GameObject*>* list = m->getObjects();
+		for(unsigned i = 0; i < list->size(); i++) {
+			add((Drawable*) (*list)[i]);
+		}
+	}
+
 	float WindowModule::meterToPixel(float m) {
 		return camera->meterToPixel(m);
 	}

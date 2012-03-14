@@ -23,9 +23,10 @@ int TestState::load(Game* game) {
 	engine->addModule(box2d);
 
 	//Map
-	Map* map = new Map("TestMap.xml");
-	if(map->load()) {
-		map->spawn(box2d,window);
+	SpaceRaceMap* map = new SpaceRaceMap(engine);
+	if(map->load("TestMap.xml")) {
+		box2d->add(map);
+		window->add(map);
 	} else {
 		cout << "unable to load map" << endl;
 		return -1;
@@ -65,6 +66,6 @@ int TestState::run() {
 }
 
 void TestState::spawn(z::GameObject* g) {
-	box2d->addObject((z::PhysicsObject*) g);
+	box2d->add((z::PhysicsObject*) g);
 	window->add((z::Drawable*) g);
 }

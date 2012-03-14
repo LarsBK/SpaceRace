@@ -4,7 +4,10 @@
 namespace z
 {
 
-	Engine::Engine(string name) {
+	Engine::Engine(string name) :
+		resMan(this)
+		
+	{
 		gameName = name;
 		running = true;
 	}

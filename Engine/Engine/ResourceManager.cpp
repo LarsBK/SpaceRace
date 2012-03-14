@@ -36,3 +36,42 @@ void z::ResourceManager::unloadImage(sf::Image* im) {
 	return;
 }
 
+TiXmlDocument* z::ResourceManager::getXml(string filename) {
+	for(unsigned i = 0; i < xmlList.size(); i++) {
+		if(filename == xmlList[i]->filename) {
+			xmlList[i]->count++;
+			return xmlList[i]->t;
+		}
+	}
+
+	TiXmlDocument* doc = new TiXmlDocument(filename);
+	if(!doc->LoadFile()) {
+		cerr << "Error opening file: " << filename << " "
+			<< doc->ErrorDesc() << endl;
+		return 0;
+	}
+	
+	LoadedResource<TiXmlDocument*>* lr = new LoadedResource<TiXmlDocument*>(filename, doc);
+	xmlList.push_back(lr);
+
+	return doc;
+}
+
+void z::ResourceManager::unloadXml(TiXmlDocument* x) {
+	for(unsigned i = 0; i < xmlList.size(); i++) {
+		if( xmlList[i]->t == x) {
+			xmlList[i]->count--;
+			if(xmlList[i]->count == 0) {
+				cout << "Unloading " << xmlList[i]->filename << endl;
+			delete xmlList[i]->t;
+			delete xmlList[i];
+			xmlList.erase(xmlList.begin()+i);
+			}
+			return;
+		}
+	}
+	return;
+}
+
+
+

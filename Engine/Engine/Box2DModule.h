@@ -4,6 +4,7 @@
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include "Engine.h"
+#include "Map.h"
 #include "PhysicsObject.h"
 
 
@@ -22,7 +23,8 @@ namespace z {
 		Box2DModule(Engine* e, int fps, b2Vec2 gravity, bool allowSleep);
 		~Box2DModule();
 		void onPhysics(float now);
-		void addObject(PhysicsObject* o);
+		void add(Map* m);
+		void add(PhysicsObject* o);
 		b2World* getWorld();
 
 		private:

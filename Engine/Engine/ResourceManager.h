@@ -9,6 +9,8 @@
 using namespace std;
 
 namespace z {
+
+	class Engine;
 	
 	template <class T>
 	class LoadedResource {
@@ -27,11 +29,19 @@ namespace z {
 
 	class ResourceManager {
 
+		Engine* engine;
+
 		vector<LoadedResource<sf::Image*>*> imageList;
 		vector<LoadedResource<TiXmlDocument*>*>	xmlList;
 
 		public:
+		ResourceManager(Engine* e) {
+			engine = e;
+		}
+
 		sf::Image* getImage(string filename);
+		TiXmlDocument* getXml(string filename);
+		void unloadXml(TiXmlDocument* x);
 		void unloadImage(string filename);
 		void unloadImage(sf::Image* im);
 

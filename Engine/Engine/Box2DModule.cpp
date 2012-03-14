@@ -22,11 +22,18 @@ namespace z {
 		delete world;
 	}
 
-	void Box2DModule::addObject(PhysicsObject* o) {
+	void Box2DModule::add(PhysicsObject* o) {
 		b2BodyDef def = o->getBodyDef();
 		b2Body* b = world->CreateBody(&def);
 		o->setBody(b);
 		list.push_back(o);
+	}
+
+	void Box2DModule::add(Map* m) {
+		vector<GameObject*>* list = m->getObjects();
+		for(unsigned i = 0; i < list->size(); i++) {
+			add((PhysicsObject*) (*list)[i]);
+		}
 	}
 
 	b2World* Box2DModule::getWorld() {
