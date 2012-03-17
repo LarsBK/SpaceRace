@@ -17,7 +17,7 @@ namespace z {
 
 	class WindowModule : public Module {
 		sf::RenderWindow* window;
-		sf::WindowSettings windowSettings;
+		sf::ContextSettings windowSettings;
 		bool fullscreen;
 		Camera* camera;
 		FullscreenAction* fullscreenAction;

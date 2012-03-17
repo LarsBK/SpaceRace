@@ -6,14 +6,14 @@ namespace z {
 		name = "WindowModule";
 		fullscreen = false;
 
-		windowSettings.AntialiasingLevel = 8;
+		windowSettings.antialiasingLevel = 8;
 
 		if(fullscreen)
-			window = new sf::RenderWindow(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
+			window = new sf::RenderWindow(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		else
 			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
 
-		window->UseVerticalSync(true);
+		window->useVerticalSync(true);
 		camera = new Camera(window, e);
 		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
 
@@ -25,7 +25,7 @@ namespace z {
 	}
 
 	void WindowModule::vsync(bool v) {
-		window->UseVerticalSync(v);
+		window->useVerticalSync(v);
 	}
 
 	WindowModule::~WindowModule() {
@@ -45,30 +45,30 @@ namespace z {
 
 		if(fullscreen) {
 			std::cout << "Entering fullscreen" << std::endl;
-			window->Create(sf::VideoMode::GetMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
+			window->create(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		} else {
 			std::cout << "Leaving fullscreen" << std::endl;
-			window->Create(sf::VideoMode(720,480,32), engine->getName(),
+			window->create(sf::VideoMode(720,480,32), engine->getName(),
 				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
 
-		camera->setWindowSize(window->GetWidth(), window->GetHeight());
+		camera->setWindowSize(window->getWidth(), window->getHeight());
 	}
 
 	void WindowModule::update(float time) {
 		sf::Event event;
 		Event* e;
-		while(window->GetEvent(event)) {
+		while(window->getEvent(event)) {
 			string s;
 			s.append("keyboard_");
-			if (event.Type == sf::Event::Closed) 
+			if (event.type == sf::Event::Closed) 
 				engine->quit("User quit");
-			else if (event.Type == sf::Event::Resized) {
+			else if (event.type == sf::Event::Resized) {
 				//fix here
-				camera->setWindowSize(event.Size.Width, event.Size.Height);
+				camera->setWindowSize(event.size.width, event.size.height);
 
 				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
-			} else if (event.Type == sf::Event::MouseMoved) {
+			} else if (event.type == sf::Event::MouseMoved) {
 
 			} else if (event.Type == sf::Event::KeyReleased) {
 				char c = event.Text.Unicode;

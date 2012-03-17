@@ -13,10 +13,10 @@ namespace z {
 
 		public:
 		TexturedGameObject(string textureFile, ResourceManager* man) {
-			sf::Image* im = man->getImage(textureFile);
+			sf::Texture* im = man->getTexture(textureFile);
 			resMan = man;
 			sprite = new sf::Sprite();
-			((sf::Sprite*) sprite)->SetImage(*im); //??
+			((sf::Sprite*) sprite)->setImage(*im); //??
 		}
 /*
 		~TexturedGameObject() {
@@ -26,11 +26,11 @@ namespace z {
 */
 
 		virtual unsigned int spriteHeight(){
-			return ((sf::Sprite*) sprite)->GetImage()->GetHeight();
+			return ((sf::Sprite*) sprite)->getImage()->getHeight();
 		}
 		
 		virtual unsigned int spriteWidth() {
-			return ((sf::Sprite*) sprite)->GetImage()->GetWidth();
+			return ((sf::Sprite*) sprite)->getImage()->getWidth();
 		}
 
 		
