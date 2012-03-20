@@ -8,7 +8,6 @@
 #include "Engine/WindowModule.h"
 #include "Engine/GameObject.h"
 #include "RandomObject.h"
-#include "Wall.h"
 #include "EarthTest.h"
 #include "Engine/ResourceManager.h"
 #include "Map.h"

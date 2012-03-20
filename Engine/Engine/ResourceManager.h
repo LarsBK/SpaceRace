@@ -11,13 +11,12 @@ namespace z {
 
 	class LoadedResource {
 		public:
-		sf::Image* im;
+		sf::Texture im;
 		string filename;
 
 		unsigned int count;
 
-		LoadedResource(string f, sf::Image* i) {
-			im = i;
+		LoadedResource(string f) {
 			filename = f;
 		}
 	};
@@ -27,9 +26,9 @@ namespace z {
 		vector<LoadedResource*> list;
 
 		public:
-		sf::Image* getImage(string filename);
-		void unloadImage(string filename);
-		void unloadImage(sf::Image* im);
+		sf::Texture* getTexture(string filename);
+		void unloadTexture(string filename);
+		void unloadTexture(sf::Texture* im);
 
 	};
 

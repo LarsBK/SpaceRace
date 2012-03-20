@@ -10,7 +10,7 @@ namespace z {
 	class GameObject : protected PhysicsObject, protected Drawable {
 		
 		protected:
-		sf::Drawable* sprite;
+		sf::Transformable* sprite;
 
 		//These are used to scale the sprite
 		virtual unsigned int spriteHeight()=0;

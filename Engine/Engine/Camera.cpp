@@ -36,10 +36,9 @@ namespace z {
 			md(this,0,8,"down") {
 		f = 0;
 		sf::Vector2f center(0,0);
-		sf::Vector2f halfSize(w->GetWidth(), w->GetHeight());
-		view = new sf::View(center, halfSize);
-		ppm = halfSize.x/METERINWIDTH;
-		view->Zoom(0.2);
+		view = new sf::View(center, sf::Vector2<float>(w->getSize()));
+		ppm = w->getSize().x/METERINWIDTH;
+		view->zoom(0.2);
 
 		xSpeed = 0;
 		ySpeed = 0;
@@ -69,15 +68,15 @@ namespace z {
 			b2Vec2 vec = f->getBody()->GetPosition();
 			float x = meterToPixel(vec.x);
 			float y = meterToPixel(vec.y);
-			view->SetCenter(x, y);
+			view->setCenter(x, y);
 			
 		} else {
-			view->Move(xSpeed*lastMove.GetElapsedTime(), ySpeed*lastMove.GetElapsedTime());
-			lastMove.Reset();
+			view->move(xSpeed*lastMove.getElapsedTime().asSeconds(), ySpeed*lastMove.getElapsedTime().asSeconds());
+			lastMove.restart();
 			
 			if(zoomFactor != 0) {
-				view->Zoom(1.0f + zoomFactor*lastZoom.GetElapsedTime()); //lastZoomFactor);
-				lastZoom.Reset();
+				view->zoom(1.0f + zoomFactor*lastZoom.getElapsedTime().asSeconds()); //lastZoomFactor);
+				lastZoom.restart();
 			}
 		}
 
@@ -88,20 +87,20 @@ namespace z {
 		return m*ppm;
 	}
 
-	void Camera::setWindowSize(int w, int h) {
-		view->SetHalfSize(w/2.0f, h/2.0f);
-		ppm = w/METERINWIDTH;
+	void Camera::setWindowSize(sf::Vector2u size) {
+		view->setSize(sf::Vector2f(size));
+		ppm = size.x/METERINWIDTH;
 	}
 
 	void Camera::zoom(float f) {
 		zoomFactor = f;
-		lastZoom.Reset();
+		lastZoom.restart();
 	}
 
 	void Camera::setSpeed(float x, float y) {
 		xSpeed += meterToPixel(x);
 		ySpeed += meterToPixel(y);
-		lastMove.Reset();
+		lastMove.restart();
 	}
 
 /*

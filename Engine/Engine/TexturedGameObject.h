@@ -16,7 +16,7 @@ namespace z {
 			sf::Texture* im = man->getTexture(textureFile);
 			resMan = man;
 			sprite = new sf::Sprite();
-			((sf::Sprite*) sprite)->setImage(*im); //??
+			((sf::Sprite*) sprite)->setTexture(*im); //??
 		}
 /*
 		~TexturedGameObject() {
@@ -26,11 +26,11 @@ namespace z {
 */
 
 		virtual unsigned int spriteHeight(){
-			return ((sf::Sprite*) sprite)->getImage()->getHeight();
+			return ((sf::Sprite*) sprite)->getTexture()->getHeight();
 		}
 		
 		virtual unsigned int spriteWidth() {
-			return ((sf::Sprite*) sprite)->getImage()->getWidth();
+			return ((sf::Sprite*) sprite)->getTexture()->getWidth();
 		}
 
 		

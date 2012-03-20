@@ -1,5 +1,4 @@
 #include "SpaceRace.h"
-#include "BenchmarkState.h"
 #include "TestState.h"
 
 string SpaceRace::getName() {

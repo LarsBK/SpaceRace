@@ -23,12 +23,12 @@ namespace z {
 				float scaleH = wm->meterToPixel(shapeHeight())
 					/ (float) spriteHeight();
 
-				sprite->SetCenter(spriteWidth()/2.0f, spriteHeight()/2.0f);
-				sprite->SetScale(scaleW, scaleH);
-				sprite->SetRotation( -rot * (180/3.14));
-				sprite->SetPosition(wm->meterToPixel(vec.x),
+				sprite->setOrigin(spriteWidth()/2.0f, spriteHeight()/2.0f);
+				sprite->setScale(scaleW, scaleH);
+				sprite->setRotation( -rot * (180/3.14));
+				sprite->setPosition(wm->meterToPixel(vec.x),
 					wm->meterToPixel(vec.y));
-				w->Draw(*sprite);
+				w->draw(*((sf::Drawable*) sprite));
 			}
 		}
 	}

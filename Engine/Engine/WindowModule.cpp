@@ -4,33 +4,34 @@ namespace z {
 
 	WindowModule::WindowModule(Engine* e) : Module(e) {
 		name = "WindowModule";
-		fullscreen = false;
+		fullscreen = true; //Flipped
 
 		windowSettings.antialiasingLevel = 8;
-
+/*
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		else
 			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
-
-		window->useVerticalSync(true);
-		camera = new Camera(window, e);
-		//camera->setWindowSize(window->GetWidth(), window->GetHeight());
+*/
+		vsync(true);
+		camera = new Camera(&window, e);
+		toggleFullscreen();
+		//camera->setWindowSize(window.GetWidth(), window.GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
 		engine->addAction( fullscreenAction);
 		engine->bind("keyboard_f", fullscreenAction->toString());
 
-		pressed = new bool[sf::Key::Count];
+		pressed = new bool[sf::Keyboard::KeyCount];
 	}
 
 	void WindowModule::vsync(bool v) {
-		window->useVerticalSync(v);
+		window.setVerticalSyncEnabled(v);
 	}
 
 	WindowModule::~WindowModule() {
 		delete[] pressed;
-		delete window;
+		//delete window;
 		delete fullscreenAction;
 	}
 /*
@@ -45,20 +46,20 @@ namespace z {
 
 		if(fullscreen) {
 			std::cout << "Entering fullscreen" << std::endl;
-			window->create(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
+			window.create(sf::VideoMode::getDesktopMode(), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		} else {
 			std::cout << "Leaving fullscreen" << std::endl;
-			window->create(sf::VideoMode(720,480,32), engine->getName(),
+			window.create(sf::VideoMode(720,480,32), engine->getName(),
 				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
 
-		camera->setWindowSize(window->getWidth(), window->getHeight());
+		camera->setWindowSize(window.getSize());
 	}
 
 	void WindowModule::update(float time) {
 		sf::Event event;
 		Event* e;
-		while(window->getEvent(event)) {
+		while(window.pollEvent(event)) {
 			string s;
 			s.append("keyboard_");
 			if (event.type == sf::Event::Closed) 
@@ -67,7 +68,7 @@ namespace z {
 				//fix here
 				camera->setWindowSize(event.size.width, event.size.height);
 
-				//window->GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
+				//window.GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
 			} else if (event.type == sf::Event::MouseMoved) {
 
 			} else if (event.Type == sf::Event::KeyReleased) {
@@ -93,9 +94,9 @@ namespace z {
 	}
 
 	void WindowModule::onDraw(float time) {
-		window->Clear();
+		window.clear();
 
-		window->SetView(*(camera->getView()));
+		window.setView(*(camera->getView()));
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(this);
@@ -105,12 +106,12 @@ namespace z {
 			hudList[i]->draw(window);
 		}
 */
-		window->SetView(window->GetDefaultView());
+		window.setView(window.getDefaultView());
 
-		int fps = 1.0f/window->GetFrameTime();
+		int fps = 1.0f/window.getFrameTime().asSeconds();
 		engine->setFPS(fps);
 		drawFps(fps);
-		window->Display();
+		window.display();
 	}
 
 	void WindowModule::drawFps(int f) {
@@ -120,15 +121,15 @@ namespace z {
 		ss >> fpsstring;
 
 		sf::String string;
-		string.SetText(fpsstring + " FPS");
+		string.setText(fpsstring + " FPS");
 		if (f >= 50)
-			string.SetColor(sf::Color::Green);
+			string.setColor(sf::Color::Green);
 		else if (f >= 30)
-			string.SetColor(sf::Color::Yellow);
+			string.setColor(sf::Color::Yellow);
 		else
-			string.SetColor(sf::Color::Red);
+			string.setColor(sf::Color::Red);
 
-		window->Draw(string);
+		window.draw(string);
 	}
 
 	void WindowModule::add(Drawable* d) {

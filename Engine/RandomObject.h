@@ -4,10 +4,10 @@
 
 #include "Engine/GameObject.h"
 #include <SFML/System.hpp>
+#include <time.h>
 
 class RandomObject : public z::GameObject {
 
-	sf::Shape spr;
 	float randomSize;
 	public:
 	RandomObject(float xi, float yi);

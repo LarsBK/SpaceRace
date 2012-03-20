@@ -72,7 +72,7 @@ namespace z {
 		Camera(sf::Window* w, Engine* e);
 		~Camera();
 		sf::View* getView();
-		void setWindowSize(int w, int h);
+		void setWindowSize(sf::Vector2u size);
 		void follow(PhysicsObject* g);
 		float meterToPixel(float m);
 		void zoom(float f);
