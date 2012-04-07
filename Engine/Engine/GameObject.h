@@ -7,10 +7,14 @@
 
 namespace z {
 
+	class TransformableDrawable : public sf::Drawable, public sf::Transformable {
+
+	};
+
 	class GameObject : protected PhysicsObject, protected Drawable {
 		
 		protected:
-		sf::Transformable* sprite;
+		TransformableDrawable* sprite;
 
 		//These are used to scale the sprite
 		virtual unsigned int spriteHeight()=0;

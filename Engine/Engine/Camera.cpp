@@ -42,6 +42,7 @@ namespace z {
 
 		xSpeed = 0;
 		ySpeed = 0;
+		zoomFactor = 0;
 
 		e->addAction((Action*) &zo);
 		e->addAction((Action*) &zi);

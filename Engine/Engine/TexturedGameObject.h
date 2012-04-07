@@ -15,7 +15,7 @@ namespace z {
 		TexturedGameObject(string textureFile, ResourceManager* man) {
 			sf::Texture* im = man->getTexture(textureFile);
 			resMan = man;
-			sprite = new sf::Sprite();
+			sprite = (TransformableDrawable*) new sf::Sprite();
 			((sf::Sprite*) sprite)->setTexture(*im); //??
 		}
 /*

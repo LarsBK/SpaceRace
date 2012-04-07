@@ -28,6 +28,7 @@ namespace z {
 				sprite->setRotation( -rot * (180/3.14));
 				sprite->setPosition(wm->meterToPixel(vec.x),
 					wm->meterToPixel(vec.y));
+				
 				w->draw(*((sf::Drawable*) sprite));
 			}
 		}

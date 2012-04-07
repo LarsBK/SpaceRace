@@ -17,12 +17,12 @@ RandomObject::RandomObject(float xi, float yi) {
 	if(randomShape) {
 		shape = (b2Shape*) new b2CircleShape();
 		shape-> m_radius = randomSize/2.0f;
-		sprite = new sf::CircleShape();
+		sprite = (z::TransformableDrawable*) new sf::CircleShape();
 	} else {
 		sf::Vector2f sizevec(randomSize*10, randomSize*10);
 		shape = (b2Shape*) new b2PolygonShape();
 		((b2PolygonShape*) shape)->SetAsBox(randomSize/2.0f, randomSize/2.0f);
-		sprite = new sf::RectangleShape(sizevec);
+		sprite = (z::TransformableDrawable*) new sf::RectangleShape(sizevec);
 		//, sf::Color(red,green,blue));
 	}
 

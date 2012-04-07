@@ -35,7 +35,8 @@ namespace z {
 		void drawFps(int f);
 
 		void vsync(bool v);
-		void toggleFullscreen();
+		void setFullscreen(bool f);
+		bool isFullscreen();
 		Camera* getCamera();
 		float meterToPixel(float m);
 

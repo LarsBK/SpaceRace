@@ -13,6 +13,7 @@ bool Map::load() {
 	TiXmlElement* current = doc.RootElement();
 	string name;
 	current->QueryStringAttribute("name", &name);
-	cout << "name: " << current->GetText() << endl;
+	cout << "name: " << name << endl;
+	return true;
 }
 

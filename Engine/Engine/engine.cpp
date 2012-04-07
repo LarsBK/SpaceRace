@@ -39,9 +39,9 @@ namespace z
 	}
 
 	void Engine::run() {
-		frameTime.Reset();
+		frameTime.restart();
 		running = true;
-		clock.Reset();
+		clock.restart();
 		while(running) { 
 			cycle();
 		}
@@ -68,7 +68,7 @@ namespace z
 	}
 
 	void Engine::update() {	
-		float pTime = clock.GetElapsedTime();
+		float pTime = clock.getElapsedTime().asSeconds();
 
 		for (unsigned int i = 0; i < updateList.size(); i++) {
 			updateList[i]->update(pTime);//delta);
@@ -76,7 +76,7 @@ namespace z
 	}
 
 	void Engine::physics() {
-		float pTime = clock.GetElapsedTime();
+		float pTime = clock.getElapsedTime().asSeconds();
 
 		for (unsigned int i = 0; i < physicsList.size(); i++) {
 			physicsList[i]->onPhysics(pTime);//delta);
@@ -85,7 +85,7 @@ namespace z
 
 	void Engine::draw() {
 		needsDraw = false;
-		float pTime = clock.GetElapsedTime();
+		float pTime = clock.getElapsedTime().asSeconds();
 		for (unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->onDraw(pTime);//delta);
 		}
@@ -96,7 +96,7 @@ namespace z
 	}
 
 	float Engine::getTime() {
-	  return clock.GetElapsedTime();
+	  return clock.getElapsedTime().asSeconds();
 	}
 
 	unsigned int Engine::getFPS() {

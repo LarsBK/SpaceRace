@@ -2,11 +2,10 @@
 
 namespace z {
 
-	WindowModule::WindowModule(Engine* e) : Module(e) {
+	WindowModule::WindowModule(Engine* e) : Module(e), window() {
 		name = "WindowModule";
-		fullscreen = true; //Flipped
 
-		windowSettings.antialiasingLevel = 8;
+		//windowSettings.antialiasingLevel = 8;
 /*
 		if(fullscreen)
 			window = new sf::RenderWindow(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
@@ -15,7 +14,7 @@ namespace z {
 */
 		vsync(true);
 		camera = new Camera(&window, e);
-		toggleFullscreen();
+		setFullscreen(false);
 		//camera->setWindowSize(window.GetWidth(), window.GetHeight());
 
 		fullscreenAction = new FullscreenAction(this);
@@ -41,14 +40,14 @@ namespace z {
 		}
 	}
 */
-	void WindowModule::toggleFullscreen() {
-		fullscreen = !fullscreen;
-
+	
+	void WindowModule::setFullscreen(bool f) {
+		fullscreen = f;
 		if(fullscreen) {
-			std::cout << "Entering fullscreen" << std::endl;
+			std::cout << "Fullscreen" << std::endl;
 			window.create(sf::VideoMode::getDesktopMode(), engine->getName(), sf::Style::Fullscreen, windowSettings);
 		} else {
-			std::cout << "Leaving fullscreen" << std::endl;
+			std::cout << "Windowmode" << std::endl;
 			window.create(sf::VideoMode(720,480,32), engine->getName(),
 				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
@@ -60,34 +59,38 @@ namespace z {
 		sf::Event event;
 		Event* e;
 		while(window.pollEvent(event)) {
+			cout << "event" << endl;
 			string s;
 			s.append("keyboard_");
 			if (event.type == sf::Event::Closed) 
 				engine->quit("User quit");
 			else if (event.type == sf::Event::Resized) {
 				//fix here
-				camera->setWindowSize(event.size.width, event.size.height);
-
-				//window.GetView().SetHalfSize(event.Size.Width/2.0f, event.Size.Height/2.0f);
+				sf::Vector2u size(event.size.width, event.size.height);
+				camera->setWindowSize(size);
 			} else if (event.type == sf::Event::MouseMoved) {
 
-			} else if (event.Type == sf::Event::KeyReleased) {
-				char c = event.Text.Unicode;
+			} else if (event.type == sf::Event::KeyReleased) {
+				cout << "released" << (char) event.text.unicode << endl;
+				char c = event.text.unicode;
 				s.append(charToString(c));
-				pressed[event.Key.Code] = false;
+				pressed[event.key.code] = false;
 				e = new Event(s);
 				e->state = Event::STOPPED;
 				engine->event(e);
-			} else if (event.Type == sf::Event::KeyPressed) {
-				char c = event.Text.Unicode;
+			} else if (event.type == sf::Event::KeyPressed) {
+				cout << "pressed" << (char) event.text.unicode << endl;
+				char c = event.text.unicode;
 				s.append(charToString(c));
-				if(!pressed[event.Key.Code]) {
-					pressed[event.Key.Code] = true;
+				if(!pressed[event.key.code]) {
+					pressed[event.key.code] = true;
 					e = new Event(s);
 					e->state = Event::STARTED;
 					engine->event(e);
 					delete e;
 				}
+			} else if (event.type == sf::Event::TextEntered) {
+				cout << "text " << (char) event.text.unicode << endl;
 			}
 
 		}
@@ -107,13 +110,14 @@ namespace z {
 		}
 */
 		window.setView(window.getDefaultView());
-
+/*
 		int fps = 1.0f/window.getFrameTime().asSeconds();
 		engine->setFPS(fps);
 		drawFps(fps);
+*/
 		window.display();
 	}
-
+/*
 	void WindowModule::drawFps(int f) {
 		std::stringstream ss;
 		std::string fpsstring;
@@ -131,9 +135,13 @@ namespace z {
 
 		window.draw(string);
 	}
-
+*/
 	void WindowModule::add(Drawable* d) {
 		drawList.push_back(d);
+	}
+
+	bool WindowModule::isFullscreen() {
+		return fullscreen;
 	}
 
 	float WindowModule::meterToPixel(float m) {
@@ -151,7 +159,7 @@ namespace z {
 
 	void FullscreenAction::fire(Event* e) {
 		if(e->state == Event::STARTED) {
-			wm->toggleFullscreen();
+			wm->setFullscreen(!wm->isFullscreen());
 		}
 	}
 
