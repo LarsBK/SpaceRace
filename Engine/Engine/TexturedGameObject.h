@@ -10,13 +10,15 @@ namespace z {
 	class TexturedGameObject : protected GameObject {
 		
 		ResourceManager* resMan;
+		protected:
+		sf::Sprite* sprite;
 
 		public:
 		TexturedGameObject(string textureFile, ResourceManager* man) {
 			sf::Texture* im = man->getTexture(textureFile);
 			resMan = man;
-			sprite = (TransformableDrawable*) new sf::Sprite();
-			((sf::Sprite*) sprite)->setTexture(*im); //??
+			sprite = new sf::Sprite();
+			sprite->setTexture(*im); //??
 		}
 /*
 		~TexturedGameObject() {

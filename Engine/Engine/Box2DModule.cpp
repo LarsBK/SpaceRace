@@ -22,11 +22,18 @@ namespace z {
 		delete world;
 	}
 
-	void Box2DModule::addObject(PhysicsObject* o) {
+	void Box2DModule::add(PhysicsObject* o) {
 		b2BodyDef def = o->getBodyDef();
 		b2Body* b = world->CreateBody(&def);
 		o->setBody(b);
 		list.push_back(o);
+	}
+
+	void Box2DModule::add(Map* m) {
+		vector<GameObject*>* list = m->getObjects();
+		for(unsigned i = 0; i < list->size(); i++) {
+			add((PhysicsObject*) (*list)[i]);
+		}
 	}
 
 	b2World* Box2DModule::getWorld() {
@@ -44,8 +51,10 @@ namespace z {
 
 		while(lastTime+timeStep <= engine->getTime()) {
 
+			float acc = (engine->getTime() - (lastTime+timeStep))/timeStep;
+
 			for(unsigned x = 0; x < list.size(); x++) {
-				list[x]->onPhysicsStep();
+				list[x]->prePhysicsStep(lastTime, timeStep);
 			}
 
 			world->Step(timeStep, velocityIterations, positionIterations);
@@ -54,10 +63,12 @@ namespace z {
 			if(i % 120 == 0) {
 				std::cout << "WARNING: physics fell 120 steps behind, fast-forwarding. Please report this as a bug." << std::endl;
 				float ff;
+				unsigned x = 1;
 				do {
 					ff = engine->getTime() - lastTime;
-					world->Step(ff,	velocityIterations, positionIterations);
+					world->Step(ff*x,	velocityIterations, positionIterations);
 					lastTime+=ff;
+					x++;
 				} while(lastTime+timeStep < engine->getTime());
 
 			}
@@ -72,7 +83,7 @@ namespace z {
 			*/
 			
 			//if(i>0)
-				engine->needToDraw();
+				//engine->needToDraw();
 		}
 		
 	}

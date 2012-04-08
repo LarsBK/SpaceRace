@@ -16,9 +16,9 @@ SpaceRace::SpaceRace() {
 	window = new z::WindowModule(engine);
 	engine->addModule(window);
 	
-	//push(new BenchmarkState(engine, window));
 	//push(new InGameState(engine, window));
 	push(new TestState(engine, window));
+	//push(new BenchmarkState(engine, window));
 }
 
 SpaceRace::~SpaceRace() {

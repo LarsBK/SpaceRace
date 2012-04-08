@@ -28,17 +28,18 @@ namespace z {
 
 //Camera
 	Camera::Camera(sf::Window* w, Engine* e) :
-			zo(this,0.9,"out"),
-			zi(this,-0.9,"in"),
-			ml(this,-8,0,"left"),
-			mr(this,8,0,"right"),
-			mu(this,0,-8,"up"),
-			md(this,0,8,"down") {
+			zo(this,1,"out"),
+			zi(this,-1,"in"),
+			ml(this,-5,0,"left"),
+			mr(this,5,0,"right"),
+			mu(this,0,-5,"up"),
+			md(this,0,5,"down") {
 		f = 0;
 		sf::Vector2f center(0,0);
 		view = new sf::View(center, sf::Vector2<float>(w->getSize()));
 		ppm = w->getSize().x/METERINWIDTH;
 		view->zoom(0.2);
+
 
 		xSpeed = 0;
 		ySpeed = 0;
@@ -72,6 +73,7 @@ namespace z {
 			view->setCenter(x, y);
 			
 		} else {
+			//float scale = (view->GetHalfSize().x * 2);
 			view->move(xSpeed*lastMove.getElapsedTime().asSeconds(), ySpeed*lastMove.getElapsedTime().asSeconds());
 			lastMove.restart();
 			

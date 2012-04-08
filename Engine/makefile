@@ -8,10 +8,11 @@
 
 	
 UNAME = $(shell uname)
-EXECFILE = ./stage3-$(UNAME)
-EXEC = ../build/$(EXECFILE)
+BUILDDIR = ../build/
+EXECNAME = stage3-$(UNAME)
+EXEC = $(BUILDDIR)$(EXECNAME)
 
-TINYXMLSRC = tinyxml/tinystr.cpp tinyxml/tinyxml.cpp tinyxml/tinyxmlerror.cpp tinyxml/tinyxmlparser.cpp
+TINYXMLSRC = Engine/tinyxml/tinystr.cpp Engine/tinyxml/tinyxml.cpp Engine/tinyxml/tinyxmlerror.cpp Engine/tinyxml/tinyxmlparser.cpp
 TINYXMLOBJ =  $(TINYXMLSRC:.cpp=.o)
 
 SOURCES = $(wildcard *.cpp) $(wildcard Engine/*.cpp)
@@ -23,6 +24,7 @@ REMOVE := rm
 LFLAGS := -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
 CFLAGS = -DTIXML_USE_STL
 
+TOREMOVE = $(OBJECTS)
 
 ifeq ($(UNAME),Darwin)
 	LFLAGS := -framework sfml-system -framework sfml-window -framework sfml-graphics -lBox2D
@@ -37,7 +39,8 @@ ifeq ($(UNAME),Windows)
 	LFLAGS += -static-libgcc -static-libstdc++
 	#COMPILER := g++ #-m32
 	#LFLAGS := -m32 -static -lsfml-system -lsfml-window -lsfml-graphics -lBox2D
-	REMOVE := del
+	REMOVE := cmd /C del
+	TOREMOVE = $(subst /,\,${OBJECTS})
 endif
 
 #ALL
@@ -54,7 +57,7 @@ release : $(EXEC)
 
 #Kjør
 run: debug
-	cd ../build/ && $(EXECFILE)
+	cd $(BUILDDIR); ./$(EXECNAME)
 
 #TinyXML
 tinyxml : $(TINYXMLOBJ)
@@ -64,7 +67,7 @@ doxygen : $(SOURCES)
 	cd Engine; doxygen
 
 clean :
-	$(REMOVE) $(EXEC) $(OBJECTS)
+	$(REMOVE) $(TOREMOVE)
 	#$(REMOVE) *.o Engine/*.o
 
 $(EXEC) : $(OBJECTS) tinyxml

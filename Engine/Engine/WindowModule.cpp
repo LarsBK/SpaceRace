@@ -5,13 +5,6 @@ namespace z {
 	WindowModule::WindowModule(Engine* e) : Module(e), window() {
 		name = "WindowModule";
 
-		//windowSettings.antialiasingLevel = 8;
-/*
-		if(fullscreen)
-			window = new sf::RenderWindow(sf::VideoMode::getMode(0), engine->getName(), sf::Style::Fullscreen, windowSettings);
-		else
-			window = new sf::RenderWindow(sf::VideoMode(1024,576,32), engine->getName(), sf::Style::Close|sf::Style::Resize, windowSettings);
-*/
 		vsync(true);
 		camera = new Camera(&window, e);
 		setFullscreen(false);
@@ -59,7 +52,6 @@ namespace z {
 		sf::Event event;
 		Event* e;
 		while(window.pollEvent(event)) {
-			cout << "event" << endl;
 			string s;
 			s.append("keyboard_");
 			if (event.type == sf::Event::Closed) 
@@ -71,17 +63,14 @@ namespace z {
 			} else if (event.type == sf::Event::MouseMoved) {
 
 			} else if (event.type == sf::Event::KeyReleased) {
-				cout << "released" << (char) event.text.unicode << endl;
-				char c = event.text.unicode;
-				s.append(charToString(c));
+				s.append(keyToString(event.key.code));
 				pressed[event.key.code] = false;
 				e = new Event(s);
 				e->state = Event::STOPPED;
 				engine->event(e);
+				delete e;
 			} else if (event.type == sf::Event::KeyPressed) {
-				cout << "pressed" << (char) event.text.unicode << endl;
-				char c = event.text.unicode;
-				s.append(charToString(c));
+				s.append(keyToString(event.key.code));
 				if(!pressed[event.key.code]) {
 					pressed[event.key.code] = true;
 					e = new Event(s);
@@ -90,7 +79,6 @@ namespace z {
 					delete e;
 				}
 			} else if (event.type == sf::Event::TextEntered) {
-				cout << "text " << (char) event.text.unicode << endl;
 			}
 
 		}
@@ -98,18 +86,17 @@ namespace z {
 
 	void WindowModule::onDraw(float time) {
 		window.clear();
-
 		window.setView(*(camera->getView()));
 
 		for(unsigned int i = 0; i < drawList.size(); i++) {
-			drawList[i]->draw(this);
+			drawList[i]->draw(this,time);
 		}
+		window.setView(window.getDefaultView());
 /*
 		for(unsigned int i = 0; i < hudList.size(); i++) {
 			hudList[i]->draw(window);
 		}
 */
-		window.setView(window.getDefaultView());
 /*
 		int fps = 1.0f/window.getFrameTime().asSeconds();
 		engine->setFPS(fps);
@@ -143,11 +130,17 @@ namespace z {
 	bool WindowModule::isFullscreen() {
 		return fullscreen;
 	}
+	
+	void WindowModule::add(Map* m) {
+		vector<GameObject*>* list = m->getObjects();
+		for(unsigned i = 0; i < list->size(); i++) {
+			add((Drawable*) (*list)[i]);
+		}
+	}
 
 	float WindowModule::meterToPixel(float m) {
 		return camera->meterToPixel(m);
 	}
-	
 
 	Camera* WindowModule::getCamera() {
 		return camera;
@@ -171,9 +164,13 @@ namespace z {
 		return "fullscreen";
 	}
 
-	static string charToString(char c) {
+	static string keyToString(sf::Keyboard::Key k) {
 		stringstream ss;
-		ss << c;
+		int c = k +	'a';
+		if(c >= 0 && c <= 'z')
+			ss << (char) c;
+		else
+			ss << "code_" << c;
 		return ss.str();
 	}
 

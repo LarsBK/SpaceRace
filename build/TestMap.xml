@@ -5,7 +5,23 @@
 
 	<planet>
 		<name>Earth</name>
-		<x>0.0f</x>
+		<x>100.0f</x>
 		<y>0.0f</y>
+		<radius>64</radius>
+		<density>5.515</density>
+		<texture>Earth.png</texture>
+	</planet>
+	<planet>
+		<name>LunaDynamic</name>
+		<dynamic>true</dynamic>
+		<xSpeed>0</xSpeed>
+		<ySpeed>25</ySpeed>
+		<x>-104</x>
+		<y>-100.0f</y>
+		<radius>17</radius>
+		<!-- tetthet er oppgitt i ekte tetthet / 1000 -->
+		<density>3.3</density>
+		<texture>Moon_2.png</texture>
 	</planet>
 </map>
+

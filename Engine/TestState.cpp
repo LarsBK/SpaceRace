@@ -15,31 +15,38 @@ int TestState::load(Game* game) {
 	//spawn(new Wall(0,0,200,1));
 	//spawn(new Wall(-100,-100,1,200));
 	//spawn(new Wall(100,-100,1,200));
-	z::GameObject* go = new RandomObject(0,-100);
+	//z::GameObject* go = new RandomObject(0,-100);
 	//window->getCamera()->follow((z::PhysicsObject*) go);
-	spawn(go);
+	//spawn(go);
 
-	Map* map = new Map("TestMap.xml");
-	map->load();
-	//delete map;
-
-	z::ResourceManager* man = new z::ResourceManager();
+	//z::ResourceManager* man = new z::ResourceManager();
 	engine->addModule(box2d);
-	spawn((GameObject*) new EarthTest(man,120,100));
-	//spawn((GameObject*) new EarthTest(man,300,500));
-	engine->cycle();
 
+	//Map
+	SpaceRaceMap* map = new SpaceRaceMap(engine);
+	if(map->load("TestMap.xml")) {
+		box2d->add(map);
+		window->add(map);
+	} else {
+		cout << "unable to load map" << endl;
+		return -1;
+	}
+
+	cout << "Spawning...";
+	
+//	srand(time(NULL));
 	for(unsigned int x = 0; x < 60; x++) {
 		float z = -100.0f*(x+1.0f);
 
 		for(unsigned int i = 0; i < 10; i++) {
-			spawn(new RandomObject(0,z)); //-200)); //*(x+1)));
+			spawn(new RandomObject(0,z)); 
 		}
 
-		engine->cycle();
+		//engine->cycle();
 	}
-
+	
 	engine->cycle();
+	cout << " done!" << endl;
 	return 0;
 }
 
@@ -53,6 +60,6 @@ int TestState::run() {
 }
 
 void TestState::spawn(z::GameObject* g) {
-	box2d->addObject((z::PhysicsObject*) g);
+	box2d->add((z::PhysicsObject*) g);
 	window->add((z::Drawable*) g);
 }

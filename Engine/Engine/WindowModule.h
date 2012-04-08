@@ -4,10 +4,11 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
+#include "Map.h"
 #include <iostream>
 #include <sstream>
 
-#define METERINWIDTH 8.0f
+#define METERINWIDTH 20.0f
 
 namespace z {
 
@@ -21,6 +22,7 @@ namespace z {
 		bool fullscreen;
 		Camera* camera;
 		FullscreenAction* fullscreenAction;
+
 
 		bool* pressed;
 
@@ -41,6 +43,7 @@ namespace z {
 		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		void add(Map* m);
 		sf::RenderWindow* getWindow() {
 			return &window;
 		}
@@ -57,11 +60,10 @@ namespace z {
 
 	class Drawable {
 		public:
-		virtual void draw(WindowModule*) =0;
-
+		virtual void draw(WindowModule*, float now) =0;
 	};
 
-	static string charToString(char c);
+	static string keyToString(sf::Keyboard::Key k);
 
 }
 

@@ -5,10 +5,9 @@ RandomObject::RandomObject(float xi, float yi) {
 	y = yi;
 
 	dynamic = true;
-	srand(time(NULL));
 
 	int randomShape = rand() % 2;
-	randomSize = 0.1f * (rand() % 80); //0.1f, 8.0f);
+	randomSize = 0.1f + 0.1f * (rand() % 80); //0.1f, 8.0f);
 
 	int red = rand() % 256;
 	int green = rand() % 256;
@@ -19,7 +18,7 @@ RandomObject::RandomObject(float xi, float yi) {
 		shape-> m_radius = randomSize/2.0f;
 		sprite = (z::TransformableDrawable*) new sf::CircleShape();
 	} else {
-		sf::Vector2f sizevec(randomSize*10, randomSize*10);
+		sf::Vector2f sizevec(100, 100);
 		shape = (b2Shape*) new b2PolygonShape();
 		((b2PolygonShape*) shape)->SetAsBox(randomSize/2.0f, randomSize/2.0f);
 		sprite = (z::TransformableDrawable*) new sf::RectangleShape(sizevec);

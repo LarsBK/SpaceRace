@@ -6,11 +6,13 @@
 #include <SFML/System.hpp>
 #include "Event.h"
 #include "split.h"
+#include "ResourceManager.h"
 
 namespace z {
 
 	class Engine;
 	class Console;
+	class ResourceManager;
 
 	/** Modules are loaded into the engine class
 	* The will be called to do work three times
@@ -47,8 +49,8 @@ namespace z {
 
 		//List over all currently loaded modules
 		vector<Module*> updateList;
-		vector<Module*> drawList;
-		vector<Module*> physicsList;
+		//vector<Module*> drawList;
+		//vector<Module*> physicsList;
 
 		vector<EventBinding*> eventBindings;
 		vector<Action*> actions;
@@ -62,9 +64,8 @@ namespace z {
 		void physics();
 		void draw();
 
-		//State
-		bool needsDraw; //game state changed
-
+		ResourceManager resMan;
+		
 		public:
 		float getTime();
 		Engine(string name);
@@ -79,10 +80,9 @@ namespace z {
 		unsigned int getFPS();
 		void setFPS(unsigned int f);
 
-		void needToDraw();
 
 		//Register modules
-		unsigned int addModule(Module* m);
+		void addModule(Module* m);
 		//int removeModule(unsigned int moduleId);
 
 		//Event
@@ -94,6 +94,10 @@ namespace z {
 
 		//ActionHandler
 		//void handleAction(Action* a);
+
+		ResourceManager* resourceManager() {
+			return &resMan;
+		}
 	};
 /*
 	class CommandEvent : public Event {
