@@ -12,29 +12,50 @@ TestState::TestState(z::Engine* e, z::WindowModule* w) {
 int TestState::load(Game* game) {
 	box2d = new z::Box2DModule(engine, 60, b2Vec2(0.0f, 0.0f), true);
 
-	//spawn(new Wall(0,0,200,1));
-	//spawn(new Wall(-100,-100,1,200));
-	//spawn(new Wall(100,-100,1,200));
-	//z::GameObject* go = new RandomObject(0,-100);
 	//window->getCamera()->follow((z::PhysicsObject*) go);
-	//spawn(go);
-
-	//z::ResourceManager* man = new z::ResourceManager();
 	engine->addModule(box2d);
-
 	//Map
-	SpaceRaceMap* map = new SpaceRaceMap(engine);
-	if(map->load("TestMap.xml")) {
-		box2d->add(map);
-		window->add(map);
-	} else {
-		cout << "unable to load map" << endl;
-		return -1;
+	
+	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
+	//SpaceRaceMap* map = new SpaceRaceMap(engine);
+	
+	TiXmlDocument* doc = new TiXmlDocument();
+	if(!doc->LoadFile("TestMap.xml")) {
+		cerr << "Error opening file: " << " "
+			<< doc->ErrorDesc() << endl;
 	}
 
-	cout << "Spawning...";
+	//map->interpret(doc->FirstChildElement("map"));
+
+	TiXmlElement* map = doc->FirstChildElement("map");
+	TiXmlElement* name = map->FirstChildElement("name");
+	string mapName = name->GetText();
+	cout << "Loading map " << mapName << endl;
 	
+	TiXmlElement* planet = map->FirstChildElement("planet");
+
+	while(planet) {
+		spawn(new Planet(planet, engine));
+		planet = planet->NextSiblingElement("planet");
+	}
+
+	//if(map->load("TestMap.xml")) {
+		//box2d->add(map);
+		//GameObject* go = 
+		//window->add(go);
+		//box2d->add(go);
+		
+		//window->add(map);
+//	} else {
+//		cout << "unable to load map" << endl;
+//		return -1;
+//	}
+	
+	cout << "Spawning...";
+	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
+	//spawn(new RandomObject(0,0)); 
 //	srand(time(NULL));
+/*
 	for(unsigned int x = 0; x < 60; x++) {
 		float z = -100.0f*(x+1.0f);
 
@@ -44,6 +65,7 @@ int TestState::load(Game* game) {
 
 		//engine->cycle();
 	}
+	*/
 	
 	engine->cycle();
 	cout << " done!" << endl;

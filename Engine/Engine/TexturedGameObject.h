@@ -7,19 +7,15 @@
 
 namespace z {
 
-	class TexturedGameObject : protected GameObject {
+	class TexturedGameObject : public GameObject {
 		
 		ResourceManager* resMan;
 		protected:
-		sf::Sprite* sprite;
+		sf::Sprite sprite;
 
 		public:
-		TexturedGameObject(string textureFile, ResourceManager* man) {
-			sf::Texture* im = man->getTexture(textureFile);
-			resMan = man;
-			sprite = new sf::Sprite();
-			sprite->setTexture(*im); //??
-		}
+		TexturedGameObject(string textureFile, ResourceManager* man);
+		TexturedGameObject(ResourceManager* man);
 /*
 		~TexturedGameObject() {
 			resMan->unloadImage(((sf::Sprite*) sprite)->GetImage());
@@ -27,15 +23,12 @@ namespace z {
 		}
 */
 
-		virtual unsigned int spriteHeight(){
-			return ((sf::Sprite*) sprite)->getTexture()->getHeight();
-		}
+		virtual unsigned int spriteHeight();
+		virtual unsigned int spriteWidth();
+		virtual sf::Transformable* getTransformable();
+		virtual sf::Drawable* getDrawable();
 		
-		virtual unsigned int spriteWidth() {
-			return ((sf::Sprite*) sprite)->getTexture()->getWidth();
-		}
-
-		
+		bool setTexture(string filename);
 	};
 }
 #endif /* end of include guard: TEXTUREDGAMEOBJECT_ACYWKM2R */

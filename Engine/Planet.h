@@ -8,7 +8,7 @@
 
 using namespace z;
 
-class Planet : protected TexturedGameObject {
+class Planet : public TexturedGameObject {
 	
 	float fakeMass;
 	float xSpeed;
@@ -18,6 +18,9 @@ class Planet : protected TexturedGameObject {
 
 	Planet(float xi, float yi, float r, float mass, bool d,
 		float xS, float yS, string textureName, ResourceManager* man);
+	Planet(TiXmlElement* planet, z::Engine* e);
+
+
 	virtual void prePhysicsStep(float now, float t);
 
 	virtual float shapeWidth() { return shape->m_radius*2;}

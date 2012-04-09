@@ -12,15 +12,16 @@ namespace z {
 				sprite = getDrawable();
 			}*/
 
-			if(sprite) {
+			sf::Drawable* d = getDrawable();
+			sf::Transformable* t = getTransformable();
 
+			if(t) {
 				float deltaTime = (now - lastTime) / timeStep;
 
 				b2Vec2 nextPos = body->GetPosition();
 				b2Vec2 deltaPos = nextPos - lastPos;
 				deltaPos *= deltaTime;
 				b2Vec2 renderPos = lastPos + deltaPos;
-
 
 				float rot = body->GetAngle();
 
@@ -29,23 +30,29 @@ namespace z {
 				float scaleH = wm->meterToPixel(shapeHeight())
 					/ (float) spriteHeight();
 
-				sprite->setOrigin(spriteWidth()/2.0f, spriteHeight()/2.0f);
-				sprite->setScale(scaleW, scaleH);
-				sprite->setRotation( rot * (180/3.14));
-				sprite->setPosition(wm->meterToPixel(renderPos.x),
+				cout << "scale" << scaleW << endl;
+
+				t->setOrigin(spriteWidth()/2.0f, spriteHeight()/2.0f);
+				t->setScale(scaleW, scaleH);
+				t->setRotation( rot * (180/3.14));
+				t->setPosition(wm->meterToPixel(renderPos.x),
 					wm->meterToPixel(renderPos.y));
-				
-				w->draw(*((sf::Drawable*) sprite));
+			} else {
+				cerr << "Gameobject without transformable" << endl;
 			}
+
+			if(d) {
+				w->draw(*((sf::Drawable*) d));
+			} else {
+				cerr << "Gameobject without sprite" << endl;
+			}
+		} else {
+			cerr << "GameObject without body" << endl;
 		}
 	}
 
-	GameObject::GameObject() :PhysicsObject() {
-		//sprite = new sf::Shape(sf::Shape::Rectangle(0,0,10.0f,10.0f, sf::Color::White,0.0f,sf::Color::Black));
-		sprite = 0;
-	}
-
 	void GameObject::prePhysicsStep(float last, float t) {
+		cout << "OMG" << endl;
 		storeOldPos(last,t);
 	}
 

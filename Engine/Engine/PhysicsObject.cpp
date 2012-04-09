@@ -62,6 +62,7 @@ namespace z {
 	  }*/
 
 	void PhysicsObject::prePhysicsStep(float now, float timeStep) {
+		std::cout << "omg2" << std::endl;
 		//if(force.x != 0 || force.y != 0)
 		//	body->ApplyForceToCenter(force);
 	}

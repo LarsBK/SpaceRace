@@ -38,6 +38,8 @@ namespace z {
 		vector<GameObject*>* getObjects() {
 			return &objects;
 		}
+
+
 	};
 
 }

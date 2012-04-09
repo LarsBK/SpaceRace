@@ -8,6 +8,9 @@ void SpaceRaceMap::interpret(TiXmlElement* map) {
 		return false;
 	}
 	*/
+	
+	//go =  new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager());
+
 
 	TiXmlElement* name = map->FirstChildElement("name");
 	mapName = name->GetText();
@@ -16,33 +19,10 @@ void SpaceRaceMap::interpret(TiXmlElement* map) {
 	TiXmlElement* planet = map->FirstChildElement("planet");
 
 	while(planet) {
-		TiXmlElement* dynamicNode = planet->FirstChildElement("dynamic");
-		bool dynamic = false;
-		if(dynamicNode) {
-			dynamic = (string(dynamicNode->GetText()) == "true");
-		}
-
-		float x = atof(planet->FirstChildElement("x")->GetText());
-		float y = atof(planet->FirstChildElement("y")->GetText());
-		float density = atof(planet->FirstChildElement("density")->GetText());
-		float radius = atof(planet->FirstChildElement("radius")->GetText());
-
-		float xSpeed = 0;
-		float ySpeed = 0;
-		TiXmlElement* temp = 0;
-		temp = planet->FirstChildElement("xSpeed");
-		if(temp)
-			xSpeed = atof(temp->GetText());
-		temp = planet->FirstChildElement("ySpeed");
-		if(temp)
-			ySpeed = atof(temp->GetText());
-
-		string texture = planet->FirstChildElement("texture")->GetText();
-
-		objects.push_back((GameObject*) new Planet(x,y,radius,
-			density, dynamic,xSpeed, ySpeed, texture, engine->resourceManager()));
-
+		objects.push_back(new Planet(planet, engine));
 		planet = planet->NextSiblingElement("planet");
 	}
+
+	
 	
 }

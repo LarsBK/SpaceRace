@@ -16,12 +16,12 @@ RandomObject::RandomObject(float xi, float yi) {
 	if(randomShape) {
 		shape = (b2Shape*) new b2CircleShape();
 		shape-> m_radius = randomSize/2.0f;
-		sprite = (z::TransformableDrawable*) new sf::CircleShape();
+		sprite = new sf::CircleShape();
 	} else {
 		sf::Vector2f sizevec(100, 100);
 		shape = (b2Shape*) new b2PolygonShape();
 		((b2PolygonShape*) shape)->SetAsBox(randomSize/2.0f, randomSize/2.0f);
-		sprite = (z::TransformableDrawable*) new sf::RectangleShape(sizevec);
+		sprite = new sf::RectangleShape(sizevec);
 		//, sf::Color(red,green,blue));
 	}
 
@@ -33,6 +33,8 @@ RandomObject::RandomObject(float xi, float yi) {
 	restitution = 0.1;
 
 }
+
+
 
 void RandomObject::onSpawn() {
 	impulse(0,10000);

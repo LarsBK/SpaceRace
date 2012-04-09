@@ -7,14 +7,9 @@
 
 namespace z {
 
-	class TransformableDrawable : public sf::Drawable, public sf::Transformable {
-
-	};
-
-	class GameObject : protected PhysicsObject, protected Drawable {
+	class GameObject : public PhysicsObject, public Drawable {
 		
 		protected:
-		TransformableDrawable* sprite;
 		b2Vec2 lastPos;
 		float lastTime;
 		float timeStep;
@@ -25,10 +20,11 @@ namespace z {
 		virtual float shapeHeight()=0;
 		virtual float shapeWidth()=0;
 
-		public:
-		GameObject();
-		virtual void draw(WindowModule* wm, float now);
+		virtual sf::Drawable* getDrawable() = 0;
+		virtual sf::Transformable* getTransformable() =0;
 
+		public:
+		virtual void draw(WindowModule* wm, float now);
 
 		virtual void prePhysicsStep(float last, float t);
 		void storeOldPos(float acc, float t);

@@ -43,6 +43,7 @@ namespace z {
 		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		void add(GameObject* d);
 		void add(Map* m);
 		sf::RenderWindow* getWindow() {
 			return &window;

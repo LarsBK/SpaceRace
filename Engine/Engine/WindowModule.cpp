@@ -126,6 +126,9 @@ namespace z {
 	void WindowModule::add(Drawable* d) {
 		drawList.push_back(d);
 	}
+	void WindowModule::add(GameObject* d) {
+		add((Drawable*) d);
+	}
 
 	bool WindowModule::isFullscreen() {
 		return fullscreen;
@@ -134,7 +137,8 @@ namespace z {
 	void WindowModule::add(Map* m) {
 		vector<GameObject*>* list = m->getObjects();
 		for(unsigned i = 0; i < list->size(); i++) {
-			add((Drawable*) (*list)[i]);
+			GameObject* g = (*list)[i];
+			add(g);
 		}
 	}
 

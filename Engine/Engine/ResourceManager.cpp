@@ -43,7 +43,7 @@ TiXmlDocument* z::ResourceManager::getXml(string filename) {
 		}
 	}
 
-	
+	cout << "Loading xml " << filename << endl;
 	LoadedResource<TiXmlDocument>* lr = new LoadedResource<TiXmlDocument>(filename);
 	TiXmlDocument* doc = &(lr->t);
 	if(!doc->LoadFile(filename)) {

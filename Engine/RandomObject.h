@@ -9,6 +9,8 @@
 class RandomObject : public z::GameObject {
 
 	float randomSize;
+	sf::Shape* sprite;
+
 	public:
 	RandomObject(float xi, float yi);
 
@@ -18,6 +20,8 @@ class RandomObject : public z::GameObject {
 	virtual unsigned int spriteWidth() {return 100;}
 	virtual float shapeHeight() {return randomSize;}
 	virtual float shapeWidth() {return randomSize;}
+	virtual sf::Transformable* getTransformable() {return sprite;}
+	virtual sf::Drawable* getDrawable() {return sprite;}
 
 };
 

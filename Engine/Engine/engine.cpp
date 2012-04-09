@@ -43,8 +43,11 @@ namespace z
 	}
 
 	void Engine::cycle() {
+		cout << "update" << endl;
 		update();
+		cout << "phys" << endl;
 		physics();
+		cout << "draw" << endl;
 		draw();
 	}
 
