@@ -54,7 +54,6 @@ void Planet::onSpawn() {
 }
 
 void Planet::prePhysicsStep(float now, float t) {
-	cout << "omg1" << endl;
 	storeOldPos(now,t);
 	b2World* w = body->GetWorld();
 

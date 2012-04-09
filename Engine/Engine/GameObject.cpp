@@ -30,8 +30,6 @@ namespace z {
 				float scaleH = wm->meterToPixel(shapeHeight())
 					/ (float) spriteHeight();
 
-				cout << "scale" << scaleW << endl;
-
 				t->setOrigin(spriteWidth()/2.0f, spriteHeight()/2.0f);
 				t->setScale(scaleW, scaleH);
 				t->setRotation( rot * (180/3.14));
@@ -52,7 +50,6 @@ namespace z {
 	}
 
 	void GameObject::prePhysicsStep(float last, float t) {
-		cout << "OMG" << endl;
 		storeOldPos(last,t);
 	}
 
