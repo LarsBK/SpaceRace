@@ -14,6 +14,8 @@ int TestState::load(Game* game) {
 
 	//window->getCamera()->follow((z::PhysicsObject*) go);
 	engine->addModule(box2d);
+
+	window->addHUD(new PerformanceMonitor(engine));
 	//Map
 	
 	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
@@ -63,7 +65,7 @@ int TestState::load(Game* game) {
 			spawn(new RandomObject(0,z)); 
 		}
 
-		//engine->cycle();
+		engine->cycle();
 	}
 	
 	

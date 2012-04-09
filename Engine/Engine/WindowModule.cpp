@@ -91,41 +91,22 @@ namespace z {
 		for(unsigned int i = 0; i < drawList.size(); i++) {
 			drawList[i]->draw(this,time);
 		}
+		
 		window.setView(window.getDefaultView());
-/*
 		for(unsigned int i = 0; i < hudList.size(); i++) {
-			hudList[i]->draw(window);
+			hudList[i]->draw(this, time);
 		}
-*/
-/*
-		int fps = 1.0f/window.getFrameTime().asSeconds();
-		engine->setFPS(fps);
-		drawFps(fps);
-*/
 		window.display();
 	}
-/*
-	void WindowModule::drawFps(int f) {
-		std::stringstream ss;
-		std::string fpsstring;
-		ss << f;
-		ss >> fpsstring;
 
-		sf::String string;
-		string.setText(fpsstring + " FPS");
-		if (f >= 50)
-			string.setColor(sf::Color::Green);
-		else if (f >= 30)
-			string.setColor(sf::Color::Yellow);
-		else
-			string.setColor(sf::Color::Red);
-
-		window.draw(string);
-	}
-*/
 	void WindowModule::add(Drawable* d) {
 		drawList.push_back(d);
 	}
+
+	void WindowModule::addHUD(Drawable* d) {
+		hudList.push_back(d);
+	}
+
 	void WindowModule::add(GameObject* d) {
 		add((Drawable*) d);
 	}

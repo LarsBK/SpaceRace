@@ -10,6 +10,9 @@
 #include "RandomObject.h"
 #include "Engine/ResourceManager.h"
 #include "SpaceRaceMap.h"
+
+#include "Engine/PerformanceMonitor.hpp"
+
 #include <string>
 
 using namespace std;

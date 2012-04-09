@@ -27,6 +27,7 @@ namespace z {
 		bool* pressed;
 
 		vector<Drawable*> drawList;
+		vector<Drawable*> hudList;
 
 		public:
 		WindowModule(Engine* e);
@@ -43,6 +44,7 @@ namespace z {
 		float meterToPixel(float m);
 
 		void add(Drawable* d);
+		void addHUD(Drawable* d);
 		void add(GameObject* d);
 		void add(Map* m);
 		sf::RenderWindow* getWindow() {
