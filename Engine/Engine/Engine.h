@@ -76,9 +76,15 @@ namespace z {
 		void quit();
 		bool isRunning();
 		string getName();
-		unsigned int getTargetFramerate();
-		unsigned int getFPS();
-		void setFPS(unsigned int f);
+
+		//Performance analysis
+		float updateTime;
+		float physicsTime;
+		float drawTime;
+
+		float getDrawTime();
+		float getPhysicsTime();
+		float getUpdateTime();
 
 
 		//Register modules

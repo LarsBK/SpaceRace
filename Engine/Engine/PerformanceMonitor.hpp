@@ -12,6 +12,13 @@ class PerformanceMonitor : public Drawable {
 	Engine* engine;
 
 	sf::Text fps_drawable;
+	sf::Text draw_drawable;
+	sf::Text update_drawable;
+	sf::Text physics_drawable;
+
+	float drawTime;
+	float updateTime;
+	float physicsTime;
 
 	public:
 	PerformanceMonitor(Engine* e);

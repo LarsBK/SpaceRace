@@ -43,9 +43,27 @@ namespace z
 	}
 
 	void Engine::cycle() {
+		sf::Clock cycleTime;
 		update();
+		updateTime = cycleTime.getElapsedTime().asSeconds();
+		cycleTime.restart();
 		physics();
+		physicsTime = cycleTime.getElapsedTime().asSeconds();
+		cycleTime.restart();
 		draw();
+		drawTime = cycleTime.getElapsedTime().asSeconds();
+	}
+
+	float Engine::getDrawTime() {
+		return drawTime;
+	}
+
+	float Engine::getPhysicsTime() {
+		return physicsTime;
+	}
+	
+	float Engine::getUpdateTime() {
+		return updateTime;
 	}
 
 	void Engine::quit(string reason) {
@@ -86,10 +104,6 @@ namespace z
 
 	float Engine::getTime() {
 	  return clock.getElapsedTime().asSeconds();
-	}
-
-	unsigned int Engine::getFPS() {
-		return fps;
 	}
 
 	//Event
