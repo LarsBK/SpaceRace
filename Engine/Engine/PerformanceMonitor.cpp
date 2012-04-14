@@ -37,13 +37,13 @@ namespace z {
 			float totalTime = drawTime+physicsTime+updateTime;
 
 			ss.str("");
-			ss << "Render time: " << drawTime/totalTime;
+			ss << "Render time: " << (int)((drawTime/totalTime)*100) << "%";
 			draw_drawable.setString(ss.str());
 			ss.str("");
-			ss << "Physics time: " << physicsTime/totalTime;
+			ss << "Physics time: " << (int)((physicsTime/totalTime)*100) << "%";
 			physics_drawable.setString(ss.str());
 			ss.str("");
-			ss << "Update time: " << updateTime/totalTime;
+			ss << "Update time: " << (int)((updateTime/totalTime)*100) << "%";
 			update_drawable.setString(ss.str());
 	
 			drawTime = 0;

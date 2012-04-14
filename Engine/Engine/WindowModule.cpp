@@ -5,8 +5,8 @@ namespace z {
 	WindowModule::WindowModule(Engine* e) : Module(e), window() {
 		name = "WindowModule";
 
-		vsync(true);
 		camera = new Camera(&window, e);
+		vsyncEnabled = false;
 		setFullscreen(false);
 		//camera->setWindowSize(window.GetWidth(), window.GetHeight());
 
@@ -15,10 +15,6 @@ namespace z {
 		engine->bind("keyboard_f", fullscreenAction->toString());
 
 		pressed = new bool[sf::Keyboard::KeyCount];
-	}
-
-	void WindowModule::vsync(bool v) {
-		window.setVerticalSyncEnabled(v);
 	}
 
 	WindowModule::~WindowModule() {
@@ -44,6 +40,7 @@ namespace z {
 			window.create(sf::VideoMode(720,480,32), engine->getName(),
 				sf::Style::Close|sf::Style::Resize, windowSettings);
 		}
+		window.setVerticalSyncEnabled(vsyncEnabled);
 
 		camera->setWindowSize(window.getSize());
 	}

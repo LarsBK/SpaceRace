@@ -59,8 +59,7 @@ int TestState::load(Game* game) {
 	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
 	//spawn(new RandomObject(0,0)); 
 	srand(time(NULL));
-
-	for(unsigned int x = 0; x < 60; x++) {
+	for(unsigned int x = 0; x < 10; x++) {
 		float z = -100.0f*(x+1.0f);
 
 		for(unsigned int i = 0; i < 10; i++) {
@@ -69,7 +68,6 @@ int TestState::load(Game* game) {
 
 		engine->cycle();
 	}
-	
 	
 	engine->cycle();
 	cout << " done!" << endl;

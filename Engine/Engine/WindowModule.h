@@ -23,6 +23,7 @@ namespace z {
 		Camera* camera;
 		FullscreenAction* fullscreenAction;
 
+		bool vsyncEnabled;
 
 		bool* pressed;
 
@@ -37,7 +38,6 @@ namespace z {
 
 		void drawFps(int f);
 
-		void vsync(bool v);
 		void setFullscreen(bool f);
 		bool isFullscreen();
 		Camera* getCamera();
