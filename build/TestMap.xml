@@ -15,8 +15,8 @@
 		<name>LunaDynamic</name>
 		<dynamic>true</dynamic>
 		<xSpeed>0</xSpeed>
-		<ySpeed>25</ySpeed>
-		<x>-104</x>
+		<ySpeed>30</ySpeed>
+		<x>-304</x>
 		<y>-100.0f</y>
 		<radius>17</radius>
 		<!-- tetthet er oppgitt i ekte tetthet / 1000 -->

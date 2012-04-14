@@ -32,6 +32,9 @@ namespace z {
 		virtual void onSpawn();
 		void impulse(float x, float y);
 		void setVelocity(float x, float y);
+		void applyForce(b2Vec2 vec) {
+			force += vec;
+		}
 
 	};
 /*

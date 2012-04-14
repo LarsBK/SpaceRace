@@ -95,7 +95,6 @@ namespace z
 	//Event
 	void Engine::event(Event* e) {
 		EventBinding* eb = getBinding(e->toString());
-		cout << "Event: " << e->toString() << endl;
 		if(eb) {
 			eb->fire(e);
 		}

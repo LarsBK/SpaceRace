@@ -20,7 +20,7 @@ int TestState::load(Game* game) {
 	
 	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
 	//SpaceRaceMap* map = new SpaceRaceMap(engine);
-	
+
 	TiXmlDocument* doc = new TiXmlDocument();
 	if(!doc->LoadFile("TestMap.xml")) {
 		cerr << "Error opening file: " << " "
@@ -53,6 +53,8 @@ int TestState::load(Game* game) {
 //		return -1;
 //	}
 	
+	spawn(new Thruster(engine));
+
 	cout << "Spawning...";
 	//spawn(new Planet(100,0,64,5.515,0,0,0,"Earth.png", engine->resourceManager()));
 	//spawn(new RandomObject(0,0)); 

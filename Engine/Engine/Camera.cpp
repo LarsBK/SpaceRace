@@ -30,10 +30,10 @@ namespace z {
 	Camera::Camera(sf::Window* w, Engine* e) :
 			zo(this,1,"out"),
 			zi(this,-1,"in"),
-			ml(this,-5,0,"left"),
-			mr(this,5,0,"right"),
-			mu(this,0,-5,"up"),
-			md(this,0,5,"down") {
+			ml(this,-1,0,"left"),
+			mr(this,1,0,"right"),
+			mu(this,0,-1,"up"),
+			md(this,0,1,"down") {
 		f = 0;
 		sf::Vector2f center(0,0);
 		view = new sf::View(center, sf::Vector2<float>(w->getSize()));
@@ -73,8 +73,8 @@ namespace z {
 			view->setCenter(x, y);
 			
 		} else {
-			//float scale = (view->GetHalfSize().x * 2);
-			view->move(xSpeed*lastMove.getElapsedTime().asSeconds(), ySpeed*lastMove.getElapsedTime().asSeconds());
+			float scale = (view->getSize().x);
+			view->move(scale*xSpeed*lastMove.getElapsedTime().asSeconds(),					scale*ySpeed*lastMove.getElapsedTime().asSeconds());
 			lastMove.restart();
 			
 			if(zoomFactor != 0) {
@@ -90,6 +90,10 @@ namespace z {
 		return m*ppm;
 	}
 
+	float Camera::pixelToMeter(float p) {
+		return p / ppm;
+	}
+
 	void Camera::setWindowSize(sf::Vector2u size) {
 		view->setSize(sf::Vector2f(size));
 		ppm = size.x/METERINWIDTH;
@@ -101,8 +105,8 @@ namespace z {
 	}
 
 	void Camera::setSpeed(float x, float y) {
-		xSpeed += meterToPixel(x);
-		ySpeed += meterToPixel(y);
+		xSpeed += x;
+		ySpeed += y;
 		lastMove.restart();
 	}
 

@@ -51,6 +51,7 @@ namespace z {
 
 	void GameObject::prePhysicsStep(float last, float t) {
 		storeOldPos(last,t);
+		PhysicsObject::prePhysicsStep(last,t);
 	}
 
 	void GameObject::storeOldPos(float last, float t) {

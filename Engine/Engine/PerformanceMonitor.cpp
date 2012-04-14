@@ -6,6 +6,8 @@ namespace z {
 		engine = e;
 		lastTime = 0;
 		frames = 0;
+		fps_drawable.setCharacterSize(10);
+		fps_drawable.setString("Framerate: ");
 	}
 
 	void PerformanceMonitor::draw(WindowModule* wm, float time) {

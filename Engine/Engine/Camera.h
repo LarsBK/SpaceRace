@@ -75,6 +75,7 @@ namespace z {
 		void setWindowSize(sf::Vector2u size);
 		void follow(PhysicsObject* g);
 		float meterToPixel(float m);
+		float pixelToMeter(float p);
 		void zoom(float f);
 		void setSpeed(float x, float y);
 

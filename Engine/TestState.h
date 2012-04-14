@@ -10,6 +10,7 @@
 #include "RandomObject.h"
 #include "Engine/ResourceManager.h"
 #include "SpaceRaceMap.h"
+#include "Thruster.hpp"
 
 #include "Engine/PerformanceMonitor.hpp"
 
