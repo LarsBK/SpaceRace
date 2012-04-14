@@ -8,6 +8,9 @@
 		<x>500.0f</x>
 		<y>0.0f</y>
 		<radius>200</radius>
+		<dynamic>true</dynamic>
+		<xSpeed>0</xSpeed>
+		<ySpeed>10</ySpeed>
 		<density>5.515</density>
 		<texture>Earth.png</texture>
 	</planet>
@@ -15,13 +18,22 @@
 		<name>LunaDynamic</name>
 		<dynamic>true</dynamic>
 		<xSpeed>0</xSpeed>
-		<ySpeed>60</ySpeed>
+		<ySpeed>70.0f</ySpeed>
 		<x>-704</x>
-		<y>-100.0f</y>
+		<y>0.0f</y>
 		<radius>54</radius>
-		<!-- tetthet er oppgitt i ekte tetthet / 1000 -->
+		<!-- tetthet er oppgitt i g/cm^3 -->
 		<density>3.3</density>
 		<texture>Moon_2.png</texture>
+	</planet>
+	
+	<planet>
+		<name>The Sun</name>
+		<x>400000.0f</x>
+		<y>0.0f</y>
+		<radius>21800</radius>
+		<density>1.408</density>
+		<texture>TheSun.jpg</texture>
 	</planet>
 </map>
 
