@@ -24,11 +24,11 @@ bool z::TexturedGameObject::setTexture(string filename) {
 }
 
 unsigned int z::TexturedGameObject::spriteHeight(){
-	return sprite.getTexture()->getHeight();
+	return sprite.getTexture()->getSize().y;
 }
 
 unsigned int z::TexturedGameObject::spriteWidth() {
-	return sprite.getTexture()->getWidth();
+	return sprite.getTexture()->getSize().x;
 }
 
 sf::Transformable* z::TexturedGameObject::getTransformable() {
